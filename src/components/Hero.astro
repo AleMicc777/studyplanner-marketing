@@ -1,42 +1,53 @@
 ---
-const PLANNER_URL = "https://ae-planner-proxy.vercel.app";
-const DEMO_MAILTO = "mailto:alessandromiccolo2003@gmail.com?subject=StudyPlanner%20Demo%20Request&body=University%20name%3A%0AProgramme%3A%0AYour%20role%3A";
+import { PLANNER_URL, bookDemoHref } from "../config/site";
+import BrowserFrame from "./BrowserFrame.astro";
+import CTAButton from "./CTAButton.astro";
 ---
 
-<section class="relative overflow-hidden border-b border-indigo-100 bg-gradient-to-br from-indigo-950 via-slate-900 to-slate-950">
+<section class="relative overflow-hidden bg-ink-900">
   <div
     aria-hidden="true"
-    class="pointer-events-none absolute inset-0 opacity-[0.04]"
+    class="pointer-events-none absolute inset-0 opacity-[0.06]"
     style="background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:40px 40px;"
   ></div>
-  <div class="relative mx-auto max-w-6xl px-6 pt-24 pb-28 sm:pt-32 sm:pb-36">
-    <div class="mb-6 inline-flex items-center rounded-full border border-indigo-400/50 bg-indigo-500/10 px-3 py-1 text-xs font-medium text-indigo-200">
-      Stop validating study plans by hand.
-    </div>
-    <h1 class="max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-6xl">
-      Valid study plans, <span class="text-indigo-400">every time.</span>
+  <div class="relative mx-auto max-w-6xl px-6 pt-24 pb-0 sm:pt-32">
+    <h1
+      class="hero-stagger-1 max-w-3xl font-heading text-[length:var(--text-display)] font-semibold text-paper"
+    >
+      Every study plan checked against your rules — before it reaches your inbox.
     </h1>
-    <p class="mt-6 max-w-2xl text-lg text-slate-300 sm:text-xl">
-      StudyPlanner is an AI-powered MSc study planner that validates student plans against your programme rules in real time — so coordinators stop spending hours fixing invalid plans over email.
+    <p
+      class="hero-stagger-2 mt-6 max-w-2xl text-[length:var(--text-lead)] text-ink-200"
+    >
+      StudyPlanner encodes your MSc programme's requirements — prerequisites, EC totals, track rules — and validates each student's plan in real time. Coordinators approve; they no longer debug.
     </p>
-    <div class="mt-10 flex flex-wrap items-center gap-4">
-      <a
+    <div class="hero-stagger-3 mt-10 flex flex-wrap items-center gap-4">
+      <CTAButton href={bookDemoHref} dataTrack="cta-hero-demo">
+        Book a 20-minute demo
+      </CTAButton>
+      <CTAButton
         href={PLANNER_URL}
+        variant="outline"
         target="_blank"
         rel="noreferrer"
-        class="inline-flex items-center justify-center rounded-md bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-900/40 transition hover:bg-indigo-500"
+        dataTrack="open-planner"
       >
-        Open the StudyPlanner →
-      </a>
-      <a
-        href={DEMO_MAILTO}
-        class="inline-flex items-center justify-center rounded-md border border-slate-600 bg-white/5 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10"
-      >
-        Book a 20-min demo
-      </a>
+        Try the live planner →
+      </CTAButton>
     </div>
-    <p class="mt-6 text-sm text-slate-400">
-      Live demo available · Multi-tenant · Branded per institution · GDPR-compliant
-    </p>
+
+    <!-- Product screenshot in a simple browser frame, bleeding into the section below -->
+    <div class="hero-stagger-4 mt-16 -mb-24 sm:-mb-32">
+      <div class="mx-auto max-w-4xl">
+        <BrowserFrame
+          src="/screenshots/screenshot-1.png"
+          alt="StudyPlanner interface showing a validated MSc study plan"
+          width={1600}
+          height={1000}
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
   </div>
 </section>

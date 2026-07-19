@@ -1,32 +1,42 @@
 ---
-const problems = [
-  {
-    title: "Hundreds of emails per term",
-    body: "Students send half-built plans asking what counts and what doesn't. The same questions, every quarter.",
-  },
-  {
-    title: "Invalid plans surface late",
-    body: "EC totals, prerequisite chains, and PPD credits often only get checked when it's too late to swap a course.",
-  },
-  {
-    title: "No view across the cohort",
-    body: "Each plan lives in a PDF or Excel sheet on a student's laptop. No data, no patterns, no way to improve the programme.",
-  },
-];
 ---
 
-<section class="border-b border-slate-200 bg-indigo-50">
-  <div class="mx-auto max-w-6xl px-6 py-20 sm:py-24">
-    <h2 class="max-w-3xl text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-      Coordinators shouldn't be a human plan validator.
-    </h2>
-    <div class="mt-10 grid gap-8 sm:grid-cols-3">
-      {problems.map((item) => (
-        <div class="rounded-lg border-l-4 border-indigo-500 bg-white px-6 py-5 shadow-sm">
-          <h3 class="text-lg font-semibold text-slate-900">{item.title}</h3>
-          <p class="mt-2 text-slate-600">{item.body}</p>
+<section class="border-b border-[var(--color-ink-200)] bg-[var(--color-paper)]">
+  <div class="mx-auto max-w-6xl px-6 pt-32 pb-20 sm:pt-40 sm:pb-24">
+    <div class="grid gap-12 lg:grid-cols-[3fr_2fr] lg:items-start">
+      <div class="max-w-[var(--prose-max)]">
+        <h2 data-reveal class="font-heading text-[length:var(--text-h2)] font-semibold text-ink-950">
+          Coordinators shouldn't be a human plan validator.
+        </h2>
+        <div class="mt-6 space-y-5 text-[length:var(--text-lead)] leading-relaxed text-[color:var(--color-text)]">
+          <p>
+            A 300-student cohort, three revision rounds a term — that's the shape of the problem. Every plan starts as a half-built PDF or spreadsheet, and every EC shortfall, missing prerequisite, or track violation only surfaces once a student emails to ask what counts.
+          </p>
+          <p>
+            Coordinators answer the same handful of questions hundreds of times a term, then catch the real errors too late to matter — after registration has closed, after the swap window is gone.
+          </p>
+          <p>
+            StudyPlanner moves the check to the moment the plan is built, not the moment it lands in an inbox.
+          </p>
         </div>
-      ))}
+      </div>
+
+      <div data-reveal class="border border-[var(--color-ink-200)] bg-[var(--color-paper-shade)] p-6 font-mono text-sm">
+        <p class="mb-3 text-xs font-semibold uppercase text-[var(--color-text-muted)]">Before</p>
+        <p class="text-[var(--color-flag-600)]">
+          <span class="line-through decoration-2">AE4-ADS + AE4-SD (32 EC, prereq unmet)</span>
+        </p>
+        <p class="mt-1 text-[var(--color-text-muted)]">→ flagged after submission, three weeks late</p>
+        <div class="my-5 h-px bg-[var(--color-ink-200)]"></div>
+        <p class="mb-3 text-xs font-semibold uppercase text-[var(--color-text-muted)]">After</p>
+        <p class="flex items-center gap-1.5 text-[var(--color-valid-600)]">
+          AE4-ADS + AE4-SP (30 EC, prereqs met)
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path class="check-draw" d="M3 8.5 6.5 12 13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </p>
+        <p class="mt-1 text-[var(--color-text-muted)]">→ validated the moment it's built</p>
+      </div>
     </div>
   </div>
 </section>

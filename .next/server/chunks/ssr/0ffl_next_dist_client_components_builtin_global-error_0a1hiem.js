@@ -1,3 +1,0 @@
-module.exports=[7414,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(92325);a.n(d("[project]/OneDrive/Desktop/studyplanner-marketing/node_modules/next/dist/client/components/builtin/global-error.js <module evaluation>"))},66027,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(92325);a.n(d("[project]/OneDrive/Desktop/studyplanner-marketing/node_modules/next/dist/client/components/builtin/global-error.js"))},21656,a=>{"use strict";a.i(7414);var b=a.i(66027);a.n(b)},89512,a=>{a.n(a.i(21656))}];
-
-//# sourceMappingURL=0ffl_next_dist_client_components_builtin_global-error_0a1hiem.js.map

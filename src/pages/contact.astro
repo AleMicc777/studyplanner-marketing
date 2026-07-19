@@ -1,9 +1,11 @@
 ---
 import Base from "../layouts/Base.astro";
 import Navbar from "../components/Navbar.astro";
+import { PLANNER_URL, DEMO_MAILTO, CONTACT_EMAIL, BOOKING_URL, bookDemoHref } from "../config/site";
+import CTAButton from "../components/CTAButton.astro";
 
-const PLANNER_URL = "https://ae-planner-proxy.vercel.app";
-const DEMO_MAILTO = "mailto:alessandromiccolo2003@gmail.com?subject=StudyPlanner%20Demo%20Request&body=University%20name%3A%0AProgramme%3A%0AYour%20role%3A";
+const FORMSPREE_ID = import.meta.env.PUBLIC_FORMSPREE_ID ?? null;
+const FORMSPREE_ACTION = FORMSPREE_ID ? `https://formspree.io/f/${FORMSPREE_ID}` : null;
 
 const blocks = [
   {
@@ -20,25 +22,23 @@ const blocks = [
 <Base title="Contact — StudyPlanner" description="Get in touch to bring StudyPlanner to your university. Twenty-minute call, no commitment.">
   <Navbar />
   <main class="flex-1">
-    <div class="min-h-screen bg-indigo-950">
+    <div class="min-h-screen bg-ink-950">
       <div class="mx-auto max-w-3xl px-6 py-24 sm:py-32">
-        <div class="mb-8 h-1 w-16 rounded-full bg-indigo-500"></div>
+        <div class="mb-8 h-1 w-16 bg-white"></div>
         <h1 class="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
           Bring StudyPlanner to your university.
         </h1>
-        <p class="mt-6 text-lg text-slate-200">
+        <p class="mt-6 text-lg text-ink-200">
           Twenty-minute call. We'll walk through the live demo, show how the multi-tenant setup works, and scope what it would take for your programme.
         </p>
         <div class="mt-12 grid gap-6 sm:grid-cols-2">
           {blocks.map((block) => (
-            <div class="rounded-xl border border-indigo-800 bg-indigo-900/60 p-6">
-              <h2 class="font-semibold text-indigo-100 mb-4">{block.title}</h2>
+            <div class="border border-ink-700 bg-ink-900 p-6">
+              <h2 class="font-semibold text-white mb-4">{block.title}</h2>
               <ul class="space-y-2">
                 {block.items.map((item) => (
-                  <li class="flex items-start gap-2 text-sm text-slate-300">
-                    <span class="mt-0.5 h-4 w-4 shrink-0 rounded-full bg-indigo-500/30 flex items-center justify-center">
-                      <span class="h-1.5 w-1.5 rounded-full bg-indigo-400"></span>
-                    </span>
+                  <li class="flex items-start gap-2 text-sm text-ink-200">
+                    <span class="mt-0.5 shrink-0 text-white">✓</span>
                     {item}
                   </li>
                 ))}
@@ -46,26 +46,86 @@ const blocks = [
             </div>
           ))}
         </div>
+
+        {BOOKING_URL && (
+          <div class="mt-12 border border-ink-700 bg-ink-900 p-6">
+            <h2 class="font-semibold text-white">Book directly</h2>
+            <p class="mt-2 text-sm text-ink-200">Pick a time that works for you — no back-and-forth needed.</p>
+            <CTAButton
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noreferrer"
+              dataTrack="cta-contact-booking"
+              class="mt-4"
+            >
+              Choose a time →
+            </CTAButton>
+          </div>
+        )}
+
+        {FORMSPREE_ACTION && (
+          <div class="mt-12 border border-ink-700 bg-ink-900 p-6">
+            <h2 class="font-semibold text-white mb-4">Send us a message</h2>
+            <form action={FORMSPREE_ACTION} method="POST" class="grid gap-4 sm:grid-cols-2">
+              <input
+                type="text"
+                name="_gotcha"
+                tabindex="-1"
+                autocomplete="off"
+                class="hidden"
+                aria-hidden="true"
+              />
+              <div class="sm:col-span-1">
+                <label for="name" class="block text-sm font-medium text-ink-200">Name</label>
+                <input id="name" name="name" type="text" required class="mt-1 w-full border border-ink-700 bg-ink-950 px-3 py-2 text-sm text-white placeholder:text-ink-500 focus:border-white focus:outline-none" />
+              </div>
+              <div class="sm:col-span-1">
+                <label for="university" class="block text-sm font-medium text-ink-200">University</label>
+                <input id="university" name="university" type="text" required class="mt-1 w-full border border-ink-700 bg-ink-950 px-3 py-2 text-sm text-white placeholder:text-ink-500 focus:border-white focus:outline-none" />
+              </div>
+              <div class="sm:col-span-1">
+                <label for="programme" class="block text-sm font-medium text-ink-200">Programme</label>
+                <input id="programme" name="programme" type="text" required class="mt-1 w-full border border-ink-700 bg-ink-950 px-3 py-2 text-sm text-white placeholder:text-ink-500 focus:border-white focus:outline-none" />
+              </div>
+              <div class="sm:col-span-1">
+                <label for="role" class="block text-sm font-medium text-ink-200">Your role</label>
+                <input id="role" name="role" type="text" required class="mt-1 w-full border border-ink-700 bg-ink-950 px-3 py-2 text-sm text-white placeholder:text-ink-500 focus:border-white focus:outline-none" />
+              </div>
+              <div class="sm:col-span-2">
+                <label for="message" class="block text-sm font-medium text-ink-200">Message</label>
+                <textarea id="message" name="message" rows="4" required class="mt-1 w-full border border-ink-700 bg-ink-950 px-3 py-2 text-sm text-white placeholder:text-ink-500 focus:border-white focus:outline-none"></textarea>
+              </div>
+              <div class="sm:col-span-2">
+                <button
+                  type="submit"
+                  data-track="cta-contact-form-submit"
+                  class="inline-flex items-center justify-center bg-white px-6 py-3 text-sm font-semibold text-ink-950 transition hover:bg-ink-200"
+                >
+                  Send message
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
+
         <div class="mt-12 flex flex-wrap gap-4">
-          <a
-            href={DEMO_MAILTO}
-            class="inline-flex items-center justify-center rounded-md bg-indigo-600 px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-950 transition hover:bg-indigo-500"
-          >
+          <CTAButton href={bookDemoHref} dataTrack="cta-contact-demo">
             Book a 20-min demo
-          </a>
-          <a
+          </CTAButton>
+          <CTAButton
             href={PLANNER_URL}
+            variant="outline-invert"
             target="_blank"
             rel="noreferrer"
-            class="inline-flex items-center justify-center rounded-md border border-slate-700 px-8 py-3 text-sm font-semibold text-white transition hover:border-indigo-500 hover:text-indigo-300"
+            dataTrack="cta-contact-planner"
           >
             Try the planner first →
-          </a>
+          </CTAButton>
         </div>
-        <p class="mt-8 text-sm text-slate-400">
+        <p class="mt-8 text-sm text-ink-200">
           Or email directly:{" "}
-          <a href={DEMO_MAILTO} class="underline underline-offset-2 hover:text-slate-200">
-            alessandromiccolo2003@gmail.com
+          <a href={DEMO_MAILTO} class="underline underline-offset-2 hover:text-white">
+            {CONTACT_EMAIL}
           </a>
         </p>
       </div>

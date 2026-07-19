@@ -1,20 +1,40 @@
 ---
 import "../styles/global.css";
-const { title = "StudyPlanner — AI study planning for universities", description = "An AI-powered MSc study planner that validates student plans in real time and saves coordinators hours of email back-and-forth. Multi-tenant, branded per institution." } = Astro.props;
-const OG_IMAGE = "https://studyplanner-marketing.vercel.app/screenshots/screenshot-3.png";
+import "@fontsource-variable/schibsted-grotesk";
+import "@fontsource-variable/source-serif-4";
+
+const {
+  title = "StudyPlanner — AI study planning for universities",
+  description = "An AI-powered MSc study planner that validates student plans in real time and saves coordinators hours of email back-and-forth. Multi-tenant, branded per institution.",
+  jsonLd = [] as Record<string, unknown>[],
+} = Astro.props;
+
+const SITE = "https://studyplanner-marketing.vercel.app";
+const OG_IMAGE = `${SITE}/screenshots/screenshot-3.png`;
+const canonicalURL = new URL(Astro.url.pathname, SITE).toString();
 ---
 <!DOCTYPE html>
 <html lang="en" class="h-full antialiased">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      // Runs synchronously before paint so [data-reveal] elements start in their
+      // pre-reveal state only when JS is actually available — no-JS visitors get
+      // fully-visible content by default (see html.js rule in global.css).
+      document.documentElement.classList.add("js");
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
     <!-- OG -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content="StudyPlanner" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:image" content={OG_IMAGE} />
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -23,8 +43,27 @@ const OG_IMAGE = "https://studyplanner-marketing.vercel.app/screenshots/screensh
     <meta name="twitter:image" content={OG_IMAGE} />
     <!-- Sitemap -->
     <link rel="sitemap" href="/sitemap.xml" />
+    <!-- Structured data -->
+    {jsonLd.map((entry) => (
+      <script type="application/ld+json" set:html={JSON.stringify(entry)} />
+    ))}
   </head>
-  <body class="min-h-full flex flex-col bg-white text-slate-900">
+  <body class="min-h-full flex flex-col bg-paper text-[var(--color-text)]">
     <slot />
+    <script defer src="/_vercel/insights/script.js"></script>
+    <script>
+      // Delegated click tracking: any element with data-track="<name>" fires
+      // a Vercel Web Analytics custom event. No-ops safely if va isn't loaded.
+      document.addEventListener("click", (event) => {
+        const target = (event.target as HTMLElement)?.closest("[data-track]");
+        if (!target) return;
+        const name = target.getAttribute("data-track");
+        if (!name) return;
+        (window as any).va?.("event", { name });
+      });
+    </script>
+    <script>
+      import "../scripts/reveal";
+    </script>
   </body>
 </html>

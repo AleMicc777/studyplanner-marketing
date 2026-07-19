@@ -3,27 +3,71 @@ import Base from "../layouts/Base.astro";
 import Navbar from "../components/Navbar.astro";
 import Hero from "../components/Hero.astro";
 import Problem from "../components/Problem.astro";
-import Stats from "../components/Stats.astro";
 import HowItWorks from "../components/HowItWorks.astro";
 import Features from "../components/Features.astro";
-import ForUniversities from "../components/ForUniversities.astro";
 import CaseStudy from "../components/CaseStudy.astro";
 import Screenshots from "../components/Screenshots.astro";
+import ForUniversities from "../components/ForUniversities.astro";
+import TrustSecurity from "../components/TrustSecurity.astro";
 import FAQ from "../components/FAQ.astro";
 import CTAFooter from "../components/CTAFooter.astro";
+import { PLANNER_URL, CONTACT_EMAIL } from "../config/site";
+import { faqs } from "../data/faqs";
+
+const SITE = "https://studyplanner-marketing.vercel.app";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "StudyPlanner",
+    url: SITE,
+    logo: `${SITE}/favicon.svg`,
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: CONTACT_EMAIL,
+      contactType: "sales",
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "StudyPlanner",
+    applicationCategory: "EducationalApplication",
+    operatingSystem: "Web",
+    url: PLANNER_URL,
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "EUR",
+      description: "Custom pricing per institution — contact for a quote",
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
+    })),
+  },
+];
 ---
 
-<Base>
+<Base jsonLd={jsonLd}>
   <Navbar />
   <main class="flex-1">
     <div id="home"><Hero /></div>
     <div id="problem"><Problem /></div>
-    <Stats />
-    <div id="how-it-works"><HowItWorks /></div>
+    <HowItWorks />
     <Features />
-    <div id="universities"><ForUniversities /></div>
     <CaseStudy />
     <div id="demo"><Screenshots /></div>
+    <div id="universities"><ForUniversities /></div>
+    <TrustSecurity />
     <div id="faq"><FAQ /></div>
     <div id="contact"><CTAFooter /></div>
   </main>

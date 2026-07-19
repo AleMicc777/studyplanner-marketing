@@ -1,0 +1,61 @@
+---
+import { CONTACT_EMAIL } from "../config/site";
+
+const points = [
+  {
+    title: "EU hosting",
+    body: "All infrastructure runs on EU-based hosting. Shared plan data never leaves the EU.",
+  },
+  {
+    title: "No student accounts required",
+    body: "Students can build and validate a full plan without creating an account. Advisors can view a shared plan without either party signing up.",
+  },
+  {
+    title: "Data minimisation",
+    body: "Plans are stored locally in the student's browser by default. Nothing reaches our servers unless a student explicitly chooses to share.",
+  },
+  {
+    title: "No third-party tracking cookies",
+    body: "Fonts are self-hosted and analytics are cookieless, so the site loads without a cookie banner and without sending visitor data to Google or Meta.",
+  },
+  {
+    title: "DPA available on request",
+    body: "A Data Processing Agreement is ready for your institution's procurement process — ask in the first call.",
+  },
+  {
+    title: "Data deletion on request",
+    body: "Any shared plan or account can be deleted on request, in full, within the timelines your institution requires.",
+  },
+];
+---
+
+<section class="border-b border-ink-200 bg-paper">
+  <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)]">
+    <h2 data-reveal class="text-[length:var(--text-h2)] font-semibold text-[var(--color-text)]">
+      Built for GDPR procurement, not around it
+    </h2>
+    <p class="mt-4 max-w-[var(--prose-max)] font-[family-name:var(--font-body)] text-[var(--color-text-muted)]">
+      University data-protection review is part of every pilot, not an afterthought. Here is
+      what we can tell your data protection officer before they ask.
+    </p>
+
+    <dl class="mt-12 divide-y divide-ink-200 border-t border-ink-200">
+      {points.map((p) => (
+        <div class="grid gap-2 py-6 sm:grid-cols-[16rem_1fr] sm:gap-8">
+          <dt class="font-[family-name:var(--font-heading)] font-semibold text-[color:var(--color-text)]">
+            {p.title}
+          </dt>
+          <dd class="font-[family-name:var(--font-body)] text-[color:var(--color-text-muted)]">{p.body}</dd>
+        </div>
+      ))}
+    </dl>
+
+    <p class="mt-8 text-sm text-[color:var(--color-text-muted)]">
+      Questions for your DPO? Reach us directly at
+      {" "}
+      <a href={`mailto:${CONTACT_EMAIL}`} class="underline underline-offset-2 hover:text-[color:var(--color-ink-700)]">
+        {CONTACT_EMAIL}
+      </a>.
+    </p>
+  </div>
+</section>

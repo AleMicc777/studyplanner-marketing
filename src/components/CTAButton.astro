@@ -1,0 +1,34 @@
+---
+interface Props {
+  href: string;
+  variant?: "solid" | "outline" | "outline-invert";
+  dataTrack?: string;
+  target?: string;
+  rel?: string;
+  class?: string;
+}
+
+const { href, variant = "solid", dataTrack, target, rel, class: className } = Astro.props;
+
+const base = "inline-flex items-center justify-center rounded-none px-6 py-3 text-sm font-semibold transition";
+
+const variants = {
+  // Filled paper button — the primary action on dark ink backgrounds.
+  solid: "bg-paper text-ink-950 hover:-translate-y-0.5 hover:bg-ink-200",
+  // Subtle border, transparent fill — secondary action on dark ink backgrounds.
+  outline: "border border-ink-500 text-paper hover:bg-white/5",
+  // Border that fills solid white and inverts text on hover — used where a
+  // stronger secondary action is wanted (footer/case-study/contact CTAs).
+  "outline-invert": "border border-white text-white hover:bg-white hover:text-ink-950",
+};
+---
+
+<a
+  href={href}
+  target={target}
+  rel={rel}
+  data-track={dataTrack}
+  class:list={[base, variants[variant], className]}
+>
+  <slot />
+</a>

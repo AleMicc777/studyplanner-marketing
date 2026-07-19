@@ -1,5 +1,6 @@
 ---
-const DEMO_MAILTO = "mailto:alessandromiccolo2003@gmail.com?subject=StudyPlanner%20Demo%20Request&body=University%20name%3A%0AProgramme%3A%0AYour%20role%3A";
+import { bookDemoHref } from "../config/site";
+import CTAButton from "./CTAButton.astro";
 const points = [
   { title: "Multi-tenant from day one", body: "Each university gets its own catalogue, rules, branding, and subdomain. Ready to deploy for your programme." },
   { title: "Zero onboarding cost for students", body: "No account required to plan. Students land, build, validate, share — all without IT involvement on your side." },
@@ -8,36 +9,33 @@ const points = [
 ];
 ---
 
-<section class="border-b border-slate-200 bg-indigo-950">
-  <div class="mx-auto max-w-6xl px-6 py-20 sm:py-24">
+<section class="border-b border-ink-200 bg-ink-950">
+  <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)]">
     <div class="grid gap-12 lg:grid-cols-[1fr_2fr] lg:gap-16">
       <div>
-        <h2 class="text-3xl font-semibold tracking-tight text-white sm:text-4xl">For universities</h2>
-        <p class="mt-4 text-slate-200">
+        <h2 data-reveal class="text-[length:var(--text-h2)] font-semibold text-white">For universities</h2>
+        <p class="mt-4 font-[family-name:var(--font-body)] text-ink-200">
           StudyPlanner is built to be deployed across programmes and institutions, not just one.
           If you coordinate an MSc and want fewer plan-validation emails next term, let's talk.
         </p>
-        <a
-          href={DEMO_MAILTO}
-          class="mt-8 inline-flex items-center justify-center rounded-md bg-indigo-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-900/50 transition hover:bg-indigo-400"
+        <p class="mt-4 font-[family-name:var(--font-body)] text-ink-200">
+          Priced per institution, per programme. Pilot programmes start with a free encoded
+          prototype of your own catalogue — you see your rules running before any commitment.
+        </p>
+        <CTAButton
+          href={bookDemoHref}
+          variant="outline-invert"
+          dataTrack="cta-universities-book"
+          class="mt-8"
         >
           Book a 20-min demo
-        </a>
-        <div class="mt-8 rounded-lg border border-indigo-800 bg-indigo-900/40 px-5 py-4">
-          <p class="text-xs font-semibold uppercase tracking-wide text-indigo-300">Data &amp; Privacy</p>
-          <p class="mt-1 text-sm text-slate-300">
-            Student plans are stored locally in the browser by default. No data leaves
-            the student's machine unless they choose to share. If shared, data is stored
-            on EU infrastructure and never used for training or shared with third parties.
-            <span class="font-medium text-indigo-200">GDPR-compliant by design.</span>
-          </p>
-        </div>
+        </CTAButton>
       </div>
-      <div class="grid gap-5 sm:grid-cols-2">
+      <div class="grid gap-px border border-ink-700 bg-ink-700 sm:grid-cols-2">
         {points.map((p) => (
-          <div class="rounded-xl border border-indigo-800 bg-indigo-900/60 p-6 backdrop-blur">
-            <h3 class="font-semibold text-indigo-100">{p.title}</h3>
-            <p class="mt-2 text-sm text-slate-200">{p.body}</p>
+          <div class="bg-ink-950 p-6">
+            <h3 class="font-[family-name:var(--font-heading)] font-semibold text-white">{p.title}</h3>
+            <p class="mt-2 text-sm font-[family-name:var(--font-body)] text-ink-200">{p.body}</p>
           </div>
         ))}
       </div>

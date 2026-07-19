@@ -1,49 +1,27 @@
 ---
-const faqs = [
-  {
-    q: "How long does it take to set up for my programme?",
-    a: "About two weeks. You send us your programme guide; we encode the validation rules and you review them before going live. No IT involvement needed on your side.",
-  },
-  {
-    q: "What does it cost?",
-    a: "Pricing is per-institution. We'll give you a number in the first call — no commitment needed to hear it.",
-  },
-  {
-    q: "Is student data safe and GDPR-compliant?",
-    a: "Yes. Plans are stored locally in the student's browser by default — no data reaches our servers unless the student explicitly shares their plan. All shared data is stored on EU infrastructure and never used for training or sold to third parties.",
-  },
-  {
-    q: "Does it connect to our student information system?",
-    a: "Not yet. StudyPlanner works standalone today — students use it alongside whatever SIS you have. Integration with SIS and course catalogues is on the roadmap.",
-  },
-  {
-    q: "What if our programme rules change each year?",
-    a: "We update the validation logic each academic year as part of the subscription. Send us the new programme guide and we'll handle the rest.",
-  },
-  {
-    q: "Can students use it without creating an account?",
-    a: "Yes. Plans are saved in the browser by default. Students can optionally create an account to sync across devices and share with their advisor.",
-  },
-];
+import { faqs } from "../data/faqs";
 ---
 
-<section class="border-b border-slate-200 bg-slate-50">
-  <div class="mx-auto max-w-3xl px-6 py-20 sm:py-24">
-    <h2 class="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+<section class="border-b border-ink-200 bg-paper">
+  <div class="mx-auto max-w-3xl px-6 py-[var(--section-y)]">
+    <h2 data-reveal class="text-[length:var(--text-h2)] font-semibold text-[color:var(--color-text)]">
       Common questions
     </h2>
-    <dl class="mt-10 space-y-4">
+    <dl class="mt-10 divide-y divide-ink-200 border-t border-b border-ink-200">
       {faqs.map((item) => (
-        <details class="group rounded-xl border border-slate-200 bg-white shadow-sm">
-          <summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-base font-semibold text-slate-900 marker:hidden [&::-webkit-details-marker]:hidden">
+        <details class="group">
+          <summary
+            data-track="faq-open"
+            class="flex cursor-pointer items-center justify-between gap-4 py-5 font-[family-name:var(--font-heading)] text-base font-semibold text-[color:var(--color-text)] marker:hidden [&::-webkit-details-marker]:hidden"
+          >
             {item.q}
-            <span class="shrink-0 text-slate-400 transition group-open:rotate-180">
+            <span class="shrink-0 text-[color:var(--color-text-muted)] transition group-open:rotate-180">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="m6 9 6 6 6-6" />
               </svg>
             </span>
           </summary>
-          <div class="border-t border-slate-100 px-6 pb-5 pt-4 text-slate-600">
+          <div class="pb-5 font-[family-name:var(--font-body)] text-[color:var(--color-text-muted)]">
             {item.a}
           </div>
         </details>
