@@ -2,87 +2,82 @@
 import { PLANNER_URL, bookDemoHref } from "../config/site";
 import BrowserFrame from "./BrowserFrame.astro";
 import CTAButton from "./CTAButton.astro";
+
+const blocks = [
+  {
+    label: "Challenge",
+    body: "Advisors were fielding the same plan-validation emails every term. Students were unsure which electives satisfied prerequisite chains, EC totals, and track requirements across five specialisations.",
+  },
+  {
+    label: "What was encoded",
+    body: "Prerequisite chains, EC requirements, and PPD credits across every specialisation track, built directly from the programme guide.",
+  },
+];
 ---
 
-<section class="border-b border-ink-200 bg-ink-950" data-reveal>
+<section class="border-b border-hairline bg-graphite text-on-dark" data-reveal>
   <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)]">
-    <p class="font-[family-name:var(--font-heading)] text-sm font-semibold text-ink-200">
-      Case study — TU Delft, MSc Aerospace Engineering
+    <p class="font-mono text-sm text-on-dark-2">
+      <span class="text-amber">//</span> Case study: a live MSc Aerospace Engineering programme
     </p>
-    <p class="mt-1 text-sm text-ink-200">
+    <p class="mt-2 font-mono text-sm text-steel">
       180+ courses encoded · 5 specialisation tracks · under 2 weeks to live.
     </p>
 
-    <div class="mt-8 grid gap-12 lg:grid-cols-2 lg:items-start">
-      <div>
-        <h2 class="text-[length:var(--text-h2)] font-semibold text-white">
+    <div class="mt-10 grid gap-12 lg:grid-cols-2 lg:items-start lg:gap-16">
+      <div class="min-w-0">
+        <h2 class="text-[length:var(--text-h2)] font-extrabold tracking-[-0.04em] text-on-dark">
           From email chaos to self-service validation
         </h2>
 
-        <div class="mt-8 space-y-6 font-[family-name:var(--font-body)] text-ink-200">
-          <div>
-            <h3 class="font-[family-name:var(--font-heading)] text-sm font-semibold uppercase tracking-normal text-white">
-              Challenge
-            </h3>
-            <p class="mt-1">
-              Advisors were fielding the same plan-validation emails every term — students unsure
-              which electives satisfied prerequisite chains, EC totals, and track requirements
-              across five specialisations.
-            </p>
-          </div>
-          <div>
-            <h3 class="font-[family-name:var(--font-heading)] text-sm font-semibold uppercase tracking-normal text-white">
-              What was encoded
-            </h3>
-            <p class="mt-1">
-              Prerequisite chains, EC requirements, and PPD credits across every specialisation
-              track — built directly from the programme guide.
-            </p>
-          </div>
-          <div>
-            <h3 class="font-[family-name:var(--font-heading)] text-sm font-semibold uppercase tracking-normal text-white">
+        <div class="mt-8 divide-y divide-hairline">
+          {blocks.map((b) => (
+            <div class="py-5 first:pt-0">
+              <h3 class="font-mono text-xs font-medium uppercase tracking-[0.08em] text-steel">
+                {b.label}
+              </h3>
+              <p class="mt-2 text-on-dark-2">{b.body}</p>
+            </div>
+          ))}
+          <div class="py-5">
+            <h3 class="font-mono text-xs font-medium uppercase tracking-[0.08em] text-steel">
               Outcome
             </h3>
-            <p class="mt-1">
+            <p class="mt-2 text-on-dark-2">
               Students now validate their own plans before an advising appointment, catching
               invalid configurations themselves. Early estimate:
               {" "}
-              <span class="font-semibold text-valid-600">~2 hours saved per student per year</span>
+              <span class="font-semibold text-amber">~2 hours saved per student per year</span>
               {" "}
-              on back-and-forth email — estimates subject to programme complexity.
+              on back-and-forth email. Estimates vary with programme complexity.
             </p>
           </div>
         </div>
 
-        <div class="mt-10 border border-ink-700 bg-ink-900 p-6">
-          <p class="font-[family-name:var(--font-heading)] font-semibold text-white">
-            Become the pilot programme in your country
-          </p>
-          <p class="mt-2 text-sm font-[family-name:var(--font-body)] text-ink-200">
-            We're taking on a small number of founding-partner programmes at pilot pricing,
-            one per country, while the catalogue library grows. If that's you, let's talk.
-          </p>
-        </div>
-
-        <div class="mt-8 flex flex-wrap gap-4">
+        <div class="mt-10 flex flex-wrap gap-4">
+          <CTAButton href={bookDemoHref} variant="solid" dataTrack="cta-casestudy-book">
+            Book a 20-min demo
+          </CTAButton>
           <CTAButton
             href={PLANNER_URL}
             target="_blank"
             rel="noreferrer"
+            variant="outline"
             dataTrack="cta-casestudy-planner"
           >
-            See the live plan →
-          </CTAButton>
-          <CTAButton href={bookDemoHref} variant="outline-invert" dataTrack="cta-casestudy-book">
-            Book a demo for your programme
+            Explore the live planner <span aria-hidden="true">&rarr;</span>
           </CTAButton>
         </div>
       </div>
 
       <BrowserFrame
         src="/screenshots/screenshot-3.png"
-        alt="Full study plan grid with live EC validation and AI recommendations, TU Delft MSc Aerospace Engineering"
+        alt="Full study plan grid with live EC validation and AI recommendations, a live MSc Aerospace Engineering programme"
         caption="The plan view students use before every advising appointment: four quarters per year, real-time EC totals, prerequisite conflict flags."
+        url="planner.studyplanner.eu/plan/2025-2026"
+        live={true}
+        ticks={true}
+        tone="dark"
         width={1440}
         height={1153}
       />

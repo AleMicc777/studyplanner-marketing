@@ -1,68 +1,82 @@
 @import "tailwindcss";
 
 /*
- * Aerospace blueprint design tokens.
+ * StudyPlanner design system — "Engineered Graphite + Amber Signal".
  *
- * Usage convention:
- * - ink-* ramp   : dark sections, CTAs, structural/UI elements (Prussian blue, OKLCH hue 252).
- * - paper / paper-shade : light section backgrounds (warm off-white, never pure white).
- * - valid-*      : ONLY for "plan validates" moments — checkmarks, success states,
- *                   validation stats. Not a general-purpose accent color.
- * - flag-*       : ONLY for "invalid plan" illustrations, used sparingly.
- * - No gradients on text. No shadow-as-decoration — use 1px hairline rules for structure.
+ * ONE committed identity. A cool near-black graphite carries the structural
+ * surface; a single amber signal carries validation, key data, and the primary
+ * CTA. No second competing colour. Green/red are reserved strictly for
+ * plan-validation meaning (valid / flag), never decoration.
+ *
+ * Token usage:
+ * - graphite / graphite-2 : dark section + nav + hero + footer surfaces
+ * - panel                  : raised dark surfaces (frames, strips) on graphite
+ * - hairline               : 1px structural rules on dark
+ * - paper / paper-shade    : light section surfaces (cool near-white, never warm)
+ * - ink / muted            : text on light surfaces
+ * - on-dark / on-dark-2    : text on graphite; steel = faint mono metadata
+ * - amber (+ hover/line/deep): THE signal. CTAs, key metrics, validation accents.
+ * - valid / flag           : success / error meaning only.
+ * Type: Geist (sans) for everything; Geist Mono for metrics, code, validation.
  */
 @theme {
-  --color-ink-950: oklch(0.22 0.055 252);
-  --color-ink-900: oklch(0.28 0.06 252);
-  --color-ink-700: oklch(0.42 0.075 252);
-  --color-ink-500: oklch(0.55 0.08 252);
-  --color-ink-200: oklch(0.87 0.03 252);
+  --color-graphite: oklch(0.19 0.008 250);
+  --color-graphite-2: oklch(0.165 0.008 250);
+  --color-panel: oklch(0.24 0.01 250);
+  --color-hairline: oklch(0.32 0.012 250);
 
-  --color-paper: oklch(0.975 0.006 85);
-  --color-paper-shade: oklch(0.945 0.008 85);
+  --color-paper: oklch(0.975 0.003 250);
+  --color-paper-shade: oklch(0.945 0.004 250);
+  --color-line: oklch(0.9 0.004 250);
 
-  --color-text: oklch(0.28 0.015 85);
-  --color-text-muted: oklch(0.45 0.02 85);
+  --color-ink: oklch(0.22 0.01 250);
+  --color-muted: oklch(0.46 0.012 250);
 
-  --color-valid-600: oklch(0.55 0.12 155);
-  --color-valid-100: oklch(0.93 0.04 155);
-  --color-flag-600: oklch(0.55 0.16 25);
+  --color-on-dark: oklch(0.975 0.003 250);
+  --color-on-dark-2: oklch(0.8 0.012 250);
+  --color-steel: oklch(0.62 0.028 250);
 
-  /* Fontsource variable packages register these exact family names. */
-  --font-heading: "Schibsted Grotesk Variable", system-ui, sans-serif;
-  --font-body: "Source Serif 4 Variable", Georgia, serif;
+  --color-amber: oklch(0.76 0.16 62);
+  --color-amber-hover: oklch(0.7 0.16 60);
+  --color-amber-line: oklch(0.66 0.145 62);
+  --color-amber-deep: oklch(0.47 0.12 62);
+
+  --color-valid: oklch(0.72 0.15 150);
+  --color-flag: oklch(0.66 0.19 25);
+
+  --font-sans: "Geist Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, "SF Mono", Menlo, monospace;
 }
 
-/* Fluid type scale, 1.25 ratio. */
+/* Fluid type scale + layout + motion tokens. */
 :root {
-  --text-display: clamp(2.4rem, 1.6rem + 3.5vw, 4rem);
-  --text-h2: clamp(1.8rem, 1.5rem + 1.5vw, 2.5rem);
-  --text-h3: clamp(1.4rem, 1.2rem + 1vw, 1.8rem);
-  --text-lead: clamp(1.1rem, 1rem + 0.4vw, 1.25rem);
-  --text-body: 1rem;
-  --text-sm: 0.875rem;
+  --text-display: clamp(2.4rem, 1.7rem + 3.1vw, 4.4rem);
+  --text-h2: clamp(1.85rem, 1.3rem + 2.2vw, 2.9rem);
+  --text-h3: clamp(1.3rem, 1.1rem + 1vw, 1.7rem);
+  --text-lead: clamp(1.05rem, 1rem + 0.5vw, 1.28rem);
 
-  /* Spacing / layout. */
   --section-y: clamp(4rem, 8vw, 7rem);
-  --prose-max: 65ch;
+  --prose-max: 46ch;
 
-  /* Motion (used by Phase 4). */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --dur-reveal: 600ms;
+  --dur-hero-item: 420ms;
 }
 
 body {
-  font-family: var(--font-body);
-  color: var(--color-text);
-  background: var(--color-paper);
+  font-family: var(--font-sans);
+  background: var(--color-graphite);
+  color: var(--color-on-dark);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-heading);
   text-wrap: balance;
+  letter-spacing: -0.03em;
 }
 
 p,
@@ -70,17 +84,50 @@ li {
   text-wrap: pretty;
 }
 
-/*
- * Phase 4 — motion.
- *
- * Hero load orchestration: 4 items, 80ms stagger (0/80/160/240ms), each animating
- * translateY(12px)+opacity:0 -> translateY(0)+opacity:1 on expo ease. Per-item duration
- * is shorter than --dur-reveal so delay(240ms) + duration stays under the 700ms budget.
- */
-:root {
-  --dur-hero-item: 420ms;
+/* Amber focus ring, applied globally to keyboard focus. */
+:focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 3px;
+  border-radius: 3px;
 }
 
+/*
+ * Engineered grid backdrop — shared by the hero and closing CTA bands.
+ * A faint technical grid masked to a corner so it reads as blueprint texture,
+ * never as noise. Place on a `position: relative` dark section; wrap real
+ * content so it sits above the ::before layer.
+ */
+.grid-bg {
+  position: relative;
+  overflow: hidden;
+}
+.grid-bg::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, oklch(0.32 0.012 250 / 0.55) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.32 0.012 250 / 0.55) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(120% 90% at 82% 4%, #000 0%, transparent 68%);
+  mask-image: radial-gradient(120% 90% at 82% 4%, #000 0%, transparent 68%);
+  opacity: 0.7;
+}
+.grid-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
+/*
+ * Motion — Phase 4 infrastructure, preserved.
+ *
+ * Hero load: 4 items, 80ms stagger, translateY(12px)+opacity fade on expo ease.
+ * Default (no-JS) state is fully visible: the `.js` class is only added by the
+ * inline script in Base.astro when JS is available, so headless/no-JS renders
+ * show final content. Reveal never gates visibility on intersection.
+ */
 @keyframes hero-item-in {
   from {
     opacity: 0;
@@ -114,23 +161,20 @@ li {
   animation-delay: 240ms;
 }
 
-/*
- * Scroll reveal: opt-in via [data-reveal], driven by src/scripts/reveal.ts adding
- * .is-visible on intersection. Default state is a SLIGHT offset, not hidden content —
- * if JS never runs, `.js` is never added to <html> so elements render at their final,
- * fully-visible state (see inline script in Base.astro).
- */
+/* Scroll reveal: enhances already-visible content (see html.js gate above). */
 html.js [data-reveal] {
   opacity: 0.001;
   transform: translateY(10px);
-  transition: opacity var(--dur-reveal) var(--ease-out-expo), transform var(--dur-reveal) var(--ease-out-expo);
+  transition:
+    opacity var(--dur-reveal) var(--ease-out-expo),
+    transform var(--dur-reveal) var(--ease-out-expo);
 }
 html.js [data-reveal].is-visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Signature moment: valid-checkmark stroke-draw, paired with the same reveal trigger. */
+/* Signature: validation checkmark stroke-draw, paired with the reveal trigger. */
 .check-draw {
   stroke-dasharray: 24;
   stroke-dashoffset: 24;

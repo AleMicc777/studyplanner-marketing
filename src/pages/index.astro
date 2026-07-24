@@ -2,10 +2,13 @@
 import Base from "../layouts/Base.astro";
 import Navbar from "../components/Navbar.astro";
 import Hero from "../components/Hero.astro";
+import TrustBar from "../components/TrustBar.astro";
 import Problem from "../components/Problem.astro";
+import Stats from "../components/Stats.astro";
 import HowItWorks from "../components/HowItWorks.astro";
 import Features from "../components/Features.astro";
 import CaseStudy from "../components/CaseStudy.astro";
+import FoundingPilot from "../components/FoundingPilot.astro";
 import Screenshots from "../components/Screenshots.astro";
 import ForUniversities from "../components/ForUniversities.astro";
 import TrustSecurity from "../components/TrustSecurity.astro";
@@ -14,7 +17,7 @@ import CTAFooter from "../components/CTAFooter.astro";
 import { PLANNER_URL, CONTACT_EMAIL } from "../config/site";
 import { faqs } from "../data/faqs";
 
-const SITE = "https://studyplanner-marketing.vercel.app";
+const SITE = "https://studyplanner-marketing-steel.vercel.app";
 
 const jsonLd = [
   {
@@ -39,7 +42,7 @@ const jsonLd = [
     offers: {
       "@type": "Offer",
       priceCurrency: "EUR",
-      description: "Custom pricing per institution — contact for a quote",
+      description: "Custom pricing per institution. Contact for a quote.",
     },
   },
   {
@@ -61,10 +64,13 @@ const jsonLd = [
   <Navbar />
   <main class="flex-1">
     <div id="home"><Hero /></div>
+    <TrustBar />
     <div id="problem"><Problem /></div>
+    <Stats />
     <HowItWorks />
     <Features />
     <CaseStudy />
+    <FoundingPilot />
     <div id="demo"><Screenshots /></div>
     <div id="universities"><ForUniversities /></div>
     <TrustSecurity />

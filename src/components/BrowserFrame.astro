@@ -3,6 +3,10 @@ interface Props {
   src: string;
   alt: string;
   caption?: string;
+  url?: string;
+  live?: boolean;
+  ticks?: boolean;
+  tone?: "dark" | "light";
   width?: number;
   height?: number;
   loading?: "eager" | "lazy";
@@ -13,20 +17,55 @@ const {
   src,
   alt,
   caption,
+  url,
+  live = false,
+  ticks = false,
+  tone = "dark",
   width = 1440,
   height = 900,
   loading = "lazy",
   decoding = "async",
   fetchpriority = "auto",
 } = Astro.props;
+
+const isDark = tone === "dark";
+const shell = isDark
+  ? "border-hairline bg-panel shadow-[0_40px_80px_-40px_oklch(0_0_0/0.7)]"
+  : "border-line bg-paper-shade shadow-[0_40px_80px_-48px_oklch(0.22_0.01_250/0.4)]";
+const bar = isDark ? "bg-graphite-2 border-hairline" : "bg-paper border-line";
+const urlBox = isDark
+  ? "bg-graphite border-hairline text-steel"
+  : "bg-paper-shade border-line text-muted";
+const dot = isDark ? "bg-hairline" : "bg-line";
+const capTone = isDark ? "text-steel" : "text-muted";
 ---
 
-<figure class="m-0">
-  <div class="border border-ink-200 bg-paper">
-    <div class="flex items-center gap-1.5 border-b border-ink-200 bg-ink-200/40 px-3 py-2">
-      <span class="h-2 w-2 rounded-full bg-ink-200"></span>
-      <span class="h-2 w-2 rounded-full bg-ink-200"></span>
-      <span class="h-2 w-2 rounded-full bg-ink-200"></span>
+<figure class="m-0 min-w-0">
+  <div class:list={["frame relative overflow-hidden rounded-lg border", shell]}>
+    {ticks && (
+      <div class="ticks" aria-hidden="true">
+        <i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>
+      </div>
+    )}
+    <div class:list={["flex items-center gap-3 border-b px-3.5 py-2.5", bar]}>
+      <span class="flex gap-1.5" aria-hidden="true">
+        <span class:list={["h-2.5 w-2.5 rounded-full", dot]}></span>
+        <span class:list={["h-2.5 w-2.5 rounded-full", dot]}></span>
+        <span class:list={["h-2.5 w-2.5 rounded-full", dot]}></span>
+      </span>
+      {url && (
+        <span
+          class:list={[
+            "min-w-0 flex-1 truncate rounded border px-2.5 py-1 font-mono text-xs",
+            urlBox,
+          ]}
+        >{url}</span>
+      )}
+      {live && (
+        <span class="rounded bg-amber px-1.5 py-0.5 font-mono text-[0.66rem] font-medium tracking-[0.08em] text-graphite">
+          LIVE
+        </span>
+      )}
     </div>
     <img
       src={src}
@@ -40,6 +79,26 @@ const {
     />
   </div>
   {caption && (
-    <figcaption class="mt-3 text-sm text-[var(--color-text-muted)]">{caption}</figcaption>
+    <figcaption class:list={["mt-3 font-mono text-sm", capTone]}>{caption}</figcaption>
   )}
 </figure>
+
+<style>
+  .frame .ticks {
+    position: absolute;
+    inset: -7px;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .frame .ticks i {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--color-amber);
+    opacity: 0.85;
+  }
+  .frame .ticks i.tl { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+  .frame .ticks i.tr { top: 0; right: 0; border-left: 0; border-bottom: 0; }
+  .frame .ticks i.bl { bottom: 0; left: 0; border-right: 0; border-top: 0; }
+  .frame .ticks i.br { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+</style>

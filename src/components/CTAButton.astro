@@ -1,7 +1,7 @@
 ---
 interface Props {
   href: string;
-  variant?: "solid" | "outline" | "outline-invert";
+  variant?: "solid" | "solid-dark" | "outline" | "outline-invert";
   dataTrack?: string;
   target?: string;
   rel?: string;
@@ -10,16 +10,23 @@ interface Props {
 
 const { href, variant = "solid", dataTrack, target, rel, class: className } = Astro.props;
 
-const base = "inline-flex items-center justify-center rounded-none px-6 py-3 text-sm font-semibold transition";
+const base =
+  "inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-[0.95rem] font-semibold tracking-tight transition-colors duration-200 active:translate-y-px border";
+
+// Primary action — the amber signal. Works on graphite and on paper.
+// `solid` and `solid-dark` are the same amber primary; the two names document
+// intent at the call site (which background the button sits on).
+const amberPrimary =
+  "bg-amber text-graphite border-amber hover:bg-amber-hover hover:border-amber-hover";
 
 const variants = {
-  // Filled paper button — the primary action on dark ink backgrounds.
-  solid: "bg-paper text-ink-950 hover:-translate-y-0.5 hover:bg-ink-200",
-  // Subtle border, transparent fill — secondary action on dark ink backgrounds.
-  outline: "border border-ink-500 text-paper hover:bg-white/5",
-  // Border that fills solid white and inverts text on hover — used where a
-  // stronger secondary action is wanted (footer/case-study/contact CTAs).
-  "outline-invert": "border border-white text-white hover:bg-white hover:text-ink-950",
+  solid: amberPrimary,
+  "solid-dark": amberPrimary,
+  // Ghost on dark (graphite) surfaces.
+  outline: "bg-transparent text-on-dark border-hairline hover:border-amber hover:text-amber",
+  // Ghost on light (paper) surfaces.
+  "outline-invert":
+    "bg-transparent text-ink border-line hover:border-amber hover:text-amber-deep",
 };
 ---
 

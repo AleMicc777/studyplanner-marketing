@@ -20,7 +20,7 @@ const points = [
   },
   {
     title: "DPA available on request",
-    body: "A Data Processing Agreement is ready for your institution's procurement process — ask in the first call.",
+    body: "A Data Processing Agreement is ready for your institution's procurement process. Ask in the first call.",
   },
   {
     title: "Data deletion on request",
@@ -29,31 +29,35 @@ const points = [
 ];
 ---
 
-<section class="border-b border-ink-200 bg-paper">
+<section class="border-b border-line bg-paper text-ink">
   <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)]">
-    <h2 data-reveal class="text-[length:var(--text-h2)] font-semibold text-[var(--color-text)]">
+    <h2 data-reveal class="max-w-[22ch] text-[length:var(--text-h2)] font-extrabold tracking-[-0.04em] text-ink">
       Built for GDPR procurement, not around it
     </h2>
-    <p class="mt-4 max-w-[var(--prose-max)] font-[family-name:var(--font-body)] text-[var(--color-text-muted)]">
+    <p class="mt-4 max-w-[var(--prose-max)] text-[length:var(--text-lead)] leading-relaxed text-muted">
       University data-protection review is part of every pilot, not an afterthought. Here is
       what we can tell your data protection officer before they ask.
     </p>
 
-    <dl class="mt-12 divide-y divide-ink-200 border-t border-ink-200">
+    <dl class="mt-12 divide-y divide-line border-t border-line">
       {points.map((p) => (
         <div class="grid gap-2 py-6 sm:grid-cols-[16rem_1fr] sm:gap-8">
-          <dt class="font-[family-name:var(--font-heading)] font-semibold text-[color:var(--color-text)]">
+          <dt class="flex items-start gap-2.5 font-semibold text-ink">
+            <span aria-hidden="true" class="mt-2 h-1.5 w-1.5 shrink-0 rounded-[1px] bg-amber"></span>
             {p.title}
           </dt>
-          <dd class="font-[family-name:var(--font-body)] text-[color:var(--color-text-muted)]">{p.body}</dd>
+          <dd class="leading-relaxed text-muted sm:pl-0">{p.body}</dd>
         </div>
       ))}
     </dl>
 
-    <p class="mt-8 text-sm text-[color:var(--color-text-muted)]">
+    <p class="mt-8 text-sm text-muted">
       Questions for your DPO? Reach us directly at
       {" "}
-      <a href={`mailto:${CONTACT_EMAIL}`} class="underline underline-offset-2 hover:text-[color:var(--color-ink-700)]">
+      <a
+        href={`mailto:${CONTACT_EMAIL}`}
+        class="font-medium text-amber-deep underline decoration-amber-line/40 underline-offset-4 transition-colors hover:text-amber-hover"
+      >
         {CONTACT_EMAIL}
       </a>.
     </p>

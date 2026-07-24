@@ -1,0 +1,63 @@
+---
+/*
+ * The one full-bleed amber band on the page: giant Geist Mono numerals in
+ * graphite on the amber signal surface, four stats in a row divided by faint
+ * graphite hairlines. The "hard outcome numbers" the problem section sets up.
+ *
+ * Numbers are defensible, not fabricated: encoded catalogue size and tracks are
+ * from a live MSc Aerospace programme; the time-saved figure is explicitly an
+ * early estimate; "under 2 weeks" is the observed setup time. No institution is
+ * named in the proof.
+ *
+ * a11y note: on the amber surface, text is solid graphite (not translucent) so
+ * every label clears WCAG AA; hierarchy comes from size and weight, not opacity.
+ */
+const stats = [
+  { value: "180+", label: "Courses encoded", note: "Live MSc Aerospace catalogue" },
+  { value: "5", label: "Specialisation tracks", note: "prerequisites and EC rules per track" },
+  { value: "Under 2 wks", label: "From guide to live", note: "programme guide to working planner" },
+  { value: "~2 hrs", label: "Saved / student / year", note: "early estimate, varies by programme" },
+];
+---
+
+<section class="bg-amber text-graphite">
+  <div class="mx-auto max-w-6xl px-6 py-[clamp(2.75rem,5vw,4rem)]">
+    <h2 class="sr-only">By the numbers</h2>
+
+    <!-- mono kicker with a trailing graphite hairline -->
+    <div
+      data-reveal
+      class="mb-8 flex items-center gap-4 font-mono text-[0.78rem] uppercase tracking-[0.06em] text-graphite"
+    >
+      <span>Measured, not claimed</span>
+      <span class="h-px flex-1 bg-graphite/25" aria-hidden="true"></span>
+    </div>
+
+    <dl class="grid grid-cols-1 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-y-0">
+      {
+        stats.map((s, i) => (
+          <div
+            data-reveal
+            class:list={[
+              "border-t border-graphite/25 pt-6 lg:border-t-0 lg:pt-0",
+              "lg:px-[clamp(1rem,2.4vw,1.9rem)]",
+              i === 0
+                ? "lg:border-l-0 lg:pl-0"
+                : "lg:border-l lg:border-graphite/25",
+            ]}
+          >
+            <dt class="font-mono text-[clamp(2.05rem,1.4rem+2.6vw,3.2rem)] font-medium leading-none tracking-[-0.04em] text-graphite tabular-nums">
+              {s.value}
+            </dt>
+            <dd class="mt-4 text-[1.02rem] font-bold tracking-[-0.02em] text-graphite">
+              {s.label}
+            </dd>
+            <dd class="mt-1.5 text-[0.86rem] font-normal leading-snug text-graphite">
+              {s.note}
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>

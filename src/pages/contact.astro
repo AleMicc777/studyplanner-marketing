@@ -19,26 +19,29 @@ const blocks = [
 ];
 ---
 
-<Base title="Contact — StudyPlanner" description="Get in touch to bring StudyPlanner to your university. Twenty-minute call, no commitment.">
+<Base title="Contact · StudyPlanner" description="Get in touch to bring StudyPlanner to your university. Twenty-minute call, no commitment.">
   <Navbar />
   <main class="flex-1">
-    <div class="min-h-screen bg-ink-950">
+    <div class="grid-bg min-h-screen bg-graphite text-on-dark">
       <div class="mx-auto max-w-3xl px-6 py-24 sm:py-32">
-        <div class="mb-8 h-1 w-16 bg-white"></div>
-        <h1 class="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+        <div class="mb-8 h-1 w-12 rounded-full bg-amber"></div>
+        <h1 class="text-[length:var(--text-display)] font-extrabold tracking-[-0.04em] text-on-dark">
           Bring StudyPlanner to your university.
         </h1>
-        <p class="mt-6 text-lg text-ink-200">
+        <p class="mt-6 max-w-2xl text-[length:var(--text-lead)] leading-relaxed text-on-dark-2">
           Twenty-minute call. We'll walk through the live demo, show how the multi-tenant setup works, and scope what it would take for your programme.
         </p>
         <div class="mt-12 grid gap-6 sm:grid-cols-2">
           {blocks.map((block) => (
-            <div class="border border-ink-700 bg-ink-900 p-6">
-              <h2 class="font-semibold text-white mb-4">{block.title}</h2>
-              <ul class="space-y-2">
+            <div class="rounded-lg border border-hairline bg-panel p-6">
+              <h2 class="mb-4 flex items-center gap-2.5 font-semibold text-on-dark">
+                <span aria-hidden="true" class="h-1.5 w-1.5 shrink-0 rounded-[1px] bg-amber"></span>
+                {block.title}
+              </h2>
+              <ul class="space-y-2.5">
                 {block.items.map((item) => (
-                  <li class="flex items-start gap-2 text-sm text-ink-200">
-                    <span class="mt-0.5 shrink-0 text-white">✓</span>
+                  <li class="flex items-start gap-2.5 text-sm text-on-dark-2">
+                    <span class="mt-0.5 shrink-0 text-amber" aria-hidden="true">✓</span>
                     {item}
                   </li>
                 ))}
@@ -48,9 +51,9 @@ const blocks = [
         </div>
 
         {BOOKING_URL && (
-          <div class="mt-12 border border-ink-700 bg-ink-900 p-6">
-            <h2 class="font-semibold text-white">Book directly</h2>
-            <p class="mt-2 text-sm text-ink-200">Pick a time that works for you — no back-and-forth needed.</p>
+          <div class="mt-12 rounded-lg border border-hairline bg-panel p-6">
+            <h2 class="font-semibold text-on-dark">Book directly</h2>
+            <p class="mt-2 text-sm text-on-dark-2">Pick a time that works for you. No back-and-forth needed.</p>
             <CTAButton
               href={BOOKING_URL}
               target="_blank"
@@ -64,8 +67,8 @@ const blocks = [
         )}
 
         {FORMSPREE_ACTION && (
-          <div class="mt-12 border border-ink-700 bg-ink-900 p-6">
-            <h2 class="font-semibold text-white mb-4">Send us a message</h2>
+          <div class="mt-12 rounded-lg border border-hairline bg-panel p-6">
+            <h2 class="mb-4 font-semibold text-on-dark">Send us a message</h2>
             <form action={FORMSPREE_ACTION} method="POST" class="grid gap-4 sm:grid-cols-2">
               <input
                 type="text"
@@ -76,30 +79,30 @@ const blocks = [
                 aria-hidden="true"
               />
               <div class="sm:col-span-1">
-                <label for="name" class="block text-sm font-medium text-ink-200">Name</label>
-                <input id="name" name="name" type="text" required class="mt-1 w-full border border-ink-700 bg-ink-950 px-3 py-2 text-sm text-white placeholder:text-ink-500 focus:border-white focus:outline-none" />
+                <label for="name" class="block text-sm font-medium text-on-dark-2">Name</label>
+                <input id="name" name="name" type="text" required class="mt-1 w-full rounded-md border border-hairline bg-graphite px-3 py-2 text-sm text-on-dark placeholder:text-steel focus:border-amber focus:outline-none" />
               </div>
               <div class="sm:col-span-1">
-                <label for="university" class="block text-sm font-medium text-ink-200">University</label>
-                <input id="university" name="university" type="text" required class="mt-1 w-full border border-ink-700 bg-ink-950 px-3 py-2 text-sm text-white placeholder:text-ink-500 focus:border-white focus:outline-none" />
+                <label for="university" class="block text-sm font-medium text-on-dark-2">University</label>
+                <input id="university" name="university" type="text" required class="mt-1 w-full rounded-md border border-hairline bg-graphite px-3 py-2 text-sm text-on-dark placeholder:text-steel focus:border-amber focus:outline-none" />
               </div>
               <div class="sm:col-span-1">
-                <label for="programme" class="block text-sm font-medium text-ink-200">Programme</label>
-                <input id="programme" name="programme" type="text" required class="mt-1 w-full border border-ink-700 bg-ink-950 px-3 py-2 text-sm text-white placeholder:text-ink-500 focus:border-white focus:outline-none" />
+                <label for="programme" class="block text-sm font-medium text-on-dark-2">Programme</label>
+                <input id="programme" name="programme" type="text" required class="mt-1 w-full rounded-md border border-hairline bg-graphite px-3 py-2 text-sm text-on-dark placeholder:text-steel focus:border-amber focus:outline-none" />
               </div>
               <div class="sm:col-span-1">
-                <label for="role" class="block text-sm font-medium text-ink-200">Your role</label>
-                <input id="role" name="role" type="text" required class="mt-1 w-full border border-ink-700 bg-ink-950 px-3 py-2 text-sm text-white placeholder:text-ink-500 focus:border-white focus:outline-none" />
+                <label for="role" class="block text-sm font-medium text-on-dark-2">Your role</label>
+                <input id="role" name="role" type="text" required class="mt-1 w-full rounded-md border border-hairline bg-graphite px-3 py-2 text-sm text-on-dark placeholder:text-steel focus:border-amber focus:outline-none" />
               </div>
               <div class="sm:col-span-2">
-                <label for="message" class="block text-sm font-medium text-ink-200">Message</label>
-                <textarea id="message" name="message" rows="4" required class="mt-1 w-full border border-ink-700 bg-ink-950 px-3 py-2 text-sm text-white placeholder:text-ink-500 focus:border-white focus:outline-none"></textarea>
+                <label for="message" class="block text-sm font-medium text-on-dark-2">Message</label>
+                <textarea id="message" name="message" rows="4" required class="mt-1 w-full rounded-md border border-hairline bg-graphite px-3 py-2 text-sm text-on-dark placeholder:text-steel focus:border-amber focus:outline-none"></textarea>
               </div>
               <div class="sm:col-span-2">
                 <button
                   type="submit"
                   data-track="cta-contact-form-submit"
-                  class="inline-flex items-center justify-center bg-white px-6 py-3 text-sm font-semibold text-ink-950 transition hover:bg-ink-200"
+                  class="inline-flex items-center justify-center rounded-md bg-amber px-6 py-3 text-sm font-semibold text-graphite transition-colors hover:bg-amber-hover"
                 >
                   Send message
                 </button>
@@ -114,7 +117,7 @@ const blocks = [
           </CTAButton>
           <CTAButton
             href={PLANNER_URL}
-            variant="outline-invert"
+            variant="outline"
             target="_blank"
             rel="noreferrer"
             dataTrack="cta-contact-planner"
@@ -122,9 +125,9 @@ const blocks = [
             Try the planner first →
           </CTAButton>
         </div>
-        <p class="mt-8 text-sm text-ink-200">
+        <p class="mt-8 text-sm text-on-dark-2">
           Or email directly:{" "}
-          <a href={DEMO_MAILTO} class="underline underline-offset-2 hover:text-white">
+          <a href={DEMO_MAILTO} class="underline decoration-hairline underline-offset-4 transition-colors hover:text-amber">
             {CONTACT_EMAIL}
           </a>
         </p>

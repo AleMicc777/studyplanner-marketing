@@ -1,41 +1,101 @@
 ---
 ---
 
-<section class="border-b border-[var(--color-ink-200)] bg-[var(--color-paper)]">
-  <div class="mx-auto max-w-6xl px-6 pt-32 pb-20 sm:pt-40 sm:pb-24">
-    <div class="grid gap-12 lg:grid-cols-[3fr_2fr] lg:items-start">
+<section class="border-b border-line bg-paper text-ink">
+  <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)]">
+    <div class="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-16">
+      <!-- Left: prose -->
       <div class="max-w-[var(--prose-max)]">
-        <h2 data-reveal class="font-heading text-[length:var(--text-h2)] font-semibold text-ink-950">
+        <h2
+          data-reveal
+          class="text-[length:var(--text-h2)] font-extrabold leading-[1.08] tracking-[-0.04em] text-ink"
+        >
           Coordinators shouldn't be a human plan validator.
         </h2>
-        <div class="mt-6 space-y-5 text-[length:var(--text-lead)] leading-relaxed text-[color:var(--color-text)]">
+        <div class="mt-6 space-y-5 text-[length:var(--text-lead)] leading-relaxed text-muted">
           <p>
-            A 300-student cohort, three revision rounds a term — that's the shape of the problem. Every plan starts as a half-built PDF or spreadsheet, and every EC shortfall, missing prerequisite, or track violation only surfaces once a student emails to ask what counts.
+            A 300-student cohort, three revision rounds a term: that's the shape
+            of the problem. Every plan starts as a half-built PDF or spreadsheet,
+            and every EC shortfall, missing prerequisite, or track violation only
+            surfaces once a student emails to ask what counts.
           </p>
           <p>
-            Coordinators answer the same handful of questions hundreds of times a term, then catch the real errors too late to matter — after registration has closed, after the swap window is gone.
+            Coordinators answer the same handful of questions hundreds of times a
+            term, then catch the real errors too late to matter, after
+            registration has closed, after the swap window is gone.
           </p>
           <p>
-            StudyPlanner moves the check to the moment the plan is built, not the moment it lands in an inbox.
+            <span class="font-semibold text-ink"
+              >StudyPlanner moves the check to the moment the plan is built</span
+            >, not the moment it lands in an inbox.
           </p>
         </div>
       </div>
 
-      <div data-reveal class="border border-[var(--color-ink-200)] bg-[var(--color-paper-shade)] p-6 font-mono text-sm">
-        <p class="mb-3 text-xs font-semibold uppercase text-[var(--color-text-muted)]">Before</p>
-        <p class="text-[var(--color-flag-600)]">
-          <span class="line-through decoration-2">AE4-ADS + AE4-SD (32 EC, prereq unmet)</span>
-        </p>
-        <p class="mt-1 text-[var(--color-text-muted)]">→ flagged after submission, three weeks late</p>
-        <div class="my-5 h-px bg-[var(--color-ink-200)]"></div>
-        <p class="mb-3 text-xs font-semibold uppercase text-[var(--color-text-muted)]">After</p>
-        <p class="flex items-center gap-1.5 text-[var(--color-valid-600)]">
-          AE4-ADS + AE4-SP (30 EC, prereqs met)
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path class="check-draw" d="M3 8.5 6.5 12 13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </p>
-        <p class="mt-1 text-[var(--color-text-muted)]">→ validated the moment it's built</p>
+      <!-- Right: terminal / diff validation card (graphite card on the light field) -->
+      <div
+        data-reveal
+        role="group"
+        aria-label="Plan validation, before and after"
+        class="overflow-hidden rounded-lg border border-hairline bg-graphite font-mono shadow-[0_30px_60px_-32px_rgba(18,22,30,0.5)]"
+      >
+        <!-- run bar -->
+        <div
+          class="flex items-center justify-between gap-3 border-b border-hairline bg-graphite-2 px-4 py-2.5"
+        >
+          <span class="text-[0.8rem] tracking-[0.02em] text-steel">
+            <b class="font-medium text-on-dark-2">plan.check</b> · AE-MSc
+          </span>
+          <span class="text-[0.68rem] tracking-[0.08em] text-amber">RUNNING</span>
+        </div>
+
+        <!-- diff body -->
+        <div class="px-5 py-5 text-[0.9rem] leading-[1.75] sm:px-6">
+          <!-- INVALID · before -->
+          <div
+            class="flex items-center gap-2 text-[0.78rem] font-medium tracking-[0.06em] text-flag"
+          >
+            <span class="inline-block w-[1.15rem] text-center" aria-hidden="true"
+              >✗</span
+            >
+            <span>INVALID · before</span>
+          </div>
+          <div class="pl-[1.7rem] text-on-dark">
+            <span class="text-flag">-</span> AE4-ADS + AE4-SD
+          </div>
+          <div class="pl-[1.7rem] text-flag">32 EC, prereq unmet</div>
+          <div class="pl-[1.7rem] text-steel">flagged three weeks late</div>
+
+          <div class="my-4 h-px bg-hairline" aria-hidden="true"></div>
+
+          <!-- VALID · after -->
+          <div
+            class="flex items-center gap-2 text-[0.78rem] font-medium tracking-[0.06em] text-valid"
+          >
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true"
+              class="w-[1.15rem] shrink-0"
+            >
+              <path
+                class="check-draw"
+                d="M3 8.5 6.5 12 13 4"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+            <span>VALID · after</span>
+          </div>
+          <div class="pl-[1.7rem] text-on-dark">
+            <span class="text-valid">+</span> AE4-ADS + AE4-SP
+          </div>
+          <div class="pl-[1.7rem] text-valid">30 EC, prereqs met</div>
+          <div class="pl-[1.7rem] text-steel">validated the moment it's built</div>
+        </div>
       </div>
     </div>
   </div>

@@ -2,7 +2,7 @@
 const flow = [
   {
     title: "Programme guide (PDF)",
-    body: "You send the current programme guide — the same document you already hand students.",
+    body: "You send the current programme guide, the same document you already hand students.",
   },
   {
     title: "Encoded rules",
@@ -15,27 +15,35 @@ const flow = [
 ];
 ---
 
-<section id="how-it-works" class="border-b border-[var(--color-ink-200)] bg-[var(--color-paper)]">
+<section
+  id="how-it-works"
+  class="border-t border-hairline border-b bg-graphite text-on-dark"
+>
   <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)]">
-    <h2 data-reveal class="font-heading text-[length:var(--text-h2)] font-semibold text-ink-950">How it works</h2>
-    <p class="mt-4 max-w-xl text-[var(--color-text-muted)]">
-      You send the programme guide; we encode it — no IT department needed.
+    <h2
+      data-reveal
+      class="text-[length:var(--text-h2)] font-extrabold tracking-[-0.04em] text-on-dark"
+    >
+      How it works
+    </h2>
+    <p class="mt-4 max-w-xl text-[length:var(--text-lead)] text-on-dark-2">
+      You send the programme guide; we encode it. No IT department needed.
     </p>
 
-    <div class="mt-14 flex flex-col items-stretch gap-0 sm:flex-row sm:items-start">
-      {flow.map((step, i) => (
-        <>
-          <div class="flex-1 border border-[var(--color-ink-200)] bg-[var(--color-paper-shade)] p-6">
-            <h3 class="font-heading font-semibold text-[var(--color-ink-950)]">{step.title}</h3>
-            <p class="mt-2 text-sm text-[var(--color-text-muted)]">{step.body}</p>
-          </div>
-          {i < flow.length - 1 && (
-            <div class="flex items-center justify-center px-2 py-4 sm:py-0" aria-hidden="true">
-              <span class="text-2xl text-[var(--color-ink-500)] rotate-90 sm:rotate-0">→</span>
-            </div>
-          )}
-        </>
-      ))}
-    </div>
+    <ol class="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-3">
+      {
+        flow.map((step, i) => (
+          <li data-reveal class="border-t border-amber pt-5">
+            <span class="font-mono text-sm font-medium tracking-[0.06em] text-amber tabular-nums">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <h3 class="mt-3 text-[length:var(--text-h3)] font-semibold text-on-dark">
+              {step.title}
+            </h3>
+            <p class="mt-2 text-on-dark-2">{step.body}</p>
+          </li>
+        ))
+      }
+    </ol>
   </div>
 </section>

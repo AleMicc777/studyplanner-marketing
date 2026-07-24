@@ -1,15 +1,15 @@
 ---
 import "../styles/global.css";
-import "@fontsource-variable/schibsted-grotesk";
-import "@fontsource-variable/source-serif-4";
+import "@fontsource-variable/geist";
+import "@fontsource-variable/geist-mono";
 
 const {
-  title = "StudyPlanner — AI study planning for universities",
+  title = "StudyPlanner: AI study planning for universities",
   description = "An AI-powered MSc study planner that validates student plans in real time and saves coordinators hours of email back-and-forth. Multi-tenant, branded per institution.",
   jsonLd = [] as Record<string, unknown>[],
 } = Astro.props;
 
-const SITE = "https://studyplanner-marketing.vercel.app";
+const SITE = "https://studyplanner-marketing-steel.vercel.app";
 const OG_IMAGE = `${SITE}/screenshots/screenshot-3.png`;
 const canonicalURL = new URL(Astro.url.pathname, SITE).toString();
 ---
@@ -48,7 +48,7 @@ const canonicalURL = new URL(Astro.url.pathname, SITE).toString();
       <script type="application/ld+json" set:html={JSON.stringify(entry)} />
     ))}
   </head>
-  <body class="min-h-full flex flex-col bg-paper text-[var(--color-text)]">
+  <body class="min-h-full flex flex-col bg-graphite text-on-dark">
     <slot />
     <script defer src="/_vercel/insights/script.js"></script>
     <script>

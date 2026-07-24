@@ -4,50 +4,95 @@ import BrowserFrame from "./BrowserFrame.astro";
 import CTAButton from "./CTAButton.astro";
 ---
 
-<section class="relative overflow-hidden bg-ink-900">
+<section class="grid-bg bg-graphite">
   <div
-    aria-hidden="true"
-    class="pointer-events-none absolute inset-0 opacity-[0.06]"
-    style="background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:40px 40px;"
-  ></div>
-  <div class="relative mx-auto max-w-6xl px-6 pt-24 pb-0 sm:pt-32">
-    <h1
-      class="hero-stagger-1 max-w-3xl font-heading text-[length:var(--text-display)] font-semibold text-paper"
-    >
-      Every study plan checked against your rules — before it reaches your inbox.
-    </h1>
-    <p
-      class="hero-stagger-2 mt-6 max-w-2xl text-[length:var(--text-lead)] text-ink-200"
-    >
-      StudyPlanner encodes your MSc programme's requirements — prerequisites, EC totals, track rules — and validates each student's plan in real time. Coordinators approve; they no longer debug.
-    </p>
-    <div class="hero-stagger-3 mt-10 flex flex-wrap items-center gap-4">
-      <CTAButton href={bookDemoHref} dataTrack="cta-hero-demo">
-        Book a 20-minute demo
-      </CTAButton>
-      <CTAButton
-        href={PLANNER_URL}
-        variant="outline"
-        target="_blank"
-        rel="noreferrer"
-        dataTrack="open-planner"
+    class="mx-auto grid max-w-6xl items-center gap-10 px-6 pb-[clamp(3.25rem,5vw,5.5rem)] pt-[clamp(3rem,6vw,6rem)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1.08fr)] lg:gap-16"
+  >
+    <!-- Copy column -->
+    <div>
+      <span
+        class="hero-stagger-1 mb-6 inline-flex items-center gap-2.5 rounded-full border border-hairline py-1.5 pl-2.5 pr-3 text-[0.82rem] tracking-wide text-on-dark-2"
       >
-        Try the live planner →
-      </CTAButton>
+        <span class="hero-dot" aria-hidden="true"></span>
+        Validating plans in real time
+      </span>
+
+      <h1
+        class="hero-stagger-2 text-[length:var(--text-display)] font-extrabold leading-[1.03] tracking-[-0.045em] text-on-dark"
+      >
+        Every study plan <span class="text-amber">checked against your rules</span>, before it reaches your inbox.
+      </h1>
+
+      <p
+        class="hero-stagger-3 mt-6 max-w-[44ch] text-[length:var(--text-lead)] leading-[1.55] text-on-dark-2"
+      >
+        StudyPlanner encodes your MSc programme's rules and validates every
+        student's plan in real time. Coordinators approve plans instead of
+        debugging them.
+      </p>
+
+      <div class="hero-stagger-4 mt-8 flex flex-wrap items-center gap-3.5">
+        <CTAButton href={bookDemoHref} dataTrack="cta-hero-demo">
+          Book a 20-min demo
+        </CTAButton>
+        <CTAButton
+          href={PLANNER_URL}
+          variant="outline"
+          target="_blank"
+          rel="noreferrer"
+          dataTrack="open-planner"
+        >
+          Try the live planner
+        </CTAButton>
+      </div>
+
+      <!-- Mono readout: what gets validated, as the plan is built -->
+      <div
+        class="mt-8 flex flex-wrap gap-x-4 gap-y-1 border-t border-dashed border-hairline pt-6 font-mono text-[0.84rem] tracking-[0.01em] text-steel"
+      >
+        <span><span class="text-amber">&bull;</span> EC totals</span>
+        <span><span class="text-amber">&bull;</span> prerequisites</span>
+        <span><span class="text-amber">&bull;</span> track rules</span>
+        <span class="font-medium text-on-dark-2">checked as the plan is built</span>
+      </div>
     </div>
 
-    <!-- Product screenshot in a simple browser frame, bleeding into the section below -->
-    <div class="hero-stagger-4 mt-16 -mb-24 sm:-mb-32">
-      <div class="mx-auto max-w-4xl">
-        <BrowserFrame
-          src="/screenshots/screenshot-1.png"
-          alt="StudyPlanner interface showing a validated MSc study plan"
-          width={1600}
-          height={1000}
-          loading="eager"
-          fetchpriority="high"
-        />
-      </div>
+    <!-- Product screenshot in a corner-ticked dark browser frame -->
+    <div>
+      <BrowserFrame
+        src="/screenshots/screenshot-1.png"
+        alt="StudyPlanner interface showing a validated MSc study plan"
+        url="planner.studyplanner.eu"
+        tone="dark"
+        ticks
+        live
+        width={1600}
+        height={1000}
+        loading="eager"
+        fetchpriority="high"
+      />
     </div>
   </div>
 </section>
+
+<style>
+  /* Validation status dot: valid-green, gentle pulse (calmed by reduced-motion). */
+  .hero-dot {
+    width: 8px;
+    height: 8px;
+    flex: none;
+    border-radius: 50%;
+    background: var(--color-valid);
+    box-shadow: 0 0 0 3px oklch(0.72 0.15 150 / 0.18);
+    animation: hero-dot-pulse 2.4s var(--ease-out-expo) infinite;
+  }
+  @keyframes hero-dot-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.4;
+    }
+  }
+</style>

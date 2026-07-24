@@ -3,39 +3,45 @@ import { bookDemoHref } from "../config/site";
 import CTAButton from "./CTAButton.astro";
 const points = [
   { title: "Multi-tenant from day one", body: "Each university gets its own catalogue, rules, branding, and subdomain. Ready to deploy for your programme." },
-  { title: "Zero onboarding cost for students", body: "No account required to plan. Students land, build, validate, share — all without IT involvement on your side." },
-  { title: "Programme analytics for coordinators", body: "See aggregate elective demand, common invalid configurations, and where students get stuck — anonymised, opt-in." },
+  { title: "Zero onboarding cost for students", body: "No account required to plan. Students land, build, validate, share, all without IT involvement on your side." },
+  { title: "Programme analytics for coordinators", body: "See aggregate elective demand, common invalid configurations, and where students get stuck. Anonymised, opt-in." },
   { title: "We handle the rules", body: "Send us your programme guide; we encode the validation logic and keep it up to date each academic year." },
 ];
 ---
 
-<section class="border-b border-ink-200 bg-ink-950">
+<section class="border-b border-hairline bg-graphite text-on-dark">
   <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)]">
-    <div class="grid gap-12 lg:grid-cols-[1fr_2fr] lg:gap-16">
+    <div class="grid gap-12 lg:grid-cols-[1fr_1.55fr] lg:gap-16">
       <div>
-        <h2 data-reveal class="text-[length:var(--text-h2)] font-semibold text-white">For universities</h2>
-        <p class="mt-4 font-[family-name:var(--font-body)] text-ink-200">
-          StudyPlanner is built to be deployed across programmes and institutions, not just one.
-          If you coordinate an MSc and want fewer plan-validation emails next term, let's talk.
+        <h2 data-reveal class="text-[length:var(--text-h2)] font-extrabold tracking-[-0.04em] text-on-dark">
+          For universities
+        </h2>
+        <p class="mt-5 text-on-dark-2">
+          StudyPlanner is built to be deployed across programmes and institutions, not just
+          one, and to scale to large MSc programmes like TUM's. If you coordinate an MSc and
+          want fewer plan-validation emails next term, let's talk.
         </p>
-        <p class="mt-4 font-[family-name:var(--font-body)] text-ink-200">
+        <p class="mt-4 text-on-dark-2">
           Priced per institution, per programme. Pilot programmes start with a free encoded
-          prototype of your own catalogue — you see your rules running before any commitment.
+          prototype of your own catalogue. You see your rules running before any commitment.
         </p>
         <CTAButton
           href={bookDemoHref}
-          variant="outline-invert"
+          variant="outline"
           dataTrack="cta-universities-book"
           class="mt-8"
         >
           Book a 20-min demo
         </CTAButton>
       </div>
-      <div class="grid gap-px border border-ink-700 bg-ink-700 sm:grid-cols-2">
+      <div class="grid gap-px border border-hairline bg-hairline sm:grid-cols-2">
         {points.map((p) => (
-          <div class="bg-ink-950 p-6">
-            <h3 class="font-[family-name:var(--font-heading)] font-semibold text-white">{p.title}</h3>
-            <p class="mt-2 text-sm font-[family-name:var(--font-body)] text-ink-200">{p.body}</p>
+          <div class="bg-graphite p-6 sm:p-7">
+            <h3 class="flex items-start gap-2.5 text-base font-semibold text-on-dark">
+              <span aria-hidden="true" class="mt-2 h-1.5 w-1.5 shrink-0 rounded-[1px] bg-amber"></span>
+              {p.title}
+            </h3>
+            <p class="mt-2.5 pl-4 text-sm leading-relaxed text-on-dark-2">{p.body}</p>
           </div>
         ))}
       </div>

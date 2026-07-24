@@ -2,30 +2,30 @@
 import { faqs } from "../data/faqs";
 ---
 
-<section class="border-b border-ink-200 bg-paper">
+<section class="border-b border-line bg-paper-shade text-ink">
   <div class="mx-auto max-w-3xl px-6 py-[var(--section-y)]">
-    <h2 data-reveal class="text-[length:var(--text-h2)] font-semibold text-[color:var(--color-text)]">
+    <h2 data-reveal class="text-[length:var(--text-h2)] font-extrabold tracking-[-0.04em] text-ink">
       Common questions
     </h2>
-    <dl class="mt-10 divide-y divide-ink-200 border-t border-b border-ink-200">
+    <div class="mt-10 divide-y divide-line border-y border-line">
       {faqs.map((item) => (
         <details class="group">
           <summary
             data-track="faq-open"
-            class="flex cursor-pointer items-center justify-between gap-4 py-5 font-[family-name:var(--font-heading)] text-base font-semibold text-[color:var(--color-text)] marker:hidden [&::-webkit-details-marker]:hidden"
+            class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-base font-semibold text-ink transition-colors marker:hidden hover:text-amber-deep [&::-webkit-details-marker]:hidden"
           >
             {item.q}
-            <span class="shrink-0 text-[color:var(--color-text-muted)] transition group-open:rotate-180">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <span class="shrink-0 text-muted transition-transform duration-200 group-open:rotate-180 group-open:text-amber-deep">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="m6 9 6 6 6-6" />
               </svg>
             </span>
           </summary>
-          <div class="pb-5 font-[family-name:var(--font-body)] text-[color:var(--color-text-muted)]">
+          <div class="pb-5 leading-relaxed text-muted">
             {item.a}
           </div>
         </details>
       ))}
-    </dl>
+    </div>
   </div>
 </section>

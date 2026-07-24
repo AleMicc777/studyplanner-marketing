@@ -5,71 +5,91 @@ import { PLANNER_URL } from "../config/site";
 const screens = [
   {
     src: "/screenshots/screenshot-1.png",
-    alt: "StudyPlanner onboarding — MSc Aerospace Engineering landing page",
+    url: "planner.studyplanner.eu/msc-aerospace",
+    alt: "StudyPlanner onboarding screen for a live MSc Aerospace Engineering programme, ready to begin planning",
     title: "Branded per institution",
-    caption: "Students land on a programme-specific page. The planner loads the right catalogue, tracks, and rules automatically — no configuration needed on the student side.",
+    caption:
+      "Students land on a programme-specific page. The planner loads the right catalogue, tracks, and rules automatically. No configuration needed on the student side.",
     width: 1440,
     height: 900,
   },
   {
     src: "/screenshots/screenshot-2.png",
-    alt: "Track selection — choose your specialisation",
+    url: "planner.studyplanner.eu/tracks",
+    alt: "Track selection screen: choosing a specialisation, with mandatory courses pre-loaded",
     title: "Pick track and profile",
-    caption: "Step 1: the student picks their specialisation. Mandatory courses pre-load instantly. The profile panel on the right shows sub-tracks to narrow elective recommendations.",
+    caption:
+      "Step 1: the student picks their specialisation. Mandatory courses pre-load instantly. The profile panel on the right shows sub-tracks to narrow elective recommendations.",
     width: 1440,
     height: 900,
   },
   {
     src: "/screenshots/screenshot-3.png",
-    alt: "Full study plan grid with validation and AI recommendations",
-    title: "Full plan — live validation + AI",
-    caption: "The plan view: four quarters per year, real-time EC totals, prerequisite conflict flags, workload indicators, and an AI recommendation panel that analyses the student's profile against the full catalogue.",
+    url: "planner.studyplanner.eu/plan/2025-2026",
+    alt: "Full study plan grid with live validation and AI recommendations across four quarters",
+    title: "Full plan: live validation + AI",
+    caption:
+      "The plan view: four quarters per year, real-time EC totals, prerequisite conflict flags, workload indicators, and an AI recommendation panel that analyses the student's profile against the full catalogue.",
     width: 1440,
     height: 1153,
   },
 ];
 ---
 
-<section class="border-b border-ink-200 bg-paper">
+<section class="border-b border-line bg-paper text-ink">
   <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)]">
-    <h2 data-reveal class="text-[length:var(--text-h2)] font-semibold text-[color:var(--color-text)]">
+    <h2
+      data-reveal
+      class="max-w-[20ch] text-[length:var(--text-h2)] font-extrabold tracking-[-0.04em] text-ink"
+    >
       See it on your programme's catalogue
     </h2>
-    <p class="mt-4 max-w-[var(--prose-max)] font-[family-name:var(--font-body)] text-[color:var(--color-text-muted)]">
-      A walkthrough of the live TU Delft MSc Aerospace Engineering planner — the same
-      experience your students would get once your programme's rules are encoded.
+    <p class="mt-4 max-w-[var(--prose-max)] text-[length:var(--text-lead)] leading-relaxed text-muted">
+      A walkthrough of a live MSc Aerospace Engineering planner, the same experience
+      your students would get once your programme's rules are encoded.
     </p>
 
-    <div class="mt-12 flex flex-col gap-16">
-      {screens.map((s) => (
-        <figure class="grid gap-8 lg:grid-cols-[1fr_3fr] lg:items-start">
-          <figcaption class="lg:pt-4">
-            <h3 class="font-[family-name:var(--font-heading)] text-[length:var(--text-h3)] font-semibold text-[color:var(--color-text)]">
-              {s.title}
-            </h3>
-            <p class="mt-2 text-sm font-[family-name:var(--font-body)] leading-relaxed text-[color:var(--color-text-muted)]">
-              {s.caption}
-            </p>
-            <a
-              href={PLANNER_URL}
-              target="_blank"
-              rel="noreferrer"
-              data-track="cta-screenshots-planner"
-              class="mt-4 inline-flex items-center text-sm font-semibold text-ink-700 underline underline-offset-2"
-            >
-              Try it in the live demo →
-            </a>
-          </figcaption>
-          <BrowserFrame
-            src={s.src}
-            alt={s.alt}
-            width={s.width}
-            height={s.height}
-            loading="lazy"
-            decoding="async"
-          />
-        </figure>
-      ))}
+    <div class="mt-14 flex flex-col gap-16 lg:gap-20">
+      {screens.map((s, i) => {
+        const flip = i % 2 === 1;
+        return (
+          <figure
+            data-reveal
+            class="grid items-center gap-8 lg:grid-cols-2 lg:gap-14"
+          >
+            <figcaption class:list={["min-w-0", flip && "lg:order-2"]}>
+              <h3 class="flex items-center gap-2.5 text-[length:var(--text-h3)] font-semibold tracking-tight text-ink">
+                <span aria-hidden="true" class="h-1.5 w-1.5 shrink-0 rounded-[1px] bg-amber"></span>
+                {s.title}
+              </h3>
+              <p class="mt-3 text-sm leading-relaxed text-muted">{s.caption}</p>
+              <a
+                href={PLANNER_URL}
+                target="_blank"
+                rel="noreferrer"
+                data-track="cta-screenshots-planner"
+                class="group mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-amber-deep underline decoration-amber-line/40 underline-offset-4 transition-colors hover:text-amber-hover"
+              >
+                Try it in the live demo
+                <span aria-hidden="true" class="transition-transform group-hover:translate-x-0.5">→</span>
+              </a>
+            </figcaption>
+            <div class:list={["min-w-0", flip && "lg:order-1"]}>
+              <BrowserFrame
+                src={s.src}
+                alt={s.alt}
+                url={s.url}
+                live={true}
+                tone="light"
+                width={s.width}
+                height={s.height}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </figure>
+        );
+      })}
     </div>
   </div>
 </section>
