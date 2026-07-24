@@ -36,13 +36,13 @@
   --color-on-dark-2: oklch(0.8 0.012 250);
   --color-steel: oklch(0.62 0.028 250);
 
-  --color-amber: oklch(0.76 0.16 62);
-  --color-amber-hover: oklch(0.7 0.16 60);
-  --color-amber-line: oklch(0.66 0.145 62);
-  --color-amber-deep: oklch(0.47 0.12 62);
+  --color-amber: oklch(0.785 0.142 71);
+  --color-amber-hover: oklch(0.73 0.142 69);
+  --color-amber-line: oklch(0.66 0.128 71);
+  --color-amber-deep: oklch(0.47 0.115 71);
 
-  --color-valid: oklch(0.72 0.15 150);
-  --color-flag: oklch(0.66 0.19 25);
+  --color-valid: oklch(0.7 0.125 152);
+  --color-flag: oklch(0.6 0.165 27);
 
   --font-sans: "Geist Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "Geist Mono Variable", ui-monospace, "SF Mono", Menlo, monospace;
