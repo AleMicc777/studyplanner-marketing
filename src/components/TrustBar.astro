@@ -27,9 +27,9 @@ const credentials = [
 
 <style>
   .trust {
-    background: var(--color-panel);
-    border-top: 1px solid var(--color-hairline);
-    border-bottom: 1px solid var(--color-hairline);
+    background: var(--color-paper-shade);
+    border-top: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
   }
   .trust-inner {
     display: grid;
@@ -44,19 +44,19 @@ const credentials = [
     font-family: var(--font-mono);
     font-size: 0.82rem;
     letter-spacing: -0.01em;
-    color: var(--color-on-dark-2);
-    border-left: 1px solid var(--color-hairline);
+    color: var(--color-muted);
+    border-left: 1px solid var(--color-line);
   }
   .trust-item:first-child {
     border-left: 0;
     padding-left: 0;
   }
   .trust-item .tick {
-    color: var(--color-amber);
+    color: var(--color-amber-deep);
     flex: none;
   }
   .trust-item b {
-    color: var(--color-on-dark);
+    color: var(--color-ink);
     font-weight: 500;
   }
 
@@ -65,7 +65,7 @@ const credentials = [
       grid-template-columns: 1fr 1fr;
     }
     .trust-item {
-      border-top: 1px solid var(--color-hairline);
+      border-top: 1px solid var(--color-line);
     }
     .trust-item:nth-child(odd) {
       border-left: 0;
@@ -84,7 +84,7 @@ const credentials = [
     .trust-item {
       border-left: 0 !important;
       padding-left: 0;
-      border-top: 1px solid var(--color-hairline);
+      border-top: 1px solid var(--color-line);
     }
     .trust-item:first-child {
       border-top: 0;

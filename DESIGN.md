@@ -4,13 +4,13 @@
 
 brand — confident, branded, credible to university procurement.
 
-## Aesthetic direction — LOCKED: "Engineered Graphite + Amber Signal"
+## Aesthetic direction — LOCKED: "Engineered Paper + Amber Signal"
 
-Committed and branded. A cool near-black graphite carries the structural surface; a single amber signal carries validation, key metrics, and the primary CTA. The feel is precise, engineered, software-grade (Linear / Vercel craft) applied to a serious institutional tool, so the design itself demonstrates the product's core promise: rigorous, exact, correct. Distinctive enough that a viewer asks "how was this built?", not "which AI made this?"
+Committed and branded, light-dominant. A cool near-white paper carries the structural surface; a single amber signal carries validation, key metrics, and the primary CTA. Graphite is demoted from "the surface" to one grounding anchor (the closing footer) plus small dark product-echo cards (the validation terminal, an optional screenshot frame). The feel is precise, engineered, software-grade (Linear / Stripe craft) applied to a serious institutional tool, so the design itself demonstrates the product's core promise: rigorous, exact, correct. Distinctive enough that a viewer asks "how was this built?", not "which AI made this?"
 
 ## Colour — LOCKED (OKLCH)
 
-**Strategy: Committed.** Graphite carries 30-60%+ of the surface; amber is the single accent. This resolves the root failure (two blue systems at one hue) by collapsing everything into one graphite ramp plus one amber signal. No second competing colour.
+**Strategy: Committed, light-dominant.** Paper carries 70-80% of the surface; amber is the single accent; graphite is the one dark anchor (footer + product-echo cards). Same committed identity as before, surface dominance inverted from dark to light. This still resolves the root failure (two blue systems at one hue): everything collapses into one neutral ramp plus one amber signal. No second competing colour. Rhythm on the light page comes from paper/paper-shade alternation, `line` hairlines, the full-bleed amber stat band, and the single graphite footer — never a page of identical light rectangles.
 
 Tokens (see `src/styles/global.css` `@theme`):
 - graphite `oklch(0.19 0.008 250)`, graphite-2 `oklch(0.165 0.008 250)`, panel `oklch(0.24 0.01 250)`, panel-2 `oklch(0.275 0.011 250)`, hairline `oklch(0.32 0.012 250)`
@@ -19,7 +19,7 @@ Tokens (see `src/styles/global.css` `@theme`):
 - amber `oklch(0.785 0.142 71)` (+ hover `0.73 0.142 69`, line `0.66 0.128 71`, deep `0.47 0.115 71`) — refined honey-gold; CTAs, key metrics, validation accents, the full-bleed stat band
 - valid `oklch(0.7 0.125 152)` / flag `oklch(0.6 0.165 27)` — plan-validation meaning ONLY, never decoration
 
-WCAG: body ≥4.5:1, large ≥3:1 verified; amber-on-graphite H1 ~8.3:1 (AAA), white-on-graphite ~17:1.
+WCAG: body ≥4.5:1, large ≥3:1 verified. Light hero: ink-on-paper ~13:1 (AAA), amber-deep-on-paper AA+. Footer anchor: white-on-graphite ~17:1.
 
 ## Typography — LOCKED
 

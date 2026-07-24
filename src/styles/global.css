@@ -8,9 +8,12 @@
  * CTA. No second competing colour. Green/red are reserved strictly for
  * plan-validation meaning (valid / flag), never decoration.
  *
+ * Light-dominant: paper carries the page; graphite is demoted to the single
+ * dark footer anchor (+ optional product-echo cards). Amber is unchanged.
+ *
  * Token usage:
- * - graphite / graphite-2 : dark section + nav + hero + footer surfaces
- * - panel                  : raised dark surfaces (frames, strips) on graphite
+ * - graphite / graphite-2 : the dark footer anchor (+ product-echo cards)
+ * - panel                  : raised dark surfaces (frames) on graphite
  * - hairline               : 1px structural rules on dark
  * - paper / paper-shade    : light section surfaces (cool near-white, never warm)
  * - ink / muted            : text on light surfaces
@@ -65,8 +68,8 @@
 
 body {
   font-family: var(--font-sans);
-  background: var(--color-graphite);
-  color: var(--color-on-dark);
+  background: var(--color-paper);
+  color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -92,30 +95,42 @@ li {
 }
 
 /*
- * Engineered grid backdrop — shared by the hero and closing CTA bands.
- * A faint technical grid masked to a corner so it reads as blueprint texture,
- * never as noise. Place on a `position: relative` dark section; wrap real
- * content so it sits above the ::before layer.
+ * Engineered grid backdrop.
+ * `.grid-bg`      — faint ink blueprint on the light hero (paper surface).
+ * `.grid-bg-dark` — same texture in a raised hairline for the dark footer
+ *   anchor (graphite surface). Both mask to a corner so the grid reads as
+ *   blueprint texture, never noise. Place on a `position: relative` section and
+ *   wrap real content so it sits above the ::before layer.
  */
-.grid-bg {
+.grid-bg,
+.grid-bg-dark {
   position: relative;
   overflow: hidden;
 }
-.grid-bg::before {
+.grid-bg::before,
+.grid-bg-dark::before {
   content: "";
   position: absolute;
   inset: -2px;
   z-index: 0;
   pointer-events: none;
-  background-image:
-    linear-gradient(to right, oklch(0.32 0.012 250 / 0.55) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(0.32 0.012 250 / 0.55) 1px, transparent 1px);
   background-size: 56px 56px;
   -webkit-mask-image: radial-gradient(120% 90% at 82% 4%, #000 0%, transparent 68%);
   mask-image: radial-gradient(120% 90% at 82% 4%, #000 0%, transparent 68%);
   opacity: 0.7;
 }
-.grid-bg > * {
+.grid-bg::before {
+  background-image:
+    linear-gradient(to right, oklch(0.22 0.01 250 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.22 0.01 250 / 0.07) 1px, transparent 1px);
+}
+.grid-bg-dark::before {
+  background-image:
+    linear-gradient(to right, oklch(0.32 0.012 250 / 0.55) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.32 0.012 250 / 0.55) 1px, transparent 1px);
+}
+.grid-bg > *,
+.grid-bg-dark > * {
   position: relative;
   z-index: 1;
 }

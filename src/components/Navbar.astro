@@ -8,7 +8,7 @@ const navLinks = [
 ];
 ---
 
-<header class="sticky top-0 z-50 border-b border-hairline bg-graphite">
+<header class="sticky top-0 z-50 border-b border-line bg-paper">
   <!-- Pure-CSS mobile toggle: checkbox must be a sibling of everything it controls -->
   <input type="checkbox" id="nav-toggle" class="peer sr-only" />
 
@@ -16,7 +16,7 @@ const navLinks = [
     <!-- Wordmark with amber square mark -->
     <a
       href="/"
-      class="flex shrink-0 items-center gap-2.5 text-[1.12rem] font-extrabold tracking-[-0.03em] text-on-dark"
+      class="flex shrink-0 items-center gap-2.5 text-[1.12rem] font-extrabold tracking-[-0.03em] text-ink"
     >
       <span class="brand-mark" aria-hidden="true"></span>
       StudyPlanner
@@ -29,7 +29,7 @@ const navLinks = [
           href={l.href}
           target={l.external ? "_blank" : undefined}
           rel={l.external ? "noreferrer" : undefined}
-          class="text-[0.96rem] font-medium text-on-dark-2 transition-colors hover:text-on-dark"
+          class="text-[0.96rem] font-medium text-muted transition-colors hover:text-ink"
         >
           {l.label}
         </a>
@@ -48,7 +48,7 @@ const navLinks = [
     <!-- Mobile hamburger label -->
     <label
       for="nav-toggle"
-      class="flex cursor-pointer items-center rounded-md border border-hairline p-2 text-on-dark hover:border-amber md:hidden"
+      class="flex cursor-pointer items-center rounded-md border border-line p-2 text-ink hover:border-amber md:hidden"
       aria-label="Toggle navigation menu"
     >
       <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -58,13 +58,13 @@ const navLinks = [
   </div>
 
   <!-- Mobile menu -->
-  <div class="hidden border-t border-hairline bg-graphite px-4 pb-4 pt-2 peer-checked:block md:hidden">
+  <div class="hidden border-t border-line bg-paper px-4 pb-4 pt-2 peer-checked:block md:hidden">
     {navLinks.map((l) => (
       <a
         href={l.href}
         target={l.external ? "_blank" : undefined}
         rel={l.external ? "noreferrer" : undefined}
-        class="block border-b border-hairline px-4 py-3 text-sm font-medium text-on-dark-2 hover:text-on-dark"
+        class="block border-b border-line px-4 py-3 text-sm font-medium text-muted hover:text-ink"
       >
         {l.label}
       </a>
@@ -80,7 +80,7 @@ const navLinks = [
       href={PLANNER_URL}
       target="_blank"
       rel="noreferrer"
-      class="mt-2 block rounded-md border border-hairline px-4 py-3 text-center text-sm font-medium text-on-dark-2 hover:border-amber hover:text-amber"
+      class="mt-2 block rounded-md border border-line px-4 py-3 text-center text-sm font-medium text-muted hover:border-amber hover:text-amber-deep"
     >
       Open the StudyPlanner
     </a>
@@ -95,7 +95,7 @@ const navLinks = [
     border-radius: 4px;
     background: var(--color-amber);
     box-shadow:
-      inset 0 0 0 3px var(--color-graphite),
+      inset 0 0 0 3px var(--color-paper),
       0 0 0 1px var(--color-amber);
     flex: none;
   }
