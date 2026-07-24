@@ -24,7 +24,7 @@ StudyPlanner marketing site. Astro 6 + Tailwind v4, static output, single-page s
 
 ## Deploy
 
-Vercel, project `studyplanner-marketing` — live at `https://studyplanner-marketing.vercel.app`.
+Vercel, project `studyplanner-marketing` — live at `https://studyplanner-marketing-steel.vercel.app`.
 
 ## Notes
 

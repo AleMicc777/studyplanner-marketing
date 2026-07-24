@@ -15,6 +15,6 @@ Astro 6 + Tailwind v4.
 
 ## Deploy
 
-Vercel — https://studyplanner-marketing.vercel.app
+Vercel — https://studyplanner-marketing-steel.vercel.app
 
 See `AGENTS.md` for file map and conventions.

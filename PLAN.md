@@ -13,7 +13,7 @@ Two repos:
 | Repo | Purpose | URL |
 |---|---|---|
 | `ae-planner-proxy` (Desktop) | The actual planner app (React + Vite + Vercel serverless) | https://ae-planner-proxy.vercel.app |
-| `studyplanner-astro` (Desktop) | B2B marketing landing page (Astro + Tailwind) | https://studyplanner-marketing.vercel.app |
+| `studyplanner-astro` (Desktop) | B2B marketing landing page (Astro + Tailwind) | https://studyplanner-marketing-steel.vercel.app |
 
 ---
 
@@ -171,7 +171,7 @@ ae-planner-proxy.vercel.app
 
 - **My email:** alessandromiccolo2003@gmail.com
 - **Demo URL:** https://ae-planner-proxy.vercel.app
-- **Marketing site:** https://studyplanner-marketing.vercel.app
+- **Marketing site:** https://studyplanner-marketing-steel.vercel.app
 - **TU Delft pilot:** live, used by AE MSc students, covers 5 tracks, 180+ courses
 - **Daniella** = TU Delft AE study advisor (internal contact — do not cold-email EEMCS until her response)
 
