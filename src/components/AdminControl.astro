@@ -1,0 +1,64 @@
+---
+/*
+ * Second admin-console section (owner-commissioned 2026-08-16): total control.
+ * Sits where the student-feature deep dive used to be; the two supporting
+ * admin views moved here from AdminDashboard so the console gets two sections
+ * instead of one. Screenshots are real; copy stays qualitative.
+ */
+import BrowserFrame from "./BrowserFrame.astro";
+---
+
+<section class="border-b border-line bg-paper-shade text-ink">
+  <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)]">
+    <p data-reveal class="font-mono text-xs tracking-[0.02em] text-accent-deep">
+      // total control
+    </p>
+    <h2 data-reveal class="mt-4 max-w-[24ch] serif-heading text-[length:var(--text-h2)] text-ink">
+      Your programme, your hands on the controls
+    </h2>
+    <p class="mt-4 max-w-[var(--prose-max)] text-[length:var(--text-lead)] leading-relaxed text-muted">
+      Advisors and administrators shape the programme directly in the console:
+      every course, every rule, every column is theirs to change, and an AI
+      analyst reads the cohort with them.
+    </p>
+
+    <div class="mt-12 grid gap-10 lg:grid-cols-2 lg:gap-14">
+      <figure data-reveal class="min-w-0">
+        <BrowserFrame
+          src="/screenshots/admin-courses.png"
+          alt="Course catalogue administration: search, modify, delete, import and export of every course"
+          url="planner.studyplanner.eu/admin/courses"
+          live={true}
+          tone="light"
+          width={1912}
+          height={861}
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="mt-3 text-sm leading-relaxed text-muted">
+          <span class="font-semibold text-ink">Total control of the catalogue.</span>
+          Your office edits any course, EC value, column, or quarter; imports
+          timetables; exports everything as CSV or JSON. We encode, you decide.
+        </figcaption>
+      </figure>
+      <figure data-reveal class="min-w-0">
+        <BrowserFrame
+          src="/screenshots/admin-dashboard.png"
+          alt="Admin dashboard with an AI cohort analyst prompt, cohort brief generator, plan and activity statistics"
+          url="planner.studyplanner.eu/admin"
+          live={true}
+          tone="light"
+          width={1918}
+          height={854}
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="mt-3 text-sm leading-relaxed text-muted">
+          <span class="font-semibold text-ink">Ask about this cohort.</span>
+          An AI analyst grounded in the same data answers in plain language:
+          "Which electives are most popular among ASM students right now?"
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>

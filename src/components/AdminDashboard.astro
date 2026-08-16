@@ -76,46 +76,6 @@ const gathered = [
       />
     </div>
 
-    <!-- Supporting views: AI cohort analyst + full catalogue control -->
-    <div class="mt-12 grid gap-10 lg:grid-cols-2 lg:gap-14">
-      <figure data-reveal class="min-w-0">
-        <BrowserFrame
-          src="/screenshots/admin-dashboard.png"
-          alt="Admin dashboard with an AI cohort analyst prompt, cohort brief generator, plan and activity statistics"
-          url="planner.studyplanner.eu/admin"
-          live={true}
-          tone="light"
-          width={1918}
-          height={854}
-          loading="lazy"
-          decoding="async"
-        />
-        <figcaption class="mt-3 text-sm leading-relaxed text-muted">
-          <span class="font-semibold text-ink">Ask about this cohort.</span>
-          An AI analyst grounded in the same data answers in plain language:
-          "Which electives are most popular among ASM students right now?"
-        </figcaption>
-      </figure>
-      <figure data-reveal class="min-w-0">
-        <BrowserFrame
-          src="/screenshots/admin-courses.png"
-          alt="Course catalogue administration: search, modify, delete, import and export of every course"
-          url="planner.studyplanner.eu/admin/courses"
-          live={true}
-          tone="light"
-          width={1912}
-          height={861}
-          loading="lazy"
-          decoding="async"
-        />
-        <figcaption class="mt-3 text-sm leading-relaxed text-muted">
-          <span class="font-semibold text-ink">Total control of the catalogue.</span>
-          Your office edits any course, EC value, column, or quarter; imports
-          timetables; exports everything as CSV or JSON. We encode, you decide.
-        </figcaption>
-      </figure>
-    </div>
-
     <!-- The statistics gathered, as a ledger list -->
     <div data-reveal class="mt-14">
       <h3 class="font-mono text-xs font-medium tracking-[0.02em] text-accent-deep">

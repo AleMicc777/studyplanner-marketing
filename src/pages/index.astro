@@ -9,7 +9,7 @@ import TrustBar from "../components/TrustBar.astro";
 import Problem from "../components/Problem.astro";
 import Stats from "../components/Stats.astro";
 import HowItWorks from "../components/HowItWorks.astro";
-import Features from "../components/Features.astro";
+import AdminControl from "../components/AdminControl.astro";
 import CaseStudy from "../components/CaseStudy.astro";
 import FoundingPilot from "../components/FoundingPilot.astro";
 import Screenshots from "../components/Screenshots.astro";
@@ -72,14 +72,17 @@ const jsonLd = [
     <TrustBar />
     <div id="problem"><Problem /></div>
     <Stats />
+    <!-- Admin console promoted above the fold sequence: the buyer's product
+         first (dashboard, then pipeline, then control), student planner proof
+         demoted below. -->
+    <div id="dashboard"><AdminDashboard /></div>
     <HowItWorks />
-    <Features />
+    <AdminControl />
     <CaseStudy />
     <PilotTerms />
     <FoundingPilot />
     <div id="demo"><Screenshots /></div>
     <div id="universities"><ForUniversities /></div>
-    <div id="dashboard"><AdminDashboard /></div>
     <TrustSecurity />
     <div id="faq"><FAQ /></div>
     <div id="contact"><CTAFooter /></div>

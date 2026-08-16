@@ -1,4 +1,5 @@
 ---
+import InkMailGuide from "./ink/InkMailGuide.astro";
 import InkRuleStamp from "./ink/InkRuleStamp.astro";
 import ECCounterCard from "./ECCounterCard.astro";
 import RoleCursor from "./RoleCursor.astro";
@@ -24,9 +25,17 @@ import RoleCursor from "./RoleCursor.astro";
         <span class="font-mono text-sm font-medium tracking-[0.06em] text-accent-deep tabular-nums">
           01
         </span>
-        <h3 class="mt-3 text-[length:var(--text-h3)] font-semibold text-ink">
-          Programme guide (PDF)
-        </h3>
+        <div class="mt-3 flex flex-wrap items-center gap-4">
+          <div
+            aria-hidden="true"
+            class="aspect-square w-[132px] shrink-0 md:w-[200px]"
+          >
+            <InkMailGuide class="h-full w-full" />
+          </div>
+          <h3 class="text-[length:var(--text-h3)] font-semibold text-ink">
+            Programme guide (PDF)
+          </h3>
+        </div>
         <p class="mt-2 text-muted">
           You send the current programme guide, the same document you already hand students.
         </p>
