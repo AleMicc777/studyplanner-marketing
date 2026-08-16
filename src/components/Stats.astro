@@ -4,20 +4,22 @@
  * (.stat-numeral, the only serif use here), with the remaining three stats
  * as a modest hairline-separated mono row underneath.
  *
- * Numbers are defensible, not fabricated: the 500+ course count spans both
- * encoded catalogues (owner-stated 2026-08-16, TU Delft Aerospace live + the
- * TU Munich pilot); "< 2 wks" is the observed setup time (kept short so it
- * never wraps). Institutions are named on owner instruction (2026-08-16, the
- * TU Munich pilot is part of the pitch). Reveal only, no count-up.
+ * Numbers are defensible, not fabricated: the 500+ course count is the TU
+ * Munich pilot catalogue (owner-stated 2026-08-16); "0 unchecked plans" is
+ * the submission gate (plans cannot be submitted for review until the rule
+ * check passes); "12+" is the panel count on the Curriculum & capacity admin
+ * dashboard (AdminCurriculum.jsx, 13 panels at last count); "< 2 wks" is the
+ * observed setup time. TU Munich named on owner instruction (2026-08-16).
+ * Reveal only, no count-up.
  */
 const hero = {
   value: "500+",
   label: "Courses available",
-  note: "TU Delft Aerospace live + the TU Munich pilot catalogue",
+  note: "encoded for the TU Munich pilot",
 };
 const supporting = [
-  { value: "2", label: "University catalogues", note: "TU Delft live, TU Munich pilot encoded" },
-  { value: "5", label: "Specialisation tracks", note: "prerequisites and EC rules per track" },
+  { value: "0", label: "Unchecked plans reach review", note: "every submission passes the rule check first" },
+  { value: "12+", label: "Curriculum analytics panels", note: "demand, elective uptake, track load, cohort progress" },
   { value: "< 2 wks", label: "From guide to live", note: "programme guide to working planner" },
 ];
 ---

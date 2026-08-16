@@ -3,22 +3,29 @@ import { bookDemoHref } from "../config/site";
 import CTAButton from "./CTAButton.astro";
 import ReviewInboxCard from "./ReviewInboxCard.astro";
 import RoleCursor from "./RoleCursor.astro";
+/*
+ * Panel names in point 2 are real: AdminCurriculum.jsx ("Curriculum &
+ * capacity"), 13 panels at last count — demand forecast, seats demanded,
+ * elective column balance, track × elective choices, PPD band adherence,
+ * elective uptake, term loading by track, cohort progress, catalogue health,
+ * advising load absorbed, module affinity.
+ */
 const points = [
   {
-    title: "Multi-tenant from day one",
-    body: "Each university gets its own catalogue, rules, branding, and subdomain. No shared state with any other institution.",
-  },
-  {
-    title: "Zero onboarding cost for the pilot",
-    body: "The founding pilot gets a free encoded prototype of your catalogue before any commitment. Custom pricing per institution applies after that.",
-  },
-  {
-    title: "Programme analytics for coordinators",
-    body: "Aggregate elective demand, common invalid configurations, and where students get stuck. Anonymised and opt-in.",
-  },
-  {
     title: "We handle the rules encoding",
-    body: "Send us your programme guide and we encode the validation logic, then keep it up to date each academic year.",
+    body: "Send us your programme guide; we encode the validation logic and keep it current each academic year. No IT project on your side.",
+  },
+  {
+    title: "A curriculum dashboard, not just a planner",
+    body: "Coordinators get live, anonymised cohort analytics: module demand forecast and seats demanded before registration opens, elective uptake and track-by-track choices, term loading, and cohort progress. Evidence to tune your tracks each year instead of gut feeling.",
+  },
+  {
+    title: "Advising load, absorbed and counted",
+    body: "The dashboard counts rule checks run, staff hours saved, and plans exported for advising sessions. Invalid configurations are caught in the planner before they become emails.",
+  },
+  {
+    title: "Your own tenant, free pilot start",
+    body: "Own catalogue, rules, branding, and subdomain per institution; no shared state. The founding pilot starts with a free encoded prototype of your catalogue before any commitment.",
   },
 ];
 ---
@@ -31,13 +38,10 @@ const points = [
           For universities
         </h2>
         <p class="mt-5 text-muted">
-          StudyPlanner is built to be deployed across programmes and institutions, not just
-          one, and to scale to large MSc programmes like TU Munich's. If you coordinate an
-          MSc and want fewer plan-validation emails next term, let's talk.
-        </p>
-        <p class="mt-4 text-muted">
-          Priced per institution, per programme. Pilot programmes start with a free encoded
-          prototype of your own catalogue. You see your rules running before any commitment.
+          Students get a validated planner; your office gets the full product: a review
+          queue of pre-checked plans and a curriculum dashboard built to improve your
+          master tracks. Already scaled to large MSc programmes like the TU Munich pilot's.
+          Priced per institution, per programme.
         </p>
         <CTAButton
           href={bookDemoHref}
