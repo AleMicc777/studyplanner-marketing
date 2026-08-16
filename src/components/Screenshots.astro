@@ -40,7 +40,7 @@ const screens = [
   <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)]">
     <h2
       data-reveal
-      class="max-w-[20ch] text-[length:var(--text-h2)] font-extrabold tracking-[-0.04em] text-ink"
+      class="max-w-[20ch] serif-heading text-[length:var(--text-h2)] text-ink"
     >
       See it on your programme's catalogue
     </h2>
@@ -66,7 +66,7 @@ const screens = [
           >
             <figcaption class:list={["min-w-0", !full && flip && "lg:order-2", full && "max-w-xl"]}>
               <h3 class="flex items-center gap-2.5 text-[length:var(--text-h3)] font-semibold tracking-tight text-ink">
-                <span aria-hidden="true" class="h-1.5 w-1.5 shrink-0 rounded-[1px] bg-amber"></span>
+                <span aria-hidden="true" class="h-1.5 w-1.5 shrink-0 rounded-[1px] bg-accent"></span>
                 {s.title}
               </h3>
               <p class="mt-3 text-sm leading-relaxed text-muted">{s.caption}</p>

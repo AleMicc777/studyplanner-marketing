@@ -1,5 +1,6 @@
 ---
 import { CONTACT_EMAIL } from "../config/site";
+import InkLedgerBook from "./ink/InkLedgerBook.astro";
 
 const points = [
   {
@@ -31,22 +32,30 @@ const points = [
 
 <section class="border-b border-line bg-paper text-ink">
   <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)]">
-    <h2 data-reveal class="max-w-[22ch] text-[length:var(--text-h2)] font-extrabold tracking-[-0.04em] text-ink">
-      Built for GDPR procurement, not around it
-    </h2>
-    <p class="mt-4 max-w-[var(--prose-max)] text-[length:var(--text-lead)] leading-relaxed text-muted">
-      University data-protection review is part of every pilot, not an afterthought. Here is
-      what we can tell your data protection officer before they ask.
-    </p>
+    <div class="flex flex-col items-start gap-8 sm:flex-row sm:justify-between sm:gap-10">
+      <div>
+        <h2 data-reveal class="max-w-[22ch] serif-heading text-[length:var(--text-h2)] text-ink">
+          Built for GDPR procurement, not around it
+        </h2>
+        <p class="mt-4 max-w-[var(--prose-max)] text-[length:var(--text-lead)] leading-relaxed text-muted">
+          University data-protection review is part of every pilot, not an afterthought. Here is
+          what we can tell your data protection officer before they ask.
+        </p>
+      </div>
+
+      <div data-reveal class="aspect-square w-[130px] shrink-0 sm:w-[200px] lg:w-[220px]">
+        <InkLedgerBook />
+      </div>
+    </div>
 
     <dl class="mt-12 divide-y divide-line border-t border-line">
       {points.map((p) => (
         <div class="grid gap-2 py-6 sm:grid-cols-[16rem_1fr] sm:gap-8">
           <dt class="flex items-start gap-2.5 font-semibold text-ink">
-            <span aria-hidden="true" class="mt-2 h-1.5 w-1.5 shrink-0 rounded-[1px] bg-amber"></span>
+            <span aria-hidden="true" class="mt-2 h-1.5 w-1.5 shrink-0 rounded-[1px] bg-accent"></span>
             {p.title}
           </dt>
-          <dd class="leading-relaxed text-muted sm:pl-0">{p.body}</dd>
+          <dd class="max-w-[70ch] leading-relaxed text-muted sm:pl-0">{p.body}</dd>
         </div>
       ))}
     </dl>
@@ -56,7 +65,7 @@ const points = [
       {" "}
       <a
         href={`mailto:${CONTACT_EMAIL}`}
-        class="font-medium text-amber-deep underline decoration-amber-line/40 underline-offset-4 transition-colors hover:text-amber-hover"
+        class="font-medium text-accent-deep underline decoration-accent-line/40 underline-offset-4 transition-colors hover:text-accent-hover"
       >
         {CONTACT_EMAIL}
       </a>.
@@ -64,7 +73,7 @@ const points = [
     <p class="mt-3 text-sm">
       <a
         href={`mailto:${CONTACT_EMAIL}?subject=DPA%20request`}
-        class="font-medium text-amber-deep underline decoration-amber-line/40 underline-offset-4 transition-colors hover:text-amber-hover"
+        class="font-medium text-accent-deep underline decoration-accent-line/40 underline-offset-4 transition-colors hover:text-accent-hover"
       >
         Request the DPA <span aria-hidden="true">&rarr;</span>
       </a>

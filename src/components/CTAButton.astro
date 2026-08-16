@@ -11,22 +11,22 @@ interface Props {
 const { href, variant = "solid", dataTrack, target, rel, class: className } = Astro.props;
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-[0.95rem] font-semibold tracking-tight transition-colors duration-200 active:translate-y-px border";
+  "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-[0.95rem] font-semibold tracking-tight transition-colors duration-200 active:translate-y-px border";
 
-// Primary action — the amber signal. Works on graphite and on paper.
-// `solid` and `solid-dark` are the same amber primary; the two names document
+// Primary action — the accent signal. Works on graphite and on paper.
+// `solid` and `solid-dark` are the same accent primary; the two names document
 // intent at the call site (which background the button sits on).
-const amberPrimary =
-  "bg-amber text-graphite border-amber hover:bg-amber-hover hover:border-amber-hover";
+const accentPrimary =
+  "bg-accent text-graphite-2 border-accent hover:bg-accent-hover hover:border-accent-hover";
 
 const variants = {
-  solid: amberPrimary,
-  "solid-dark": amberPrimary,
+  solid: accentPrimary,
+  "solid-dark": accentPrimary,
   // Ghost on dark (graphite) surfaces.
-  outline: "bg-transparent text-on-dark border-hairline hover:border-amber hover:text-amber",
+  outline: "bg-transparent text-on-dark border-hairline hover:border-accent hover:text-accent",
   // Ghost on light (paper) surfaces.
   "outline-invert":
-    "bg-transparent text-ink border-line hover:border-amber hover:text-amber-deep",
+    "bg-transparent text-ink border-line hover:border-accent hover:text-accent-deep",
 };
 ---
 

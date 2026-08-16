@@ -1,0 +1,39 @@
+---
+const { class: className } = Astro.props;
+---
+<svg
+  viewBox="0 0 96 96"
+  width="100%"
+  height="100%"
+  fill="none"
+  role="img"
+  aria-label="Paper plane folded from a ruled plan sheet"
+  class={className}
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- accent pop: lower fold facet, under the ink linework -->
+  <path fill="var(--color-accent)" d="M82 20 L46 54 L36 78 Z" />
+  <g
+    stroke="var(--color-ink)"
+    stroke-width="1.75"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <!-- dart silhouette: nose, top tail, notch, bottom tail -->
+    <path vector-effect="non-scaling-stroke" d="M82 20 L14 46 L46 54 L36 78 Z" />
+    <!-- fold lines: main keel crease + partial upper crease -->
+    <path vector-effect="non-scaling-stroke" d="M82 20 L46 54" />
+    <path vector-effect="non-scaling-stroke" d="M76 22.3 L52 31.5" />
+    <!-- faint grid ruling carried over from the plan sheet -->
+    <g stroke-opacity="0.4">
+      <path vector-effect="non-scaling-stroke" d="M30 47 L66 33.5" />
+      <path vector-effect="non-scaling-stroke" d="M38 50 L58 42.5" />
+      <path vector-effect="non-scaling-stroke" d="M43 52 L49 49.7" />
+    </g>
+    <!-- launch trail: the only sanctioned dashes (4 of max 6) -->
+    <path vector-effect="non-scaling-stroke" d="M10 86 L15 85" />
+    <path vector-effect="non-scaling-stroke" d="M18 84 L23 82.8" />
+    <path vector-effect="non-scaling-stroke" d="M26 81.6 L30 80.4" />
+    <path vector-effect="non-scaling-stroke" d="M32.5 79.3 L34.5 78.7" />
+  </g>
+</svg>

@@ -18,7 +18,7 @@ const blocks = [
 <section class="border-b border-line bg-paper text-ink" data-reveal>
   <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)]">
     <p class="font-mono text-sm text-muted">
-      <span class="text-amber-deep">//</span> case study: a live MSc Aerospace Engineering programme
+      <span class="text-accent-deep">//</span> case study: a live MSc Aerospace Engineering programme
     </p>
     <p class="mt-2 font-mono text-sm text-muted">
       180+ courses encoded / 5 specialisation tracks / under 2 weeks to live
@@ -26,28 +26,28 @@ const blocks = [
 
     <div class="mt-10 grid gap-12 lg:grid-cols-2 lg:items-start lg:gap-16">
       <div class="min-w-0">
-        <h2 class="text-[length:var(--text-h2)] font-extrabold tracking-[-0.04em] text-ink">
+        <h2 class="serif-heading text-[length:var(--text-h2)] text-ink">
           From email chaos to self-service validation
         </h2>
 
         <div class="mt-8 divide-y divide-line">
           {blocks.map((b) => (
             <div class="py-5 first:pt-0">
-              <h3 class="font-mono text-xs font-medium uppercase tracking-[0.08em] text-muted">
-                {b.label}
+              <h3 class="font-mono text-xs font-medium tracking-[0.02em] text-accent-deep">
+                // {b.label.toLowerCase()}
               </h3>
               <p class="mt-2 text-muted">{b.body}</p>
             </div>
           ))}
           <div class="py-5">
-            <h3 class="font-mono text-xs font-medium uppercase tracking-[0.08em] text-muted">
-              Outcome
+            <h3 class="font-mono text-xs font-medium tracking-[0.02em] text-accent-deep">
+              // outcome
             </h3>
-            <p class="mt-2 text-muted">
+            <p class="mt-2 font-[family-name:var(--font-serif)] font-medium leading-[1.35] text-muted [font-optical-sizing:auto]">
               Students now validate their own plans before an advising appointment, catching
               invalid configurations themselves. Early estimate:
               {" "}
-              <span class="font-semibold text-amber-deep">~2 hours saved per student per year</span>
+              <span class="font-semibold text-accent-deep">~2 hours saved per student per year</span>
               {" "}
               on back-and-forth email. Estimates vary with programme complexity.
             </p>

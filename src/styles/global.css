@@ -1,15 +1,17 @@
 @import "tailwindcss";
 
 /*
- * StudyPlanner design system — "Engineered Paper + Amber Signal".
+ * StudyPlanner design system — "Petrol Ledger" (owner-approved 2026-08-16,
+ * evolved from "Engineered Paper + Amber Signal": accent hue moved from amber
+ * 71 to petrol teal 200; neutrals re-tinted onto the same blue-green axis).
  *
- * ONE committed identity. A cool near-black graphite carries the structural
- * surface; a single amber signal carries validation, key data, and the primary
- * CTA. No second competing colour. Green/red are reserved strictly for
+ * ONE committed identity. A deep petrol graphite carries the structural
+ * surface; a single teal accent signal carries validation, key data, and the
+ * primary CTA. No second competing colour. Green/red are reserved strictly for
  * plan-validation meaning (valid / flag), never decoration.
  *
  * Light-dominant: paper carries the page; graphite is demoted to the single
- * dark footer anchor (+ optional product-echo cards). Amber is unchanged.
+ * dark footer anchor (+ optional product-echo cards).
  *
  * Token usage:
  * - graphite / graphite-2 : the dark footer anchor (+ product-echo cards)
@@ -18,55 +20,93 @@
  * - paper / paper-shade    : light section surfaces (cool near-white, never warm)
  * - ink / muted            : text on light surfaces
  * - on-dark / on-dark-2    : text on graphite; steel = faint mono metadata
- * - amber (+ hover/line/deep): THE signal. CTAs, key metrics, validation accents.
+ * - accent (+ hover/line/deep): THE signal. CTAs, key metrics, validation accents.
  * - valid / flag           : success / error meaning only.
- * Type: Geist (sans) for everything; Geist Mono for metrics, code, validation.
+ * Type: Geist (sans) body; Geist Mono for metrics, code, validation.
  */
 @theme {
-  --color-graphite: oklch(0.19 0.008 250);
-  --color-graphite-2: oklch(0.165 0.008 250);
-  --color-panel: oklch(0.24 0.01 250);
-  --color-hairline: oklch(0.32 0.012 250);
+  --color-graphite: oklch(0.2 0.028 215);
+  --color-graphite-2: oklch(0.17 0.026 215);
+  --color-panel: oklch(0.25 0.03 213);
+  --color-hairline: oklch(0.33 0.032 212);
 
-  --color-paper: oklch(0.975 0.003 250);
-  --color-paper-shade: oklch(0.945 0.004 250);
-  --color-line: oklch(0.9 0.004 250);
+  --color-paper: oklch(0.975 0.004 200);
+  --color-paper-shade: oklch(0.945 0.006 200);
+  --color-line: oklch(0.9 0.007 200);
 
-  --color-ink: oklch(0.22 0.01 250);
-  --color-muted: oklch(0.46 0.012 250);
+  --color-ink: oklch(0.215 0.02 220);
+  --color-muted: oklch(0.46 0.02 210);
 
-  --color-on-dark: oklch(0.975 0.003 250);
-  --color-on-dark-2: oklch(0.8 0.012 250);
-  --color-steel: oklch(0.62 0.028 250);
+  --color-on-dark: oklch(0.975 0.004 200);
+  --color-on-dark-2: oklch(0.8 0.018 205);
+  --color-steel: oklch(0.63 0.04 205);
 
-  --color-amber: oklch(0.785 0.125 71);
-  --color-amber-hover: oklch(0.73 0.125 69);
-  --color-amber-line: oklch(0.66 0.115 71);
-  --color-amber-deep: oklch(0.47 0.115 71);
+  --color-accent: oklch(0.785 0.105 200);
+  --color-accent-hover: oklch(0.73 0.107 199);
+  --color-accent-line: oklch(0.66 0.1 200);
+  --color-accent-deep: oklch(0.45 0.072 205);
 
-  --color-valid: oklch(0.7 0.125 152);
-  --color-valid-deep: oklch(0.42 0.09 152);
+  --color-valid: oklch(0.7 0.14 148);
+  --color-valid-deep: oklch(0.42 0.1 147);
   --color-flag: oklch(0.6 0.165 27);
-  --color-flag-bright: oklch(0.68 0.15 27);
+  --color-flag-bright: oklch(0.7 0.155 25);
   --color-flag-deep: oklch(0.45 0.14 27);
 
   --font-sans: "Geist Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "Geist Mono Variable", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-serif: "Source Serif 4 Variable", Georgia, "Times New Roman", serif;
 }
 
-/* Fluid type scale + layout + motion tokens. */
+/*
+ * Fluid type scale + layout + motion tokens.
+ * Ratio 1.333; --text-display is a deliberate single super-step (2x h2) for
+ * the hero only. --text-stat is the Stats giant numeral.
+ */
 :root {
-  --text-display: clamp(2.4rem, 1.7rem + 3.1vw, 4.4rem);
-  --text-h2: clamp(1.85rem, 1.3rem + 2.2vw, 2.9rem);
-  --text-h3: clamp(1.3rem, 1.1rem + 1vw, 1.7rem);
-  --text-lead: clamp(1.05rem, 1rem + 0.5vw, 1.28rem);
+  --text-display: clamp(2.75rem, 1.35rem + 5.6vw, 6.5rem);
+  --text-h2: clamp(1.9rem, 1.35rem + 2.2vw, 3.25rem);
+  --text-h3: clamp(1.35rem, 1.15rem + 0.9vw, 1.8rem);
+  --text-lead: clamp(1.08rem, 1rem + 0.55vw, 1.375rem);
+  --text-stat: clamp(3.5rem, 2rem + 9vw, 9.5rem);
 
-  --section-y: clamp(4rem, 8vw, 7rem);
+  --section-y: clamp(4rem, 3rem + 5vw, 7.5rem);
   --prose-max: 46ch;
+
+  --shadow-float: 0 12px 32px -12px oklch(0.2 0.028 215 / 0.18);
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --dur-reveal: 600ms;
   --dur-hero-item: 420ms;
+}
+
+/*
+ * Display serif (Source Serif 4 Variable, opsz axis). Scope is exhaustive:
+ * hero h1, section h2s, Stats numeral, CaseStudy pull quote. Nothing else.
+ * .serif-display forces the opsz-60 high-contrast master (h1, stat numeral);
+ * .serif-heading lets optical sizing pick (h2s, pull quote).
+ */
+.serif-display {
+  font-family: var(--font-serif);
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 60;
+  font-weight: 620;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+.serif-heading {
+  font-family: var(--font-serif);
+  font-optical-sizing: auto;
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
+.stat-numeral {
+  font-family: var(--font-serif);
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 60;
+  font-weight: 640;
+  letter-spacing: -0.01em;
+  font-variant-numeric: lining-nums tabular-nums;
 }
 
 body {
@@ -90,9 +130,9 @@ li {
   text-wrap: pretty;
 }
 
-/* Amber focus ring, applied globally to keyboard focus. */
+/* Accent focus ring, applied globally to keyboard focus. */
 :focus-visible {
-  outline: 2px solid var(--color-amber);
+  outline: 2px solid var(--color-accent);
   outline-offset: 3px;
   border-radius: 3px;
 }
@@ -124,13 +164,13 @@ li {
 }
 .grid-bg::before {
   background-image:
-    linear-gradient(to right, oklch(0.22 0.01 250 / 0.07) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(0.22 0.01 250 / 0.07) 1px, transparent 1px);
+    linear-gradient(to right, oklch(0.215 0.02 220 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.215 0.02 220 / 0.07) 1px, transparent 1px);
 }
 .grid-bg-dark::before {
   background-image:
-    linear-gradient(to right, oklch(0.32 0.012 250 / 0.55) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(0.32 0.012 250 / 0.55) 1px, transparent 1px);
+    linear-gradient(to right, oklch(0.33 0.032 212 / 0.55) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.33 0.032 212 / 0.55) 1px, transparent 1px);
 }
 .grid-bg > *,
 .grid-bg-dark > * {

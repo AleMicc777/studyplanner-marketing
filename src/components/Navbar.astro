@@ -13,7 +13,7 @@ const navLinks = [
   <input type="checkbox" id="nav-toggle" class="peer sr-only" />
 
   <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-    <!-- Wordmark with amber square mark -->
+    <!-- Wordmark with accent square mark -->
     <a
       href="/"
       class="flex shrink-0 items-center gap-2.5 text-[1.12rem] font-extrabold tracking-[-0.03em] text-ink"
@@ -36,11 +36,11 @@ const navLinks = [
       ))}
     </nav>
 
-    <!-- Desktop CTA: amber primary -->
+    <!-- Desktop CTA: accent primary -->
     <a
       href={bookDemoHref}
       data-track="cta-nav-book"
-      class="hidden items-center justify-center rounded-md border border-amber bg-amber px-4 py-2 text-[0.92rem] font-semibold text-graphite transition-colors hover:border-amber-hover hover:bg-amber-hover md:inline-flex"
+      class="hidden items-center justify-center rounded-md border border-accent bg-accent px-4 py-2 text-[0.92rem] font-semibold text-graphite transition-colors hover:border-accent-hover hover:bg-accent-hover md:inline-flex"
     >
       Book a 20-min demo
     </a>
@@ -48,7 +48,7 @@ const navLinks = [
     <!-- Mobile hamburger label -->
     <label
       for="nav-toggle"
-      class="flex cursor-pointer items-center rounded-md border border-line p-2 text-ink hover:border-amber md:hidden"
+      class="flex cursor-pointer items-center rounded-md border border-line p-2 text-ink hover:border-accent md:hidden"
       aria-label="Toggle navigation menu"
     >
       <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -72,7 +72,7 @@ const navLinks = [
     <a
       href={bookDemoHref}
       data-track="cta-nav-book"
-      class="mt-4 block rounded-md border border-amber bg-amber px-4 py-3 text-center text-sm font-semibold text-graphite hover:border-amber-hover hover:bg-amber-hover"
+      class="mt-4 block rounded-md border border-accent bg-accent px-4 py-3 text-center text-sm font-semibold text-graphite hover:border-accent-hover hover:bg-accent-hover"
     >
       Book a 20-min demo
     </a>
@@ -80,7 +80,7 @@ const navLinks = [
       href={PLANNER_URL}
       target="_blank"
       rel="noreferrer"
-      class="mt-2 block rounded-md border border-line px-4 py-3 text-center text-sm font-medium text-muted hover:border-amber hover:text-amber-deep"
+      class="mt-2 block rounded-md border border-line px-4 py-3 text-center text-sm font-medium text-muted hover:border-accent hover:text-accent-deep"
     >
       Open the StudyPlanner
     </a>
@@ -88,15 +88,15 @@ const navLinks = [
 </header>
 
 <style>
-  /* Amber square brand mark: notched by an inset graphite ring, ringed in amber. */
+  /* Accent square brand mark: notched by an inset graphite ring, ringed in accent. */
   .brand-mark {
     width: 18px;
     height: 18px;
     border-radius: 4px;
-    background: var(--color-amber);
+    background: var(--color-accent);
     box-shadow:
       inset 0 0 0 3px var(--color-paper),
-      0 0 0 1px var(--color-amber);
+      0 0 0 1px var(--color-accent);
     flex: none;
   }
 </style>

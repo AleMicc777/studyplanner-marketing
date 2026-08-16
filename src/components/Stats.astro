@@ -1,60 +1,54 @@
 ---
 /*
- * The one full-bleed amber band on the page: giant Geist Mono numerals in
- * graphite on the amber signal surface, four stats in a row divided by faint
- * graphite hairlines. The "hard outcome numbers" the problem section sets up.
+ * Giant-serif numeral band: one dominant stat set in the display serif
+ * (.stat-numeral, the only serif use here), with the remaining three stats
+ * as a modest hairline-separated mono row underneath.
  *
  * Numbers are defensible, not fabricated: encoded catalogue size and tracks are
  * from a live MSc Aerospace programme; the time-saved figure is explicitly an
- * early estimate; "under 2 weeks" is the observed setup time. No institution is
- * named in the proof.
- *
- * a11y note: on the amber surface, text is solid graphite (not translucent) so
- * every label clears WCAG AA; hierarchy comes from size and weight, not opacity.
+ * early estimate; "< 2 wks" is the observed setup time (kept short so it never
+ * wraps). No institution is named in the proof. Reveal only, no count-up.
  */
-const stats = [
-  { value: "180+", label: "Courses encoded", note: "Live MSc Aerospace catalogue" },
+const hero = { value: "180+", label: "Courses encoded", note: "Live MSc Aerospace catalogue" };
+const supporting = [
   { value: "5", label: "Specialisation tracks", note: "prerequisites and EC rules per track" },
   { value: "< 2 wks", label: "From guide to live", note: "programme guide to working planner" },
   { value: "~2 hrs", label: "Saved / student / year", note: "early estimate, varies by programme" },
 ];
 ---
 
-<section class="bg-amber text-graphite">
-  <div class="mx-auto max-w-6xl px-6 py-[clamp(2.75rem,5vw,4rem)]">
+<section class="border-y border-line bg-paper-shade py-[var(--section-y)]">
+  <div class="mx-auto max-w-6xl px-6">
     <h2 class="sr-only">By the numbers</h2>
 
-    <!-- mono kicker with a trailing graphite hairline -->
-    <div
-      data-reveal
-      class="mb-8 flex items-center gap-4 font-mono text-[0.78rem] uppercase tracking-[0.06em] text-graphite"
-    >
-      <span>Measured, not claimed</span>
-      <span class="h-px flex-1 bg-graphite/25" aria-hidden="true"></span>
-    </div>
+    <!-- Numeral and caption are one text unit: value, label, note read in sequence. -->
+    <p data-reveal class="text-center">
+      <span class="stat-numeral block text-[length:var(--text-stat)] leading-none text-ink">
+        {hero.value}
+      </span>
+      <span class="mt-5 block font-mono text-[0.95rem] tracking-[0.02em] text-muted">
+        {hero.label}
+      </span>
+      <span class="mt-1 block font-mono text-[0.8rem] text-muted">{hero.note}</span>
+    </p>
 
-    <dl class="grid grid-cols-1 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-y-0">
+    <dl
+      data-reveal
+      class="mx-auto mt-[clamp(3rem,2rem+3.5vw,5rem)] grid max-w-4xl grid-cols-1 gap-y-8 border-t border-line pt-8 sm:grid-cols-3 sm:gap-y-0"
+    >
       {
-        stats.map((s, i) => (
+        supporting.map((s, i) => (
           <div
-            data-reveal
             class:list={[
-              "border-t border-graphite/25 pt-6 lg:border-t-0 lg:pt-0",
-              "lg:px-[clamp(1rem,2.4vw,1.9rem)]",
-              i === 0
-                ? "lg:border-l-0 lg:pl-0"
-                : "lg:border-l lg:border-graphite/25",
+              "text-center sm:px-[clamp(1rem,2vw,1.75rem)]",
+              i !== 0 && "border-t border-line pt-8 sm:border-t-0 sm:border-l sm:pt-0",
             ]}
           >
-            <dt class="font-mono text-[clamp(2.05rem,1.4rem+2.6vw,3.2rem)] font-medium leading-none tracking-[-0.04em] text-graphite tabular-nums">
+            <dt class="font-mono text-[1.3rem] font-medium tracking-[-0.02em] text-accent-deep tabular-nums">
               {s.value}
             </dt>
-            <dd class="mt-4 text-[1.02rem] font-bold tracking-[-0.02em] text-graphite">
-              {s.label}
-            </dd>
-            <dd class="mt-1.5 text-[0.86rem] font-normal leading-snug text-graphite">
-              {s.note}
-            </dd>
+            <dd class="mt-2 text-[0.92rem] leading-snug text-muted">{s.label}</dd>
+            <dd class="mt-1 text-[0.82rem] leading-snug text-muted">{s.note}</dd>
           </div>
         ))
       }

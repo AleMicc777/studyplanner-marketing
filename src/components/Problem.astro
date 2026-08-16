@@ -1,34 +1,45 @@
 ---
+import InkPlanSheet from "./ink/InkPlanSheet.astro";
 ---
 
 <section class="border-b border-line bg-paper text-ink">
   <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)]">
-    <div class="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-16">
-      <!-- Left: prose -->
-      <div class="max-w-[var(--prose-max)]">
-        <h2
+    <div class="grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-16">
+      <!-- Left: prose with the ink figure above it; stacked so the text column
+           keeps a real 55-66ch measure instead of splitting width with the SVG. -->
+      <div class="flex flex-col items-start gap-8">
+        <div
           data-reveal
-          class="text-[length:var(--text-h2)] font-extrabold leading-[1.08] tracking-[-0.04em] text-ink"
+          aria-hidden="true"
+          class="aspect-square w-[120px] shrink-0 md:w-[200px]"
         >
-          Coordinators shouldn't be a human plan validator.
-        </h2>
-        <div class="mt-6 space-y-5 text-[length:var(--text-lead)] leading-relaxed text-muted">
-          <p>
-            A 300-student cohort, three revision rounds a term: that's the shape
-            of the problem. Every plan starts as a half-built PDF or spreadsheet,
-            and every EC shortfall, missing prerequisite, or track violation only
-            surfaces once a student emails to ask what counts.
-          </p>
-          <p>
-            Coordinators answer the same handful of questions hundreds of times a
-            term, then catch the real errors too late to matter, after
-            registration has closed, after the swap window is gone.
-          </p>
-          <p>
-            <span class="font-semibold text-ink"
-              >StudyPlanner moves the check to the moment the plan is built</span
-            >, not the moment it lands in an inbox.
-          </p>
+          <InkPlanSheet class="h-full w-full" />
+        </div>
+        <div class="min-w-0 max-w-[60ch]">
+          <h2
+            data-reveal
+            class="serif-heading text-[length:var(--text-h2)] text-ink"
+          >
+            Coordinators shouldn't be a human plan validator.
+          </h2>
+          <div class="mt-6 space-y-5 text-[length:var(--text-lead)] leading-relaxed text-muted">
+            <p>
+              A 300-student cohort, three revision rounds a term: that's the shape
+              of the problem. Every plan starts as a half-built PDF or spreadsheet,
+              and every EC shortfall, missing prerequisite, or track violation only
+              surfaces once a student emails to ask what counts.
+            </p>
+            <p>
+              Coordinators answer the same handful of questions hundreds of times a
+              term, then catch the real errors too late to matter, after
+              registration has closed, after the swap window is gone.
+            </p>
+            <p>
+              <span class="font-semibold text-ink"
+                >StudyPlanner moves the check to the moment the plan is built</span
+              >, not the moment it lands in an inbox.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -38,13 +49,13 @@
         data-reveal
         role="group"
         aria-label="Plan validation, before and after"
-        class="rounded-[10px] border border-line bg-paper-shade shadow-[0_1px_2px_oklch(0.19_0.008_250/0.06),0_8px_24px_-8px_oklch(0.19_0.008_250/0.12)]"
+        class="rounded-[10px] border border-line bg-paper-shade shadow-(--shadow-float)"
       >
         <!-- document header -->
         <div
           class="flex items-baseline justify-between gap-3 border-b border-line px-6 py-3 font-mono text-[0.78rem] tracking-[0.03em] text-muted"
         >
-          <span>study plan / revision 2</span>
+          <span>study plan / draft</span>
           <span>AE-MSc</span>
         </div>
 
@@ -59,12 +70,12 @@
           <div
             class="mt-2 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 text-[0.95rem] text-ink"
           >
-            <span class="course-flag">AE4-ADS + AE4-SD</span>
-            <span class="mark-flag">32 EC</span>
+            <span class="course-flag">AE4870B before AE4870A</span>
+            <span class="mark-flag">conflict</span>
           </div>
           <div class="rule-flag mt-2 space-y-1 border-l pl-3 text-[0.85rem] leading-relaxed">
-            <p class="mark-flag">prereq unmet</p>
-            <p class="mark-flag">flagged three weeks late</p>
+            <p class="mark-flag">prereq order unmet</p>
+            <p class="mark-flag">caught after registration closed</p>
           </div>
 
           <div class="my-4 h-px bg-line" aria-hidden="true"></div>
@@ -79,16 +90,16 @@
           <div
             class="mt-2 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 text-[0.95rem] text-ink"
           >
-            <span>AE4-ADS + AE4-SP</span>
-            <span class="mark-valid">30 EC</span>
+            <span>AE4870A, then AE4870B</span>
+            <span class="mark-valid">120 / 120 EC</span>
           </div>
           <div class="rule-valid mt-2 space-y-1 border-l pl-3 text-[0.85rem] leading-relaxed">
             <p class="mark-valid">prereqs met</p>
             <p class="mark-valid">validated the moment it's built</p>
           </div>
 
-          <!-- the one amber margin note -->
-          <p class="mt-6 border-t border-line pt-3 text-right text-[0.78rem] italic text-amber-deep">
+          <!-- the one accent margin note -->
+          <p class="mt-6 border-t border-line pt-3 text-right text-[0.78rem] italic text-accent-deep">
             checked before it was ever sent
           </p>
         </div>
@@ -103,13 +114,13 @@
     color: var(--color-flag-deep, oklch(0.45 0.14 27));
   }
   .mark-valid {
-    color: var(--color-valid-deep, oklch(0.42 0.09 152));
+    color: var(--color-valid-deep, oklch(0.42 0.1 147));
   }
   .rule-flag {
     border-color: var(--color-flag-deep, oklch(0.45 0.14 27));
   }
   .rule-valid {
-    border-color: var(--color-valid-deep, oklch(0.42 0.09 152));
+    border-color: var(--color-valid-deep, oklch(0.42 0.1 147));
   }
   /* Corrector's thin rule under the offending course pair; text stays ink. */
   .course-flag {

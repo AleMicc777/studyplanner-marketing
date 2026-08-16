@@ -1,0 +1,49 @@
+---
+const { class: className } = Astro.props;
+---
+<svg
+  viewBox="0 0 96 96"
+  width="100%"
+  height="100%"
+  fill="none"
+  role="img"
+  aria-label="Study plan sheet with course rows and a circled credit total"
+  class={className}
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <g
+    stroke="var(--color-ink)"
+    stroke-width="1.75"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    transform="rotate(-2.5 48 48)"
+  >
+    <!-- sheet with peeled top-right corner -->
+    <path vector-effect="non-scaling-stroke" d="M24 12 H64 L72 20 V82 Q72 84 70 84 H24 Q22 84 22 82 V14 Q22 12 24 12 Z" />
+    <path vector-effect="non-scaling-stroke" d="M64 12 V18 Q64 20 66 20 H72" />
+    <!-- header stroke -->
+    <path vector-effect="non-scaling-stroke" d="M28 20 H48" />
+    <!-- ruled course rows: long rules -->
+    <path vector-effect="non-scaling-stroke" d="M28 28 H66" />
+    <path vector-effect="non-scaling-stroke" d="M28 36 H66" />
+    <path vector-effect="non-scaling-stroke" d="M28 44 H66" />
+    <path vector-effect="non-scaling-stroke" d="M28 52 H66" />
+    <!-- row entry stubs, varied lengths -->
+    <path vector-effect="non-scaling-stroke" d="M28 24.5 H40" />
+    <path vector-effect="non-scaling-stroke" d="M28 32.5 H36" />
+    <path vector-effect="non-scaling-stroke" d="M40 32.5 H47" />
+    <path vector-effect="non-scaling-stroke" d="M28 40.5 H44" />
+    <path vector-effect="non-scaling-stroke" d="M28 48.5 H33" />
+    <!-- pencil margin marks: double slash + cross -->
+    <path vector-effect="non-scaling-stroke" d="M24 33 L27 29" />
+    <path vector-effect="non-scaling-stroke" d="M24 38 L27 34" />
+    <path vector-effect="non-scaling-stroke" d="M24 58 L27 62 M27 58 L24 62" />
+    <!-- total row leading to the circled figure -->
+    <path vector-effect="non-scaling-stroke" d="M28 70 H48" />
+    <!-- abstract tally strokes inside the circle -->
+    <path vector-effect="non-scaling-stroke" d="M57 74 L60 66" />
+    <path vector-effect="non-scaling-stroke" d="M62 74 L65 66" />
+    <!-- accent pop: the review circle -->
+    <circle vector-effect="non-scaling-stroke" stroke="var(--color-accent)" cx="60" cy="70" r="8" />
+  </g>
+</svg>

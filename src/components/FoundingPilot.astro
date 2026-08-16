@@ -1,6 +1,7 @@
 ---
 import { bookDemoHref } from "../config/site";
 import CTAButton from "./CTAButton.astro";
+import InkPaperPlane from "./ink/InkPaperPlane.astro";
 /*
  * Honest first-party statement in place of a customer testimonial (there are no
  * real third-party quotes to show yet). A founder POV is truthful, humanising,
@@ -12,10 +13,10 @@ import CTAButton from "./CTAButton.astro";
 
 <section class="border-b border-line bg-paper-shade text-ink">
   <div class="mx-auto max-w-3xl px-6 py-[var(--section-y)] text-center">
-    <p class="font-mono text-xs tracking-[0.02em] text-amber-deep">// founder note</p>
+    <p class="font-mono text-xs tracking-[0.02em] text-accent-deep">// founder note</p>
     <blockquote
       data-reveal
-      class="mt-4 text-[length:var(--text-h3)] leading-relaxed tracking-[-0.01em] text-ink"
+      class="mt-4 font-[family-name:var(--font-serif)] text-[length:var(--text-h3)] font-medium leading-[1.4] tracking-[-0.01em] text-ink [font-optical-sizing:auto]"
     >
       "Coordinators didn't need another dashboard. They needed the plan to be
       right before it landed in their inbox. So we moved the check to the moment
@@ -27,22 +28,32 @@ import CTAButton from "./CTAButton.astro";
       / Founder, StudyPlanner
     </figcaption>
 
-    <div class="mx-auto mt-12 max-w-xl border-t border-line pt-10">
-      <h2 class="text-[length:var(--text-h3)] font-semibold tracking-[-0.02em] text-ink">
-        Become the founding pilot in your country
-      </h2>
-      <p class="mt-3 text-muted">
-        We're taking on a small number of founding-partner programmes at pilot
-        pricing, one per country, while the catalogue library grows. You see your
-        own programme's rules running before any commitment.
-      </p>
-      <p class="mt-4 font-mono text-sm text-muted">
-        Built for large MSc programmes like TU Munich's.
-      </p>
-      <div class="mt-8 flex justify-center">
-        <CTAButton href={bookDemoHref} variant="solid-dark" dataTrack="cta-founding-book">
-          Book a 20-min demo
-        </CTAButton>
+    <div class="mx-auto mt-12 max-w-2xl border-t border-line pt-10">
+      <div data-reveal class="flex items-start gap-4 text-left sm:gap-8">
+        <div class="w-[130px] shrink-0 sm:w-[180px] lg:w-[220px]">
+          <InkPaperPlane class="aspect-square h-auto w-full" />
+        </div>
+        <div class="min-w-0 flex-1">
+          <h2 class="serif-heading text-[length:var(--text-h2)] text-ink">
+            Become the founding pilot in your country
+          </h2>
+          <p class="mt-3 text-muted">
+            We're taking on a small number of founding-partner programmes at pilot
+            pricing, one per country, while the catalogue library grows. You see your
+            own programme's rules running before any commitment.
+          </p>
+          <p class="mt-4 font-mono text-sm text-muted">
+            Built for large MSc programmes like TU Munich's.
+          </p>
+          <CTAButton
+            href={bookDemoHref}
+            variant="solid-dark"
+            dataTrack="cta-founding-book"
+            class="mt-8"
+          >
+            Book a 20-min demo
+          </CTAButton>
+        </div>
       </div>
     </div>
   </div>

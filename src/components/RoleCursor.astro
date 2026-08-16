@@ -1,0 +1,96 @@
+---
+interface Props {
+  role: "student" | "coordinator";
+  label?: string;
+  rotate?: number;
+  class?: string;
+}
+const { role, label, rotate = -12, class: className = "" } = Astro.props;
+const text = label ?? (role === "student" ? "Student" : "Coordinator");
+const initial = role === "student" ? "S" : "C";
+const fill = role === "student" ? "var(--color-valid)" : "var(--color-accent)";
+// Enter offset: 8px behind the tip along the pointing axis (tip points up at rotate=0),
+// so the chip slides in the direction the arrow faces. Precomputed; CSS can't trig.
+const rad = (rotate * Math.PI) / 180;
+const dx = (-8 * Math.sin(rad)).toFixed(2);
+const dy = (8 * Math.cos(rad)).toFixed(2);
+---
+
+<div
+  class:list={["role-cursor", className]}
+  aria-hidden="true"
+  style={`--rc-fill:${fill};--rc-rotate:${rotate}deg;--rc-dx:${dx}px;--rc-dy:${dy}px;`}
+>
+  <svg class="rc-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none">
+    <path d="M3 1.5 L3 16 L7.2 12.3 L14 12.3 Z" fill="var(--rc-fill)"></path>
+  </svg>
+  <span class="rc-tag">
+    <span class="rc-pill font-sans text-graphite-2">{text}</span>
+    <span class="rc-disc bg-graphite font-mono text-on-dark">{initial}</span>
+  </span>
+</div>
+
+<style>
+  .role-cursor {
+    display: inline-block;
+    width: max-content;
+    pointer-events: none;
+  }
+  .rc-arrow {
+    display: block;
+    transform: rotate(var(--rc-rotate));
+    /* rotate about the tip so the pointer stays anchored to the pill corner */
+    transform-origin: 3px 2px;
+  }
+  .rc-tag {
+    display: inline-flex;
+    align-items: center;
+    margin: -3px 0 0 13px; /* tuck the tag under the arrow's bottom-right, Figma style */
+  }
+  .rc-pill {
+    display: inline-flex;
+    align-items: center;
+    height: 28px;
+    padding: 5px 16px 5px 12px;
+    border-radius: 999px;
+    background: var(--rc-fill);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    box-shadow: var(--shadow-float);
+  }
+  .rc-disc {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    margin-left: -8px; /* overlap the pill's outer end; padding-right 16px keeps the label clear */
+    border-radius: 50%;
+    font-size: 11px;
+    line-height: 1;
+    box-shadow: 0 0 0 2px var(--color-paper);
+  }
+
+  /* Reveal rides the ancestor [data-reveal] toggle; :global keeps the html.js
+     ancestor chain matchable from a scoped sheet. No-JS default: fully visible. */
+  :global(html.js [data-reveal]) .role-cursor {
+    opacity: 0;
+    transform: translate(var(--rc-dx), var(--rc-dy));
+    transition:
+      opacity 480ms var(--ease-out-expo) 120ms,
+      transform 480ms var(--ease-out-expo) 120ms;
+  }
+  :global(html.js [data-reveal].is-visible) .role-cursor {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  /* Global reduced-motion zeroes durations but not this offset; clear it so the
+     pre-reveal state is fade-only with no resting transform. */
+  @media (prefers-reduced-motion: reduce) {
+    :global(html.js [data-reveal]) .role-cursor {
+      transform: none;
+    }
+  }
+</style>

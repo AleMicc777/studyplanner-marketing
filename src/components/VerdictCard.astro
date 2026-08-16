@@ -1,0 +1,79 @@
+---
+// Dark product-echo card: declared abstraction of the plan verdict ledger.
+// Replaces the hero ledger chip. Joins the [data-reveal] system: spread
+// data-reveal here or wrap in a [data-reveal] parent to trigger the resolve.
+const { class: className = "", ...rest } = Astro.props;
+---
+
+<div
+  class:list={[
+    "w-full max-w-[300px] rounded-[10px] border border-hairline bg-graphite p-4",
+    "font-mono text-[0.8rem] leading-normal shadow-(--shadow-float)",
+    className,
+  ]}
+  role="img"
+  aria-label="Illustration: plan validation summary, 120 of 120 EC valid"
+  {...rest}
+>
+  <div aria-hidden="true">
+    <p class="flex items-baseline gap-2 rounded-md border border-hairline bg-panel px-3 py-2 text-steel">
+      <span>electives</span>
+      <span class="ml-auto text-on-dark-2">60 / 60 EC</span>
+      <span class="text-valid">met</span>
+    </p>
+    <p class="mt-2 flex items-baseline gap-2 rounded-md border border-hairline bg-panel px-3 py-2 text-steel">
+      <span>total</span>
+      <span class="ml-auto text-on-dark-2">120 / 120 EC</span>
+    </p>
+
+    <div class="verdict-stack mt-3 border-t border-hairline pt-3">
+      <p class="verdict-invalid flex items-center gap-2 text-flag-bright">
+        <span class="inline-block w-3.5 shrink-0 text-center">✗</span>
+        <span class="font-medium tracking-[0.06em] line-through decoration-1">INVALID</span>
+      </p>
+      <p class="verdict-valid flex items-center gap-2 text-valid">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" class="w-3.5 shrink-0">
+          <path
+            class="check-draw"
+            d="M3 8.5 6.5 12 13 4"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+        <span class="font-medium tracking-[0.06em]">VALID</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Both verdict lines share one grid cell; INVALID yields to VALID once,
+     ~400ms after the card's reveal fires (hero ledger chip timing feel). */
+  .verdict-stack { display: grid; }
+  .verdict-stack > p { grid-area: 1 / 1; }
+  :global(html.js) .verdict-invalid {
+    transition: opacity 700ms var(--ease-out-expo) 400ms, visibility 0s 1100ms;
+  }
+  :global(html.js [data-reveal].is-visible) .verdict-invalid { opacity: 0; visibility: hidden; }
+  :global(html.js) .verdict-valid {
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 700ms var(--ease-out-expo) 400ms, transform 700ms var(--ease-out-expo) 400ms;
+  }
+  :global(html.js [data-reveal].is-visible) .verdict-valid { opacity: 1; transform: translateY(0); }
+  /* Retime the global .check-draw (150ms) to the 400ms resolve delay. */
+  .verdict-valid .check-draw { transition-delay: 400ms; }
+
+  /* No-JS: static resolved ledger, both lines stacked (check drawn globally). */
+  :global(html:not(.js)) .verdict-stack { display: block; }
+  :global(html:not(.js)) .verdict-valid { margin-top: 4px; }
+
+  /* Reduced motion: same static end state, overriding the JS-path hiding. */
+  @media (prefers-reduced-motion: reduce) {
+    .verdict-stack { display: block; }
+    .verdict-invalid { opacity: 1 !important; visibility: visible !important; }
+    .verdict-valid { opacity: 1 !important; transform: none !important; margin-top: 4px; }
+    .verdict-valid .check-draw { stroke-dashoffset: 0; }
+  }
+</style>

@@ -30,8 +30,8 @@ const {
 
 const isDark = tone === "dark";
 const shell = isDark
-  ? "border-hairline bg-panel shadow-[0_40px_80px_-40px_oklch(0_0_0/0.7)]"
-  : "border-line bg-paper-shade shadow-[0_40px_80px_-48px_oklch(0.22_0.01_250/0.4)]";
+  ? "border-hairline bg-panel shadow-(--shadow-float)"
+  : "border-line bg-paper-shade shadow-(--shadow-float)";
 const bar = isDark ? "bg-graphite-2 border-hairline" : "bg-paper border-line";
 const urlBox = isDark
   ? "bg-graphite border-hairline text-steel"
@@ -41,7 +41,7 @@ const capTone = isDark ? "text-steel" : "text-muted";
 ---
 
 <figure class="m-0 min-w-0">
-  <div class:list={["frame relative overflow-hidden rounded-lg border", shell]}>
+  <div class:list={["frame relative overflow-hidden rounded-[10px] border", shell]}>
     {ticks && (
       <div class="ticks" aria-hidden="true">
         <i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>
@@ -62,7 +62,7 @@ const capTone = isDark ? "text-steel" : "text-muted";
         >{url}</span>
       )}
       {live && (
-        <span class="rounded bg-amber px-1.5 py-0.5 font-mono text-[0.66rem] font-medium tracking-[0.08em] text-graphite">
+        <span class="rounded bg-accent px-1.5 py-0.5 font-mono text-[0.66rem] font-medium tracking-[0.08em] text-graphite">
           LIVE
         </span>
       )}
@@ -94,7 +94,7 @@ const capTone = isDark ? "text-steel" : "text-muted";
     position: absolute;
     width: 14px;
     height: 14px;
-    border: 2px solid var(--color-amber);
+    border: 2px solid var(--color-accent);
     opacity: 0.85;
   }
   .frame .ticks i.tl { top: 0; left: 0; border-right: 0; border-bottom: 0; }

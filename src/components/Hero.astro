@@ -1,242 +1,73 @@
 ---
-import { PLANNER_URL, bookDemoHref } from "../config/site";
+import { bookDemoHref } from "../config/site";
 import BrowserFrame from "./BrowserFrame.astro";
 import CTAButton from "./CTAButton.astro";
+import RoleCursor from "./RoleCursor.astro";
+import VerdictCard from "./VerdictCard.astro";
 ---
 
 <section class="grid-bg bg-paper">
   <div
-    class="mx-auto grid max-w-6xl items-center gap-12 px-6 pb-[clamp(3.5rem,5vw,5.75rem)] pt-[clamp(3rem,6vw,6rem)] lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-16"
+    class="mx-auto flex max-w-6xl flex-col items-center px-6 pb-(--section-y) pt-[clamp(4.5rem,3.5rem+4vw,7rem)] text-center"
   >
-    <!-- Copy column -->
-    <div>
-      <span
-        class="hero-stagger-1 mb-6 inline-flex items-center gap-2.5 rounded-full border border-line py-1.5 pl-2.5 pr-3 text-[0.82rem] tracking-wide text-muted"
-      >
-        <span class="hero-dot" aria-hidden="true"></span>
-        Validating plans in real time
-      </span>
+    <h1 class="serif-display hero-stagger-1 text-[length:var(--text-display)] text-ink">
+      Every study plan, <span class="text-accent-deep">valid on arrival</span>.
+    </h1>
 
-      <h1
-        class="hero-stagger-2 text-[clamp(2.25rem,1.45rem+2.2vw,3.15rem)] font-extrabold leading-[1.06] tracking-[-0.04em] text-ink"
-      >
-        Every study plan <span class="text-amber-deep">checked against your rules</span>, before it reaches your inbox.
-      </h1>
+    <p
+      class="hero-stagger-2 mt-6 max-w-[52ch] text-[length:var(--text-lead)] leading-[1.55] text-muted"
+    >
+      Encode your rules once; every student plan is checked live, and
+      coordinators approve instead of debugging.
+    </p>
 
-      <p
-        class="hero-stagger-3 mt-6 max-w-[44ch] text-[length:var(--text-lead)] leading-[1.55] text-muted"
+    <div class="hero-stagger-3 mt-8">
+      <CTAButton
+        href={bookDemoHref}
+        dataTrack="cta-hero-demo"
+        class="md:px-8 md:py-4 md:text-base"
       >
-        StudyPlanner encodes your MSc programme's rules and validates every
-        student's plan in real time. Coordinators approve plans instead of
-        debugging them.
-      </p>
-
-      <div class="hero-stagger-4 mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-        <CTAButton href={bookDemoHref} dataTrack="cta-hero-demo">
-          Book a 20-min demo
-        </CTAButton>
-        <a
-          href={PLANNER_URL}
-          target="_blank"
-          rel="noreferrer"
-          data-track="open-planner"
-          class="group inline-flex min-h-11 items-center gap-2 py-3 text-[0.95rem] font-semibold tracking-tight text-ink transition-colors duration-200 hover:text-amber-deep"
-        >
-          Try the live planner
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 16 16"
-            fill="none"
-            aria-hidden="true"
-            class="transition-transform duration-200 group-hover:translate-x-0.5"
-          >
-            <path
-              d="M2.5 8h11M9.5 3.5 14 8l-4.5 4.5"
-              stroke="currentColor"
-              stroke-width="1.6"
-              stroke-linecap="round"
-              stroke-linejoin="round"></path>
-          </svg>
-        </a>
-      </div>
-
-      <!-- Mono readout: hairline-separated ledger columns, no middle dots -->
-      <div
-        class="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-line pt-4 font-mono text-[0.84rem] tracking-[0.01em] text-muted"
-      >
-        <span>EC totals</span>
-        <span class="h-3 w-px self-center bg-line" aria-hidden="true"></span>
-        <span>prerequisites</span>
-        <span class="h-3 w-px self-center bg-line" aria-hidden="true"></span>
-        <span>track rules</span>
-        <span class="h-3 w-px self-center bg-line" aria-hidden="true"></span>
-        <span class="font-medium">checked as the plan is built</span>
-      </div>
+        Book a 20-min demo
+      </CTAButton>
     </div>
 
-    <!-- Product screenshot + overlapping validation ledger chip -->
-    <div class="relative">
-      <BrowserFrame
-        src="/screenshots/screenshot-1.png"
-        alt="StudyPlanner interface showing a validated MSc study plan"
-        url="planner.studyplanner.eu"
-        tone="light"
-        ticks
-        live
-        width={1600}
-        height={1000}
-        loading="eager"
-        fetchpriority="high"
-      />
+    <!-- Load stagger on this outer wrapper, data-reveal on the inner relative
+         one: on a single element the stagger keyframe and the reveal transition
+         both drive opacity and race each other. -->
+    <div class="hero-stagger-4 mt-16 w-[min(1080px,92vw)]">
+      <div class="relative" data-reveal>
+        <BrowserFrame
+          src="/screenshots/screenshot-3.png"
+          alt="Full study plan grid with live validation across four quarters"
+          url="planner.studyplanner.eu"
+          tone="light"
+          ticks
+          live
+          width={1440}
+          height={1153}
+          loading="eager"
+          fetchpriority="high"
+        />
 
-      <!-- Mobile: chip sits BELOW the frame so the real product stays visible
-           (the signature is product + verdict, not verdict covering product).
-           lg: chip overlaps the frame's lower-left edge as designed. -->
-      <div
-        class="relative mt-4 w-[min(340px,100%)] rounded-[10px] border border-hairline bg-panel p-4 font-mono text-[0.8rem] leading-normal shadow-[0_1px_2px_oklch(0.19_0.008_250/0.06),0_8px_24px_-8px_oklch(0.19_0.008_250/0.12)] lg:absolute lg:-left-8 lg:bottom-8 lg:mt-0 lg:w-[min(340px,calc(100%-1.5rem))]"
-        role="group"
-        aria-label="Validation ledger resolving to a valid plan"
-      >
-        <p class="flex items-baseline gap-2 text-steel">
-          <span>prereq AE4-010</span>
-          <span class="leader" aria-hidden="true"></span>
-          <span class="text-valid">met</span>
-        </p>
-        <p class="mt-2 flex items-baseline gap-2 text-on-dark-2">
-          <span>EC total</span>
-          <span class="leader" aria-hidden="true"></span>
-          <span class="text-valid">120/120</span>
-        </p>
-
-        <div class="verdict-stack mt-3 border-t border-hairline pt-3">
-          <p class="verdict-invalid t-bright flex items-center gap-2" aria-hidden="true">
-            <span class="inline-block w-3.5 shrink-0 text-center">✗</span>
-            <span class="font-medium tracking-[0.06em]">INVALID</span>
-            <span class="pl-2">overload Q3</span>
-          </p>
-          <p class="verdict-valid flex items-center gap-2 text-valid">
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 16 16"
-              fill="none"
-              aria-hidden="true"
-              class="w-3.5 shrink-0"
-            >
-              <path
-                class="ledger-check"
-                d="M3 8.5 6.5 12 13 4"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"></path>
-            </svg>
-            <span class="font-medium tracking-[0.06em]">VALID</span>
-            <span class="pl-2">ready for review</span>
-          </p>
+        <!-- Positioning wrappers, not classes on RoleCursor itself: its reveal
+             sets transform on the root, which would erase a Tailwind scale.
+             Below lg the cursors stay pinned, scaled down slightly. -->
+        <div class="absolute left-[18%] top-[35%] z-10 origin-top-left scale-90 lg:scale-100">
+          <RoleCursor role="student" rotate={-10} />
         </div>
+        <!-- Right-edge pin below lg so pill + disc never clip the 390 viewport;
+             percentage pin only from lg up. -->
+        <div class="absolute right-[3%] top-[15%] z-10 origin-top-right scale-90 lg:left-[78%] lg:right-auto lg:origin-top-left lg:scale-100">
+          <RoleCursor role="coordinator" rotate={14} />
+        </div>
+
+        <!-- lg: -24px overhang past the frame's bottom-right corner. Below lg
+             it docks under the frame (old hero chip pattern) so the product
+             screenshot stays fully visible. -->
+        <VerdictCard
+          class="relative z-10 mx-auto mt-4 lg:absolute lg:-bottom-6 lg:-right-6 lg:mx-0 lg:mt-0"
+        />
       </div>
     </div>
   </div>
 </section>
-
-<style>
-  /* Validation status dot: valid-green, gentle pulse (calmed by reduced-motion). */
-  .hero-dot {
-    width: 8px;
-    height: 8px;
-    flex: none;
-    border-radius: 50%;
-    background: var(--color-valid);
-    box-shadow: 0 0 0 3px oklch(0.72 0.15 150 / 0.18);
-    animation: hero-dot-pulse 2.4s var(--ease-out-expo) infinite;
-  }
-  @keyframes hero-dot-pulse {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.4;
-    }
-  }
-
-  /* Ledger chip: dotted leaders drawn at the text baseline (empty flex item's
-     baseline is its bottom edge, so the border sits exactly on the baseline). */
-  .leader {
-    flex: 1 1 1.5rem;
-    min-width: 1rem;
-    border-bottom: 1px dotted var(--color-hairline);
-  }
-
-  /* flag-bright is defined in @theme; fallback kept for safety. */
-  .t-bright {
-    color: var(--color-flag-bright, oklch(0.68 0.15 27));
-  }
-
-  /* Verdict resolve: both lines share one grid cell; INVALID yields to VALID
-     once, ~400ms after load, 700ms on expo ease. CSS-only, runs without JS. */
-  .verdict-stack {
-    display: grid;
-  }
-  .verdict-stack > p {
-    grid-area: 1 / 1;
-  }
-  .verdict-invalid {
-    animation: ledger-out 700ms var(--ease-out-expo) 400ms forwards;
-  }
-  .verdict-valid {
-    opacity: 0;
-    animation: ledger-in 700ms var(--ease-out-expo) 400ms forwards;
-  }
-  .ledger-check {
-    stroke-dasharray: 17;
-    stroke-dashoffset: 17;
-    animation: ledger-draw 700ms var(--ease-out-expo) 400ms forwards;
-  }
-  @keyframes ledger-out {
-    to {
-      opacity: 0;
-      visibility: hidden;
-    }
-  }
-  @keyframes ledger-in {
-    from {
-      opacity: 0;
-      transform: translateY(4px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  @keyframes ledger-draw {
-    to {
-      stroke-dashoffset: 0;
-    }
-  }
-
-  /* Static end-state for reduced motion: both lines stacked, INVALID struck
-     through like a ledger correction, checkmark fully drawn. (The global
-     0.01ms rule alone would hide the INVALID line, so override explicitly.) */
-  @media (prefers-reduced-motion: reduce) {
-    .verdict-stack {
-      display: block;
-    }
-    .verdict-invalid {
-      animation: none;
-      text-decoration: line-through;
-      text-decoration-thickness: 1px;
-    }
-    .verdict-valid {
-      animation: none;
-      opacity: 1;
-      margin-top: 4px;
-    }
-    .ledger-check {
-      animation: none;
-      stroke-dashoffset: 0;
-    }
-  }
-</style>

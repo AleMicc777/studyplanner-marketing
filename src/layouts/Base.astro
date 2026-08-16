@@ -2,6 +2,9 @@
 import "../styles/global.css";
 import "@fontsource-variable/geist";
 import "@fontsource-variable/geist-mono";
+// Display serif: the opsz build registers both wght and the optical-size axis
+// (plain index.css ships wght only; opsz 60 is where the display cut lives).
+import "@fontsource-variable/source-serif-4/opsz.css";
 
 const {
   title = "StudyPlanner: AI study planning for universities",

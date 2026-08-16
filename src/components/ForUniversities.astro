@@ -1,6 +1,8 @@
 ---
 import { bookDemoHref } from "../config/site";
 import CTAButton from "./CTAButton.astro";
+import ReviewInboxCard from "./ReviewInboxCard.astro";
+import RoleCursor from "./RoleCursor.astro";
 const points = [
   {
     title: "Multi-tenant from day one",
@@ -25,7 +27,7 @@ const points = [
   <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)]">
     <div class="grid gap-12 lg:grid-cols-[1fr_1.55fr] lg:gap-16">
       <div>
-        <h2 data-reveal class="text-[length:var(--text-h2)] font-extrabold tracking-[-0.04em] text-ink">
+        <h2 data-reveal class="serif-heading text-[length:var(--text-h2)] text-ink">
           For universities
         </h2>
         <p class="mt-5 text-muted">
@@ -45,12 +47,23 @@ const points = [
         >
           Book a 20-min demo
         </CTAButton>
+
+        <!-- Product-echo card with the one Coordinator chip outside the hero;
+             the chip pins to the card corner only, never to whitespace. -->
+        <div data-reveal class="relative mt-12 w-[280px] max-w-full">
+          <ReviewInboxCard />
+          <RoleCursor
+            role="coordinator"
+            rotate={12}
+            class="absolute -top-4 -right-4 sm:-top-5 sm:-right-6"
+          />
+        </div>
       </div>
       <dl data-reveal class="divide-y divide-line border-t border-line">
         {points.map((p, i) => (
           <div class="py-6 first:pt-0">
             <dt class="flex items-start gap-3 text-base font-semibold text-ink">
-              <span class="mt-1 shrink-0 font-mono text-xs tabular-nums text-amber-deep" aria-hidden="true">
+              <span class="mt-1 shrink-0 font-mono text-xs tabular-nums text-accent-deep" aria-hidden="true">
                 {String(i + 1).padStart(2, "0")}
               </span>
               {p.title}
