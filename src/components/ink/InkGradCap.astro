@@ -1,0 +1,31 @@
+---
+const { class: className } = Astro.props;
+---
+<svg
+  viewBox="0 0 96 96"
+  width="100%"
+  height="100%"
+  fill="none"
+  role="img"
+  aria-label="Graduation cap with a tassel"
+  class={className}
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- accent pop: the tassel tip (the one teal shape) -->
+  <rect fill="var(--color-accent)" x="66.5" y="56" width="7" height="12" rx="2.5" />
+  <g
+    stroke="var(--color-ink)"
+    stroke-width="1.75"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <!-- mortarboard -->
+    <path vector-effect="non-scaling-stroke" d="M48 20 L82 33 L48 46 L14 33 Z" />
+    <!-- cap body under the board -->
+    <path vector-effect="non-scaling-stroke" d="M31 40 V54 Q31 61 48 61 Q65 61 65 54 V40" />
+    <!-- board button -->
+    <circle vector-effect="non-scaling-stroke" cx="48" cy="27" r="1.6" />
+    <!-- tassel cord from the button to the tip -->
+    <path vector-effect="non-scaling-stroke" d="M48 27 Q70 32 70 46 V56" />
+  </g>
+</svg>

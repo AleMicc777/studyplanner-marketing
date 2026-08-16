@@ -1,12 +1,18 @@
 ---
 import { faqs } from "../data/faqs";
+import InkOpenBook from "./ink/InkOpenBook.astro";
 ---
 
 <section class="border-b border-line bg-paper-shade text-ink">
   <div class="mx-auto max-w-3xl px-6 py-[var(--section-y)]">
-    <h2 data-reveal class="serif-heading text-[length:var(--text-h2)] text-ink">
-      Common questions
-    </h2>
+    <div class="flex items-end justify-between gap-8">
+      <h2 data-reveal class="serif-heading text-[length:var(--text-h2)] text-ink">
+        Common questions
+      </h2>
+      <div data-reveal aria-hidden="true" class="aspect-square w-[96px] shrink-0 sm:w-[130px]">
+        <InkOpenBook />
+      </div>
+    </div>
     <div class="mt-10 divide-y divide-line border-y border-line">
       {faqs.map((item) => (
         <details class="group">

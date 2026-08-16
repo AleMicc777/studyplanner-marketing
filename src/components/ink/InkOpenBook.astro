@@ -1,0 +1,41 @@
+---
+const { class: className } = Astro.props;
+---
+<svg
+  viewBox="0 0 96 96"
+  width="100%"
+  height="100%"
+  fill="none"
+  role="img"
+  aria-label="Open programme guide with a highlighted line"
+  class={className}
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- accent pop: the one highlighted line on the left page (teal stroke) -->
+  <path
+    stroke="var(--color-accent)"
+    stroke-width="4"
+    stroke-linecap="round"
+    d="M26 47 H42"
+  />
+  <g
+    stroke="var(--color-ink)"
+    stroke-width="1.75"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <!-- left page -->
+    <path vector-effect="non-scaling-stroke" d="M48 30 C41 24 30 23 20 26 V66 C30 63 41 64 48 70 Z" />
+    <!-- right page -->
+    <path vector-effect="non-scaling-stroke" d="M48 30 C55 24 66 23 76 26 V66 C66 63 55 64 48 70 Z" />
+    <!-- cover base -->
+    <path vector-effect="non-scaling-stroke" d="M20 66 L16 70 Q32 66 48 74 Q64 66 80 70 L76 66" />
+    <!-- text lines, left page -->
+    <path vector-effect="non-scaling-stroke" d="M26 36 H42" />
+    <path vector-effect="non-scaling-stroke" d="M26 41.5 H42" />
+    <!-- text lines, right page -->
+    <path vector-effect="non-scaling-stroke" d="M54 36 H70" />
+    <path vector-effect="non-scaling-stroke" d="M54 41.5 H70" />
+    <path vector-effect="non-scaling-stroke" d="M54 47 H70" />
+  </g>
+</svg>

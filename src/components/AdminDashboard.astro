@@ -1,0 +1,141 @@
+---
+/*
+ * Admin-console deep dive (owner-commissioned 2026-08-16): the strategic case
+ * for the Curriculum & capacity dashboard. All numbers in copy are visible in
+ * the screenshots themselves (568 modules, staff hours saved) or qualitative.
+ * Panel and statistic names are real, from AdminCurriculum.jsx. The grad-cap
+ * ink figure is the 5th illustration, owner-approved (educational motif).
+ */
+import BrowserFrame from "./BrowserFrame.astro";
+import InkGradCap from "./ink/InkGradCap.astro";
+
+const gathered = [
+  {
+    lead: "Module demand forecast",
+    rest: "seats demanded per module and per term, before registration opens",
+  },
+  {
+    lead: "Most-chosen courses",
+    rest: "elective uptake within each eligible track, ranked",
+  },
+  {
+    lead: "Track by track choices",
+    rest: "which electives each track actually combines",
+  },
+  {
+    lead: "Term loading",
+    rest: "where the EC load piles up, per track and per term",
+  },
+  {
+    lead: "Cohort progress",
+    rest: "how many plans are complete at 120 EC right now",
+  },
+  {
+    lead: "Advising load absorbed",
+    rest: "rule checks run, staff hours saved, plans exported",
+  },
+];
+---
+
+<section class="border-b border-line bg-paper text-ink">
+  <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)]">
+    <p data-reveal class="font-mono text-xs tracking-[0.02em] text-accent-deep">
+      // the admin console
+    </p>
+
+    <div class="mt-4 flex flex-col items-start gap-8 sm:flex-row sm:justify-between sm:gap-10">
+      <div>
+        <h2 data-reveal class="max-w-[22ch] serif-heading text-[length:var(--text-h2)] text-ink">
+          Shape the programme on data, not anecdotes
+        </h2>
+        <p class="mt-4 max-w-[var(--prose-max)] text-[length:var(--text-lead)] leading-relaxed text-muted">
+          Every plan students build becomes anonymised evidence: which courses they
+          actually choose, where they overload, what they combine. The dashboard turns
+          student behaviour into curriculum decisions.
+        </p>
+      </div>
+      <div data-reveal class="aspect-square w-[130px] shrink-0 sm:w-[190px] lg:w-[210px]">
+        <InkGradCap />
+      </div>
+    </div>
+
+    <!-- The flagship view: Curriculum & capacity, full width -->
+    <div data-reveal class="mt-12">
+      <BrowserFrame
+        src="/screenshots/admin-curriculum.png"
+        alt="Curriculum and capacity dashboard: plan completion, seats demanded, catalogue usage, staff hours saved, and a per-term module demand forecast table"
+        caption="Curriculum & capacity: completion rate, seats demanded per term, catalogue usage across 568 modules, staff hours saved, and the module demand forecast your timetabling has never had."
+        url="planner.studyplanner.eu/admin/curriculum"
+        live={true}
+        ticks={true}
+        tone="light"
+        width={1913}
+        height={852}
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <!-- Supporting views: AI cohort analyst + full catalogue control -->
+    <div class="mt-12 grid gap-10 lg:grid-cols-2 lg:gap-14">
+      <figure data-reveal class="min-w-0">
+        <BrowserFrame
+          src="/screenshots/admin-dashboard.png"
+          alt="Admin dashboard with an AI cohort analyst prompt, cohort brief generator, plan and activity statistics"
+          url="planner.studyplanner.eu/admin"
+          live={true}
+          tone="light"
+          width={1918}
+          height={854}
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="mt-3 text-sm leading-relaxed text-muted">
+          <span class="font-semibold text-ink">Ask about this cohort.</span>
+          An AI analyst grounded in the same data answers in plain language:
+          "Which electives are most popular among ASM students right now?"
+        </figcaption>
+      </figure>
+      <figure data-reveal class="min-w-0">
+        <BrowserFrame
+          src="/screenshots/admin-courses.png"
+          alt="Course catalogue administration: search, modify, delete, import and export of every course"
+          url="planner.studyplanner.eu/admin/courses"
+          live={true}
+          tone="light"
+          width={1912}
+          height={861}
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="mt-3 text-sm leading-relaxed text-muted">
+          <span class="font-semibold text-ink">Total control of the catalogue.</span>
+          Your office edits any course, EC value, column, or quarter; imports
+          timetables; exports everything as CSV or JSON. We encode, you decide.
+        </figcaption>
+      </figure>
+    </div>
+
+    <!-- The statistics gathered, as a ledger list -->
+    <div data-reveal class="mt-14">
+      <h3 class="font-mono text-xs font-medium tracking-[0.02em] text-accent-deep">
+        // statistics gathered, live
+      </h3>
+      <dl class="mt-4 grid grid-cols-1 gap-x-10 border-t border-line sm:grid-cols-2">
+        {gathered.map((g) => (
+          <div class="flex items-start gap-2.5 border-b border-line py-4">
+            <span aria-hidden="true" class="mt-2 h-1.5 w-1.5 shrink-0 rounded-[1px] bg-accent"></span>
+            <div>
+              <dt class="font-mono text-[0.9rem] font-medium text-ink">{g.lead}</dt>
+              <dd class="mt-0.5 text-sm leading-relaxed text-muted">{g.rest}</dd>
+            </div>
+          </div>
+        ))}
+      </dl>
+      <p class="mt-6 max-w-[70ch] text-sm leading-relaxed text-muted">
+        Aggregate and anonymised: the dashboard reads cohort patterns, never a named
+        student. Every table exports to CSV for your own capacity planning.
+      </p>
+    </div>
+  </div>
+</section>
