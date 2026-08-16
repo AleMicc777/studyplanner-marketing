@@ -7,31 +7,34 @@ const { class: className } = Astro.props;
   height="100%"
   fill="none"
   role="img"
-  aria-label="Rule stamp pressing a checkmark onto a sheet"
+  aria-label="Rubber stamp lifted above the checkmark it just stamped"
   class={className}
   xmlns="http://www.w3.org/2000/svg"
 >
-  <!-- accent pop: the stamped checkmark, under the ink linework -->
-  <path fill="var(--color-accent)" d="M37 69.5 L40 66.5 L44 70.4 L53.5 60 L56.4 62.6 L44.2 75.6 Z" />
+  <!-- accent pop: the stamped checkmark (the one teal shape) -->
+  <path
+    fill="var(--color-accent)"
+    d="M39 70.5 L42 67.5 L45 70.6 L54.5 60.5 L57.5 63.3 L45 76.5 Z"
+  />
   <g
     stroke="var(--color-ink)"
     stroke-width="1.75"
     stroke-linecap="round"
     stroke-linejoin="round"
   >
-    <!-- handle knob -->
-    <rect vector-effect="non-scaling-stroke" x="40" y="8" width="12" height="8" rx="2" />
-    <!-- stem -->
-    <path vector-effect="non-scaling-stroke" d="M44 16 V24" />
-    <path vector-effect="non-scaling-stroke" d="M48 16 V24" />
+    <!-- knob handle -->
+    <circle vector-effect="non-scaling-stroke" cx="48" cy="12" r="5.5" />
+    <!-- tapered neck -->
+    <path vector-effect="non-scaling-stroke" d="M45.5 17 L42.5 27" />
+    <path vector-effect="non-scaling-stroke" d="M50.5 17 L53.5 27" />
     <!-- stamp body -->
-    <rect vector-effect="non-scaling-stroke" x="32" y="24" width="28" height="12" rx="2" />
-    <!-- die plate, mid-press -->
-    <rect vector-effect="non-scaling-stroke" x="29" y="36" width="38" height="7" rx="2" />
-    <!-- press-motion ticks -->
-    <path vector-effect="non-scaling-stroke" d="M24 30 V38" />
-    <path vector-effect="non-scaling-stroke" d="M72 30 V38" />
-    <!-- sheet corner receiving the imprint -->
-    <path vector-effect="non-scaling-stroke" d="M18 56 H68 Q70 56 70 58 V86" />
+    <rect vector-effect="non-scaling-stroke" x="36" y="27" width="24" height="10" rx="2" />
+    <!-- wide base plate, lifted after the press -->
+    <rect vector-effect="non-scaling-stroke" x="30" y="37" width="36" height="8" rx="2" />
+    <!-- press-motion ticks either side of the plate -->
+    <path vector-effect="non-scaling-stroke" d="M24 34 V42" />
+    <path vector-effect="non-scaling-stroke" d="M72 34 V42" />
+    <!-- the imprint frame left on the sheet, check inside -->
+    <rect vector-effect="non-scaling-stroke" x="33" y="56" width="30" height="28" rx="5" />
   </g>
 </svg>

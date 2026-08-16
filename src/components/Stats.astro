@@ -4,16 +4,21 @@
  * (.stat-numeral, the only serif use here), with the remaining three stats
  * as a modest hairline-separated mono row underneath.
  *
- * Numbers are defensible, not fabricated: encoded catalogue size and tracks are
- * from a live MSc Aerospace programme; the time-saved figure is explicitly an
- * early estimate; "< 2 wks" is the observed setup time (kept short so it never
- * wraps). No institution is named in the proof. Reveal only, no count-up.
+ * Numbers are defensible, not fabricated: the 500+ course count spans both
+ * encoded catalogues (owner-stated 2026-08-16, TU Delft Aerospace live + the
+ * TU Munich pilot); "< 2 wks" is the observed setup time (kept short so it
+ * never wraps). Institutions are named on owner instruction (2026-08-16, the
+ * TU Munich pilot is part of the pitch). Reveal only, no count-up.
  */
-const hero = { value: "180+", label: "Courses encoded", note: "Live MSc Aerospace catalogue" };
+const hero = {
+  value: "500+",
+  label: "Courses available",
+  note: "TU Delft Aerospace live + the TU Munich pilot catalogue",
+};
 const supporting = [
+  { value: "2", label: "University catalogues", note: "TU Delft live, TU Munich pilot encoded" },
   { value: "5", label: "Specialisation tracks", note: "prerequisites and EC rules per track" },
   { value: "< 2 wks", label: "From guide to live", note: "programme guide to working planner" },
-  { value: "~2 hrs", label: "Saved / student / year", note: "early estimate, varies by programme" },
 ];
 ---
 
