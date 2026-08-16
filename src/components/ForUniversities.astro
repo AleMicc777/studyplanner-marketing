@@ -2,10 +2,22 @@
 import { bookDemoHref } from "../config/site";
 import CTAButton from "./CTAButton.astro";
 const points = [
-  { title: "Multi-tenant from day one", body: "Each university gets its own catalogue, rules, branding, and subdomain. Ready to deploy for your programme." },
-  { title: "Zero onboarding cost for students", body: "No account required to plan. Students land, build, validate, share, all without IT involvement on your side." },
-  { title: "Programme analytics for coordinators", body: "See aggregate elective demand, common invalid configurations, and where students get stuck. Anonymised, opt-in." },
-  { title: "We handle the rules", body: "Send us your programme guide; we encode the validation logic and keep it up to date each academic year." },
+  {
+    title: "Multi-tenant from day one",
+    body: "Each university gets its own catalogue, rules, branding, and subdomain. No shared state with any other institution.",
+  },
+  {
+    title: "Zero onboarding cost for the pilot",
+    body: "The founding pilot gets a free encoded prototype of your catalogue before any commitment. Custom pricing per institution applies after that.",
+  },
+  {
+    title: "Programme analytics for coordinators",
+    body: "Aggregate elective demand, common invalid configurations, and where students get stuck. Anonymised and opt-in.",
+  },
+  {
+    title: "We handle the rules encoding",
+    body: "Send us your programme guide and we encode the validation logic, then keep it up to date each academic year.",
+  },
 ];
 ---
 
@@ -34,17 +46,19 @@ const points = [
           Book a 20-min demo
         </CTAButton>
       </div>
-      <div class="grid gap-px border border-line bg-line sm:grid-cols-2">
-        {points.map((p) => (
-          <div class="bg-paper-shade p-6 sm:p-7">
-            <h3 class="flex items-start gap-2.5 text-base font-semibold text-ink">
-              <span aria-hidden="true" class="mt-2 h-1.5 w-1.5 shrink-0 rounded-[1px] bg-amber"></span>
+      <dl data-reveal class="divide-y divide-line border-t border-line">
+        {points.map((p, i) => (
+          <div class="py-6 first:pt-0">
+            <dt class="flex items-start gap-3 text-base font-semibold text-ink">
+              <span class="mt-1 shrink-0 font-mono text-xs tabular-nums text-amber-deep" aria-hidden="true">
+                {String(i + 1).padStart(2, "0")}
+              </span>
               {p.title}
-            </h3>
-            <p class="mt-2.5 pl-4 text-sm leading-relaxed text-muted">{p.body}</p>
+            </dt>
+            <dd class="mt-2 pl-7 text-sm leading-relaxed text-muted">{p.body}</dd>
           </div>
         ))}
-      </div>
+      </dl>
     </div>
   </div>
 </section>

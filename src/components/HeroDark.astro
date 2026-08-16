@@ -1,0 +1,102 @@
+---
+// HERO SHOOTOUT VARIANT 3: "Dark Signal"
+// Full-bleed graphite hero inverting the light page, Schibsted Grotesk
+// display, amber at maximum emphasis (rule, key phrase, mono strip, frame
+// ticks + LIVE). The BrowserFrame breaks the lower boundary and overlaps the
+// light section that follows via negative margin-bottom (that section must
+// not paint over it; the frame wrapper is z-raised). Self-contained variant.
+import "@fontsource-variable/schibsted-grotesk";
+import { PLANNER_URL, bookDemoHref } from "../config/site";
+import BrowserFrame from "./BrowserFrame.astro";
+import CTAButton from "./CTAButton.astro";
+---
+
+<section class="dark-hero relative bg-graphite">
+  <div class="relative mx-auto max-w-6xl px-6 pt-16 md:pt-24">
+    <!-- Amber rule + mono kicker -->
+    <div class="hero-stagger-1 flex items-center gap-3">
+      <span class="h-1 w-12 flex-none bg-amber" aria-hidden="true"></span>
+      <span class="font-mono text-[0.8rem] uppercase tracking-[0.16em] text-steel">
+        Plan validation for MSc programmes
+      </span>
+    </div>
+
+    <h1 class="grotesk-display hero-stagger-2 mt-6 max-w-[24ch] text-on-dark">
+      Every study plan <span class="text-amber">checked against your rules</span>, before it reaches your inbox.
+    </h1>
+
+    <p
+      class="hero-stagger-3 mt-6 max-w-[52ch] text-[length:var(--text-lead)] leading-[1.55] text-on-dark-2"
+    >
+      StudyPlanner encodes your MSc programme's rules and validates every
+      student's plan in real time. Coordinators approve plans instead of
+      debugging them.
+    </p>
+
+    <div class="hero-stagger-4 mt-8 flex flex-wrap items-center gap-4">
+      <CTAButton href={bookDemoHref} variant="solid-dark" dataTrack="cta-hero-demo">
+        Book a 20-min demo
+      </CTAButton>
+      <a
+        href={PLANNER_URL}
+        target="_blank"
+        rel="noreferrer"
+        data-track="open-planner"
+        class="inline-flex min-h-[44px] items-center px-2 font-medium text-on-dark underline decoration-hairline decoration-1 underline-offset-4 transition-colors duration-200 hover:text-amber hover:decoration-amber"
+      >
+        Try the live planner
+      </a>
+    </div>
+
+    <!-- Amber-signal mono strip: what gets checked, live -->
+    <div
+      class="mt-12 flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-t border-hairline py-3 font-mono text-[0.84rem] tracking-[0.01em]"
+    >
+      <span class="text-steel">live checks:</span>
+      <span class="text-on-dark-2">EC totals <span class="font-medium text-amber">OK</span></span>
+      <span class="text-on-dark-2">prerequisites <span class="font-medium text-amber">OK</span></span>
+      <span class="text-on-dark-2">track rules <span class="font-medium text-amber">OK</span></span>
+    </div>
+
+    <!-- Frame breaks the hero's lower boundary into the light section below -->
+    <div class="relative z-10 -mb-16 mt-12 md:-mb-24 md:mt-16">
+      <BrowserFrame
+        src="/screenshots/screenshot-1.png"
+        alt="StudyPlanner interface showing a validated MSc study plan"
+        url="planner.studyplanner.eu"
+        tone="dark"
+        ticks
+        live
+        width={1600}
+        height={1000}
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Blueprint grid, scoped: same texture as .grid-bg-dark in global.css but
+     WITHOUT overflow: hidden, so the frame can overhang the section bottom. */
+  .dark-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(to right, oklch(0.32 0.012 250 / 0.55) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(0.32 0.012 250 / 0.55) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(120% 90% at 82% 4%, #000 0%, transparent 68%);
+    mask-image: radial-gradient(120% 90% at 82% 4%, #000 0%, transparent 68%);
+    opacity: 0.7;
+  }
+  .grotesk-display {
+    font-family: "Schibsted Grotesk Variable", "Geist Variable", system-ui, sans-serif;
+    font-size: clamp(2.5rem, 1.7rem + 3.4vw, 4.6rem);
+    font-weight: 750;
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+  }
+</style>

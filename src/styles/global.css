@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /*
- * StudyPlanner design system — "Engineered Graphite + Amber Signal".
+ * StudyPlanner design system — "Engineered Paper + Amber Signal".
  *
  * ONE committed identity. A cool near-black graphite carries the structural
  * surface; a single amber signal carries validation, key data, and the primary
@@ -39,13 +39,16 @@
   --color-on-dark-2: oklch(0.8 0.012 250);
   --color-steel: oklch(0.62 0.028 250);
 
-  --color-amber: oklch(0.785 0.142 71);
-  --color-amber-hover: oklch(0.73 0.142 69);
-  --color-amber-line: oklch(0.66 0.128 71);
+  --color-amber: oklch(0.785 0.125 71);
+  --color-amber-hover: oklch(0.73 0.125 69);
+  --color-amber-line: oklch(0.66 0.115 71);
   --color-amber-deep: oklch(0.47 0.115 71);
 
   --color-valid: oklch(0.7 0.125 152);
+  --color-valid-deep: oklch(0.42 0.09 152);
   --color-flag: oklch(0.6 0.165 27);
+  --color-flag-bright: oklch(0.68 0.15 27);
+  --color-flag-deep: oklch(0.45 0.14 27);
 
   --font-sans: "Geist Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "Geist Mono Variable", ui-monospace, "SF Mono", Menlo, monospace;

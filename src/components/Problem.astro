@@ -32,71 +32,90 @@
         </div>
       </div>
 
-      <!-- Right: terminal / diff validation card (graphite card on the light field) -->
+      <!-- Right: annotated ledger document (light, on paper-shade; a document,
+           not a UI mock — complements the hero's dark chip without repeating it) -->
       <div
         data-reveal
         role="group"
         aria-label="Plan validation, before and after"
-        class="overflow-hidden rounded-lg border border-hairline bg-graphite font-mono shadow-[0_30px_60px_-32px_rgba(18,22,30,0.5)]"
+        class="rounded-[10px] border border-line bg-paper-shade shadow-[0_1px_2px_oklch(0.19_0.008_250/0.06),0_8px_24px_-8px_oklch(0.19_0.008_250/0.12)]"
       >
-        <!-- run bar -->
+        <!-- document header -->
         <div
-          class="flex items-center justify-between gap-3 border-b border-hairline bg-graphite-2 px-4 py-2.5"
+          class="flex items-baseline justify-between gap-3 border-b border-line px-6 py-3 font-mono text-[0.78rem] tracking-[0.03em] text-muted"
         >
-          <span class="text-[0.8rem] tracking-[0.02em] text-steel">
-            <b class="font-medium text-on-dark-2">plan.check</b> · AE-MSc
-          </span>
-          <span class="text-[0.68rem] tracking-[0.08em] text-amber">RUNNING</span>
+          <span>study plan / revision 2</span>
+          <span>AE-MSc</span>
         </div>
 
-        <!-- diff body -->
-        <div class="px-5 py-5 text-[0.9rem] leading-[1.75] sm:px-6">
-          <!-- INVALID · before -->
+        <div class="p-6 font-mono">
+          <!-- before: the emailed draft, marked in the corrector's red -->
           <div
-            class="flex items-center gap-2 text-[0.78rem] font-medium tracking-[0.06em] text-flag"
+            class="flex items-baseline justify-between gap-3 text-[0.72rem] font-medium uppercase tracking-[0.12em]"
           >
-            <span class="inline-block w-[1.15rem] text-center" aria-hidden="true"
-              >✗</span
-            >
-            <span>INVALID · before</span>
+            <span class="text-muted">submitted by email</span>
+            <span class="mark-flag">flagged</span>
           </div>
-          <div class="pl-[1.7rem] text-on-dark">
-            <span class="text-flag">-</span> AE4-ADS + AE4-SD
-          </div>
-          <div class="pl-[1.7rem] text-flag">32 EC, prereq unmet</div>
-          <div class="pl-[1.7rem] text-steel">flagged three weeks late</div>
-
-          <div class="my-4 h-px bg-hairline" aria-hidden="true"></div>
-
-          <!-- VALID · after -->
           <div
-            class="flex items-center gap-2 text-[0.78rem] font-medium tracking-[0.06em] text-valid"
+            class="mt-2 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 text-[0.95rem] text-ink"
           >
-            <svg
-              width="15"
-              height="15"
-              viewBox="0 0 16 16"
-              fill="none"
-              aria-hidden="true"
-              class="w-[1.15rem] shrink-0"
-            >
-              <path
-                class="check-draw"
-                d="M3 8.5 6.5 12 13 4"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"></path>
-            </svg>
-            <span>VALID · after</span>
+            <span class="course-flag">AE4-ADS + AE4-SD</span>
+            <span class="mark-flag">32 EC</span>
           </div>
-          <div class="pl-[1.7rem] text-on-dark">
-            <span class="text-valid">+</span> AE4-ADS + AE4-SP
+          <div class="rule-flag mt-2 space-y-1 border-l pl-3 text-[0.85rem] leading-relaxed">
+            <p class="mark-flag">prereq unmet</p>
+            <p class="mark-flag">flagged three weeks late</p>
           </div>
-          <div class="pl-[1.7rem] text-valid">30 EC, prereqs met</div>
-          <div class="pl-[1.7rem] text-steel">validated the moment it's built</div>
+
+          <div class="my-4 h-px bg-line" aria-hidden="true"></div>
+
+          <!-- after: the corrected plan, marked valid -->
+          <div
+            class="flex items-baseline justify-between gap-3 text-[0.72rem] font-medium uppercase tracking-[0.12em]"
+          >
+            <span class="text-muted">validated in the planner</span>
+            <span class="mark-valid">valid</span>
+          </div>
+          <div
+            class="mt-2 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 text-[0.95rem] text-ink"
+          >
+            <span>AE4-ADS + AE4-SP</span>
+            <span class="mark-valid">30 EC</span>
+          </div>
+          <div class="rule-valid mt-2 space-y-1 border-l pl-3 text-[0.85rem] leading-relaxed">
+            <p class="mark-valid">prereqs met</p>
+            <p class="mark-valid">validated the moment it's built</p>
+          </div>
+
+          <!-- the one amber margin note -->
+          <p class="mt-6 border-t border-line pt-3 text-right text-[0.78rem] italic text-amber-deep">
+            checked before it was ever sent
+          </p>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  /* flag-deep / valid-deep live in @theme; fallbacks kept for safety. */
+  .mark-flag {
+    color: var(--color-flag-deep, oklch(0.45 0.14 27));
+  }
+  .mark-valid {
+    color: var(--color-valid-deep, oklch(0.42 0.09 152));
+  }
+  .rule-flag {
+    border-color: var(--color-flag-deep, oklch(0.45 0.14 27));
+  }
+  .rule-valid {
+    border-color: var(--color-valid-deep, oklch(0.42 0.09 152));
+  }
+  /* Corrector's thin rule under the offending course pair; text stays ink. */
+  .course-flag {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: var(--color-flag-deep, oklch(0.45 0.14 27));
+    text-underline-offset: 0.3em;
+  }
+</style>

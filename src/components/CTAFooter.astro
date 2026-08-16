@@ -3,7 +3,8 @@ import { PLANNER_URL, bookDemoHref, CONTACT_EMAIL } from "../config/site";
 import CTAButton from "./CTAButton.astro";
 ---
 
-<footer class="bg-graphite-2 text-on-dark">
+<!-- pb-24 at mobile keeps the sticky CTA bar from covering the copyright line. -->
+<footer class="bg-graphite-2 pb-24 text-on-dark md:pb-0">
   <div class="grid-bg-dark border-b border-hairline">
     <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)] text-center">
       <h2 data-reveal class="mx-auto max-w-[24ch] text-[length:var(--text-h2)] font-extrabold tracking-[-0.04em] text-on-dark">
@@ -24,15 +25,15 @@ import CTAButton from "./CTAButton.astro";
           rel="noreferrer"
           dataTrack="cta-footer-planner"
         >
-          Try the planner first →
+          Try the live planner →
         </CTAButton>
       </div>
       <p class="mt-7 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 font-mono text-xs text-steel">
         <span class="text-valid" aria-hidden="true">✓</span>
         <span>EU-hosted</span>
-        <span aria-hidden="true" class="text-hairline">·</span>
+        <span aria-hidden="true" class="text-hairline">/</span>
         <span>GDPR-ready</span>
-        <span aria-hidden="true" class="text-hairline">·</span>
+        <span aria-hidden="true" class="text-hairline">/</span>
         <span>no student data required to evaluate</span>
       </p>
     </div>
@@ -75,7 +76,7 @@ import CTAButton from "./CTAButton.astro";
     </div>
 
     <p class="mt-10 border-t border-hairline pt-6 font-mono text-xs text-steel">
-      © 2026 StudyPlanner · Alessandro Miccolo · EU-hosted, GDPR-ready
+      © 2026 StudyPlanner / Alessandro Miccolo / EU-hosted, GDPR-ready
     </p>
   </div>
 </footer>

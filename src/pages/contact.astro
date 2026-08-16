@@ -1,11 +1,8 @@
 ---
 import Base from "../layouts/Base.astro";
 import Navbar from "../components/Navbar.astro";
-import { PLANNER_URL, DEMO_MAILTO, CONTACT_EMAIL, BOOKING_URL, bookDemoHref } from "../config/site";
+import { PLANNER_URL, DEMO_MAILTO, CONTACT_EMAIL, BOOKING_URL, bookDemoHref, INTAKE_URL } from "../config/site";
 import CTAButton from "../components/CTAButton.astro";
-
-const FORMSPREE_ID = import.meta.env.PUBLIC_FORMSPREE_ID ?? null;
-const FORMSPREE_ACTION = FORMSPREE_ID ? `https://formspree.io/f/${FORMSPREE_ID}` : null;
 
 const blocks = [
   {
@@ -19,7 +16,7 @@ const blocks = [
 ];
 ---
 
-<Base title="Contact · StudyPlanner" description="Get in touch to bring StudyPlanner to your university. Twenty-minute call, no commitment.">
+<Base title="Contact / StudyPlanner" description="Get in touch to bring StudyPlanner to your university. Twenty-minute call, no commitment.">
   <Navbar />
   <main class="flex-1">
     <div class="grid-bg min-h-screen bg-paper text-ink">
@@ -66,50 +63,53 @@ const blocks = [
           </div>
         )}
 
-        {FORMSPREE_ACTION && (
-          <div class="mt-12 rounded-lg border border-line bg-paper-shade p-6">
-            <h2 class="mb-4 font-semibold text-ink">Send us a message</h2>
-            <form action={FORMSPREE_ACTION} method="POST" class="grid gap-4 sm:grid-cols-2">
-              <input
-                type="text"
-                name="_gotcha"
-                tabindex="-1"
-                autocomplete="off"
-                class="hidden"
-                aria-hidden="true"
-              />
-              <div class="sm:col-span-1">
-                <label for="name" class="block text-sm font-medium text-muted">Name</label>
-                <input id="name" name="name" type="text" required class="mt-1 w-full rounded-md border border-line bg-paper px-3 py-2 text-sm text-ink placeholder:text-muted focus:border-amber focus:outline-none" />
-              </div>
-              <div class="sm:col-span-1">
-                <label for="university" class="block text-sm font-medium text-muted">University</label>
-                <input id="university" name="university" type="text" required class="mt-1 w-full rounded-md border border-line bg-paper px-3 py-2 text-sm text-ink placeholder:text-muted focus:border-amber focus:outline-none" />
-              </div>
-              <div class="sm:col-span-1">
-                <label for="programme" class="block text-sm font-medium text-muted">Programme</label>
-                <input id="programme" name="programme" type="text" required class="mt-1 w-full rounded-md border border-line bg-paper px-3 py-2 text-sm text-ink placeholder:text-muted focus:border-amber focus:outline-none" />
-              </div>
-              <div class="sm:col-span-1">
-                <label for="role" class="block text-sm font-medium text-muted">Your role</label>
-                <input id="role" name="role" type="text" required class="mt-1 w-full rounded-md border border-line bg-paper px-3 py-2 text-sm text-ink placeholder:text-muted focus:border-amber focus:outline-none" />
-              </div>
-              <div class="sm:col-span-2">
-                <label for="message" class="block text-sm font-medium text-muted">Message</label>
-                <textarea id="message" name="message" rows="4" required class="mt-1 w-full rounded-md border border-line bg-paper px-3 py-2 text-sm text-ink placeholder:text-muted focus:border-amber focus:outline-none"></textarea>
-              </div>
-              <div class="sm:col-span-2">
-                <button
-                  type="submit"
-                  data-track="cta-contact-form-submit"
-                  class="inline-flex items-center justify-center rounded-md bg-amber px-6 py-3 text-sm font-semibold text-graphite transition-colors hover:bg-amber-hover"
-                >
-                  Send message
-                </button>
-              </div>
-            </form>
-          </div>
-        )}
+        <div class="mt-12 rounded-lg border border-line bg-paper-shade p-6">
+          <h2 class="mb-4 font-semibold text-ink">Send us a message</h2>
+          <form id="intake-form" data-intake-url={INTAKE_URL} class="grid gap-4 sm:grid-cols-2">
+            <input
+              type="text"
+              name="website"
+              tabindex="-1"
+              autocomplete="off"
+              class="hidden"
+              aria-hidden="true"
+            />
+            <div class="sm:col-span-1">
+              <label for="name" class="block text-sm font-medium text-muted">Name</label>
+              <input id="name" name="name" type="text" required class="mt-1 w-full rounded-md border border-line bg-paper px-3 py-2 text-sm text-ink placeholder:text-muted focus:border-amber focus:outline-none" />
+            </div>
+            <div class="sm:col-span-1">
+              <label for="email" class="block text-sm font-medium text-muted">Email</label>
+              <input id="email" name="email" type="email" required class="mt-1 w-full rounded-md border border-line bg-paper px-3 py-2 text-sm text-ink placeholder:text-muted focus:border-amber focus:outline-none" />
+            </div>
+            <div class="sm:col-span-1">
+              <label for="university" class="block text-sm font-medium text-muted">University</label>
+              <input id="university" name="university" type="text" required class="mt-1 w-full rounded-md border border-line bg-paper px-3 py-2 text-sm text-ink placeholder:text-muted focus:border-amber focus:outline-none" />
+            </div>
+            <div class="sm:col-span-1">
+              <label for="programme" class="block text-sm font-medium text-muted">Programme</label>
+              <input id="programme" name="programme" type="text" required class="mt-1 w-full rounded-md border border-line bg-paper px-3 py-2 text-sm text-ink placeholder:text-muted focus:border-amber focus:outline-none" />
+            </div>
+            <div class="sm:col-span-2">
+              <label for="role" class="block text-sm font-medium text-muted">Your role</label>
+              <input id="role" name="role" type="text" required class="mt-1 w-full rounded-md border border-line bg-paper px-3 py-2 text-sm text-ink placeholder:text-muted focus:border-amber focus:outline-none" />
+            </div>
+            <div class="sm:col-span-2">
+              <label for="message" class="block text-sm font-medium text-muted">Message</label>
+              <textarea id="message" name="message" rows="4" required class="mt-1 w-full rounded-md border border-line bg-paper px-3 py-2 text-sm text-ink placeholder:text-muted focus:border-amber focus:outline-none"></textarea>
+            </div>
+            <div class="flex flex-wrap items-center gap-4 sm:col-span-2">
+              <button
+                type="submit"
+                data-track="cta-contact-form-submit"
+                class="inline-flex items-center justify-center rounded-md bg-amber px-6 py-3 text-sm font-semibold text-graphite transition-colors hover:bg-amber-hover disabled:opacity-60"
+              >
+                Send message
+              </button>
+              <p id="intake-status" role="status" aria-live="polite" class="text-sm text-muted"></p>
+            </div>
+          </form>
+        </div>
 
         <div class="mt-12 flex flex-wrap gap-4">
           <CTAButton href={bookDemoHref} dataTrack="cta-contact-demo">
@@ -122,7 +122,7 @@ const blocks = [
             rel="noreferrer"
             dataTrack="cta-contact-planner"
           >
-            Try the planner first →
+            Try the live planner →
           </CTAButton>
         </div>
         <p class="mt-8 text-sm text-muted">
@@ -134,4 +134,46 @@ const blocks = [
       </div>
     </div>
   </main>
+
+  <script>
+    const form = document.getElementById("intake-form") as HTMLFormElement | null;
+    const status = document.getElementById("intake-status");
+    if (form && status) {
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const button = form.querySelector("button[type=submit]") as HTMLButtonElement | null;
+        const data = new FormData(form);
+        const message = [`Programme: ${data.get("programme") ?? ""}`, String(data.get("message") ?? "")]
+          .filter(Boolean)
+          .join("\n\n");
+        if (button) button.disabled = true;
+        status.textContent = "Sending…";
+        status.className = "text-sm text-muted";
+        try {
+          const res = await fetch(form.dataset.intakeUrl ?? "", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              org: data.get("university"),
+              contactName: data.get("name"),
+              email: data.get("email"),
+              role: data.get("role"),
+              message,
+              website: data.get("website"),
+            }),
+          });
+          if (!res.ok) throw new Error(String(res.status));
+          form.reset();
+          status.textContent = "Thanks — we'll reply within two working days.";
+          status.className = "text-sm text-amber-deep";
+        } catch {
+          status.innerHTML =
+            'Something went wrong. Please email <a class="underline" href="mailto:alessandro@mscplanner.com">alessandro@mscplanner.com</a> instead.';
+          status.className = "text-sm text-muted";
+        } finally {
+          if (button) button.disabled = false;
+        }
+      });
+    }
+  </script>
 </Base>

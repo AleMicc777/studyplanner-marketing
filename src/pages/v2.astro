@@ -1,0 +1,16 @@
+---
+// Hero shootout preview: variant 2 "Faculty Serif". Unlinked, noindex.
+// Delete this page after the variant pick.
+import Base from "../layouts/Base.astro";
+import Navbar from "../components/Navbar.astro";
+import HeroSerif from "../components/HeroSerif.astro";
+import TrustBar from "../components/TrustBar.astro";
+---
+
+<Base title="Hero variant 2 preview" noindex={true}>
+  <Navbar />
+  <main class="flex-1">
+    <div id="home"><HeroSerif /></div>
+    <TrustBar />
+  </main>
+</Base>

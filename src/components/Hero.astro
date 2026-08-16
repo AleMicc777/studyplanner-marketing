@@ -6,7 +6,7 @@ import CTAButton from "./CTAButton.astro";
 
 <section class="grid-bg bg-paper">
   <div
-    class="mx-auto grid max-w-6xl items-center gap-10 px-6 pb-[clamp(3.25rem,5vw,5.5rem)] pt-[clamp(3rem,6vw,6rem)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1.08fr)] lg:gap-16"
+    class="mx-auto grid max-w-6xl items-center gap-12 px-6 pb-[clamp(3.5rem,5vw,5.75rem)] pt-[clamp(3rem,6vw,6rem)] lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-16"
   >
     <!-- Copy column -->
     <div>
@@ -18,7 +18,7 @@ import CTAButton from "./CTAButton.astro";
       </span>
 
       <h1
-        class="hero-stagger-2 text-[length:var(--text-display)] font-extrabold leading-[1.03] tracking-[-0.045em] text-ink"
+        class="hero-stagger-2 text-[clamp(2.25rem,1.45rem+2.2vw,3.15rem)] font-extrabold leading-[1.06] tracking-[-0.04em] text-ink"
       >
         Every study plan <span class="text-amber-deep">checked against your rules</span>, before it reaches your inbox.
       </h1>
@@ -31,34 +31,52 @@ import CTAButton from "./CTAButton.astro";
         debugging them.
       </p>
 
-      <div class="hero-stagger-4 mt-8 flex flex-wrap items-center gap-3.5">
+      <div class="hero-stagger-4 mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
         <CTAButton href={bookDemoHref} dataTrack="cta-hero-demo">
           Book a 20-min demo
         </CTAButton>
-        <CTAButton
+        <a
           href={PLANNER_URL}
-          variant="outline-invert"
           target="_blank"
           rel="noreferrer"
-          dataTrack="open-planner"
+          data-track="open-planner"
+          class="group inline-flex min-h-11 items-center gap-2 py-3 text-[0.95rem] font-semibold tracking-tight text-ink transition-colors duration-200 hover:text-amber-deep"
         >
           Try the live planner
-        </CTAButton>
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 16 16"
+            fill="none"
+            aria-hidden="true"
+            class="transition-transform duration-200 group-hover:translate-x-0.5"
+          >
+            <path
+              d="M2.5 8h11M9.5 3.5 14 8l-4.5 4.5"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </a>
       </div>
 
-      <!-- Mono readout: what gets validated, as the plan is built -->
+      <!-- Mono readout: hairline-separated ledger columns, no middle dots -->
       <div
-        class="mt-8 flex flex-wrap gap-x-4 gap-y-1 border-t border-dashed border-line pt-6 font-mono text-[0.84rem] tracking-[0.01em] text-muted"
+        class="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-line pt-4 font-mono text-[0.84rem] tracking-[0.01em] text-muted"
       >
-        <span><span class="text-amber-deep">&bull;</span> EC totals</span>
-        <span><span class="text-amber-deep">&bull;</span> prerequisites</span>
-        <span><span class="text-amber-deep">&bull;</span> track rules</span>
-        <span class="font-medium text-muted">checked as the plan is built</span>
+        <span>EC totals</span>
+        <span class="h-3 w-px self-center bg-line" aria-hidden="true"></span>
+        <span>prerequisites</span>
+        <span class="h-3 w-px self-center bg-line" aria-hidden="true"></span>
+        <span>track rules</span>
+        <span class="h-3 w-px self-center bg-line" aria-hidden="true"></span>
+        <span class="font-medium">checked as the plan is built</span>
       </div>
     </div>
 
-    <!-- Product screenshot in a corner-ticked dark browser frame -->
-    <div>
+    <!-- Product screenshot + overlapping validation ledger chip -->
+    <div class="relative">
       <BrowserFrame
         src="/screenshots/screenshot-1.png"
         alt="StudyPlanner interface showing a validated MSc study plan"
@@ -71,6 +89,54 @@ import CTAButton from "./CTAButton.astro";
         loading="eager"
         fetchpriority="high"
       />
+
+      <!-- Mobile: chip sits BELOW the frame so the real product stays visible
+           (the signature is product + verdict, not verdict covering product).
+           lg: chip overlaps the frame's lower-left edge as designed. -->
+      <div
+        class="relative mt-4 w-[min(340px,100%)] rounded-[10px] border border-hairline bg-panel p-4 font-mono text-[0.8rem] leading-normal shadow-[0_1px_2px_oklch(0.19_0.008_250/0.06),0_8px_24px_-8px_oklch(0.19_0.008_250/0.12)] lg:absolute lg:-left-8 lg:bottom-8 lg:mt-0 lg:w-[min(340px,calc(100%-1.5rem))]"
+        role="group"
+        aria-label="Validation ledger resolving to a valid plan"
+      >
+        <p class="flex items-baseline gap-2 text-steel">
+          <span>prereq AE4-010</span>
+          <span class="leader" aria-hidden="true"></span>
+          <span class="text-valid">met</span>
+        </p>
+        <p class="mt-2 flex items-baseline gap-2 text-on-dark-2">
+          <span>EC total</span>
+          <span class="leader" aria-hidden="true"></span>
+          <span class="text-valid">120/120</span>
+        </p>
+
+        <div class="verdict-stack mt-3 border-t border-hairline pt-3">
+          <p class="verdict-invalid t-bright flex items-center gap-2" aria-hidden="true">
+            <span class="inline-block w-3.5 shrink-0 text-center">✗</span>
+            <span class="font-medium tracking-[0.06em]">INVALID</span>
+            <span class="pl-2">overload Q3</span>
+          </p>
+          <p class="verdict-valid flex items-center gap-2 text-valid">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true"
+              class="w-3.5 shrink-0"
+            >
+              <path
+                class="ledger-check"
+                d="M3 8.5 6.5 12 13 4"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+            <span class="font-medium tracking-[0.06em]">VALID</span>
+            <span class="pl-2">ready for review</span>
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -93,6 +159,84 @@ import CTAButton from "./CTAButton.astro";
     }
     50% {
       opacity: 0.4;
+    }
+  }
+
+  /* Ledger chip: dotted leaders drawn at the text baseline (empty flex item's
+     baseline is its bottom edge, so the border sits exactly on the baseline). */
+  .leader {
+    flex: 1 1 1.5rem;
+    min-width: 1rem;
+    border-bottom: 1px dotted var(--color-hairline);
+  }
+
+  /* flag-bright is defined in @theme; fallback kept for safety. */
+  .t-bright {
+    color: var(--color-flag-bright, oklch(0.68 0.15 27));
+  }
+
+  /* Verdict resolve: both lines share one grid cell; INVALID yields to VALID
+     once, ~400ms after load, 700ms on expo ease. CSS-only, runs without JS. */
+  .verdict-stack {
+    display: grid;
+  }
+  .verdict-stack > p {
+    grid-area: 1 / 1;
+  }
+  .verdict-invalid {
+    animation: ledger-out 700ms var(--ease-out-expo) 400ms forwards;
+  }
+  .verdict-valid {
+    opacity: 0;
+    animation: ledger-in 700ms var(--ease-out-expo) 400ms forwards;
+  }
+  .ledger-check {
+    stroke-dasharray: 17;
+    stroke-dashoffset: 17;
+    animation: ledger-draw 700ms var(--ease-out-expo) 400ms forwards;
+  }
+  @keyframes ledger-out {
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+  @keyframes ledger-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes ledger-draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* Static end-state for reduced motion: both lines stacked, INVALID struck
+     through like a ledger correction, checkmark fully drawn. (The global
+     0.01ms rule alone would hide the INVALID line, so override explicitly.) */
+  @media (prefers-reduced-motion: reduce) {
+    .verdict-stack {
+      display: block;
+    }
+    .verdict-invalid {
+      animation: none;
+      text-decoration: line-through;
+      text-decoration-thickness: 1px;
+    }
+    .verdict-valid {
+      animation: none;
+      opacity: 1;
+      margin-top: 4px;
+    }
+    .ledger-check {
+      animation: none;
+      stroke-dashoffset: 0;
     }
   }
 </style>

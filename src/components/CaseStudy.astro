@@ -1,5 +1,5 @@
 ---
-import { PLANNER_URL, bookDemoHref } from "../config/site";
+import { bookDemoHref } from "../config/site";
 import BrowserFrame from "./BrowserFrame.astro";
 import CTAButton from "./CTAButton.astro";
 
@@ -18,10 +18,10 @@ const blocks = [
 <section class="border-b border-line bg-paper text-ink" data-reveal>
   <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)]">
     <p class="font-mono text-sm text-muted">
-      <span class="text-amber-deep">//</span> Case study: a live MSc Aerospace Engineering programme
+      <span class="text-amber-deep">//</span> case study: a live MSc Aerospace Engineering programme
     </p>
     <p class="mt-2 font-mono text-sm text-muted">
-      180+ courses encoded · 5 specialisation tracks · under 2 weeks to live.
+      180+ courses encoded / 5 specialisation tracks / under 2 weeks to live
     </p>
 
     <div class="mt-10 grid gap-12 lg:grid-cols-2 lg:items-start lg:gap-16">
@@ -54,18 +54,9 @@ const blocks = [
           </div>
         </div>
 
-        <div class="mt-10 flex flex-wrap gap-4">
+        <div class="mt-10">
           <CTAButton href={bookDemoHref} variant="solid" dataTrack="cta-casestudy-book">
             Book a 20-min demo
-          </CTAButton>
-          <CTAButton
-            href={PLANNER_URL}
-            target="_blank"
-            rel="noreferrer"
-            variant="outline-invert"
-            dataTrack="cta-casestudy-planner"
-          >
-            Explore the live planner <span aria-hidden="true">&rarr;</span>
           </CTAButton>
         </div>
       </div>

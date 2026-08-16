@@ -1,0 +1,107 @@
+---
+/*
+ * Fixed bottom bar, mobile-only (md:hidden), hidden until the visitor has
+ * scrolled past the Hero (#home sentinel in index.astro leaves the
+ * viewport). Dismissible; the dismissal is remembered for the session so it
+ * doesn't keep re-appearing while the visitor reads the page. Graphite bar,
+ * one hairline + the locked upward-cast elevation shadow (the bar sits above
+ * page content, so the shadow direction is flipped vs a normal card).
+ */
+import { bookDemoHref } from "../config/site";
+import CTAButton from "./CTAButton.astro";
+---
+
+<div
+  id="sticky-mobile-cta"
+  class="fixed inset-x-0 bottom-0 z-40 md:hidden"
+  role="region"
+  aria-label="Book a demo"
+>
+  <div class="sticky-cta-bar flex items-center justify-between gap-4 bg-graphite px-4">
+    <p class="min-w-0 truncate text-sm font-medium text-on-dark">
+      See it on your programme
+    </p>
+    <div class="flex shrink-0 items-center gap-2">
+      <CTAButton href={bookDemoHref} variant="solid-dark" dataTrack="cta-sticky-demo">
+        Book a 20-min demo
+      </CTAButton>
+      <button
+        type="button"
+        id="sticky-cta-dismiss"
+        aria-label="Dismiss"
+        class="flex h-11 w-11 shrink-0 items-center justify-center text-on-dark-2 transition-colors hover:text-amber"
+      >
+        <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .sticky-cta-bar {
+    min-height: 48px;
+    padding-top: 8px;
+    padding-bottom: calc(8px + env(safe-area-inset-bottom));
+    border-top: 1px solid var(--color-hairline);
+    /* Locked elevation shadow, inverted upward: this bar sits above page
+       content rather than below it, so the cast direction flips (negative
+       y instead of positive). */
+    box-shadow:
+      0 -1px 2px oklch(0.19 0.008 250 / 0.06),
+      0 -8px 24px -8px oklch(0.19 0.008 250 / 0.12);
+  }
+
+  /* Off-screen + transparent until scrolled past the hero, then slides up.
+     global.css already forces transition-duration to ~0 under
+     prefers-reduced-motion for every element, so under reduced motion this
+     collapses to a plain appear/disappear with no extra media query needed
+     here. */
+  #sticky-mobile-cta {
+    transform: translateY(100%);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform var(--dur-hero-item) var(--ease-out-expo),
+      opacity var(--dur-hero-item) var(--ease-out-expo);
+  }
+  #sticky-mobile-cta.is-visible {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+</style>
+
+<script>
+  const bar = document.getElementById("sticky-mobile-cta");
+  const home = document.getElementById("home");
+  const dismissBtn = document.getElementById("sticky-cta-dismiss");
+  const DISMISS_KEY = "sticky-cta-dismissed";
+
+  if (bar && home) {
+    let dismissed = sessionStorage.getItem(DISMISS_KEY) === "1";
+
+    const setVisible = (visible: boolean) => {
+      if (dismissed) return;
+      bar.classList.toggle("is-visible", visible);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          setVisible(!entry.isIntersecting);
+        }
+      },
+      { threshold: 0 },
+    );
+    observer.observe(home);
+
+    dismissBtn?.addEventListener("click", () => {
+      dismissed = true;
+      sessionStorage.setItem(DISMISS_KEY, "1");
+      bar.classList.remove("is-visible");
+      observer.disconnect();
+    });
+  }
+</script>

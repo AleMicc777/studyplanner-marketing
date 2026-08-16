@@ -2,6 +2,9 @@
 import Base from "../layouts/Base.astro";
 import Navbar from "../components/Navbar.astro";
 import Hero from "../components/Hero.astro";
+import AudienceRouter from "../components/AudienceRouter.astro";
+import StickyMobileCTA from "../components/StickyMobileCTA.astro";
+import PilotTerms from "../components/PilotTerms.astro";
 import TrustBar from "../components/TrustBar.astro";
 import Problem from "../components/Problem.astro";
 import Stats from "../components/Stats.astro";
@@ -64,17 +67,20 @@ const jsonLd = [
   <Navbar />
   <main class="flex-1">
     <div id="home"><Hero /></div>
+    <AudienceRouter />
     <TrustBar />
     <div id="problem"><Problem /></div>
     <Stats />
     <HowItWorks />
     <Features />
     <CaseStudy />
+    <PilotTerms />
     <FoundingPilot />
     <div id="demo"><Screenshots /></div>
     <div id="universities"><ForUniversities /></div>
     <TrustSecurity />
     <div id="faq"><FAQ /></div>
     <div id="contact"><CTAFooter /></div>
+    <StickyMobileCTA />
   </main>
 </Base>

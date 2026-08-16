@@ -1,0 +1,56 @@
+---
+import { bookDemoHref } from "../config/site";
+import CTAButton from "./CTAButton.astro";
+
+const rows = [
+  {
+    label: "Setup",
+    body: "Built from the programme guide (PDF) you already hand students. We encode the rules and keep them current each academic year.",
+  },
+  {
+    label: "Timeline",
+    body: "Live in under two weeks, from guide to working planner. No IT department needed on your side.",
+  },
+  {
+    label: "Cost",
+    body: "Zero onboarding cost for the founding pilot. Custom pricing per institution applies once the pilot is running.",
+  },
+  {
+    label: "Compliance and access",
+    body: "GDPR-ready, EU-hosted. No student accounts required to evaluate the planner.",
+  },
+];
+---
+
+<section class="border-b border-hairline bg-graphite-2 text-on-dark">
+  <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)]">
+    <p class="font-mono text-xs tracking-[0.02em] text-amber">// founding pilot</p>
+    <h2 data-reveal class="mt-4 max-w-xl text-[length:var(--text-h2)] font-extrabold tracking-[-0.04em] text-on-dark">
+      What a founding pilot includes
+    </h2>
+    <p class="mt-4 max-w-[var(--prose-max)] text-[length:var(--text-lead)] leading-relaxed text-on-dark-2">
+      Everything below is already running for a live programme, not a roadmap promise.
+    </p>
+
+    <dl data-reveal class="mt-12 divide-y divide-hairline border-t border-hairline">
+      {rows.map((r) => (
+        <div class="grid gap-2 py-6 sm:grid-cols-[13rem_1fr] sm:gap-8">
+          <dt class="font-mono text-xs font-medium uppercase tracking-[0.08em] text-steel">
+            {r.label}
+          </dt>
+          <dd class="leading-relaxed text-on-dark-2 sm:pl-0">{r.body}</dd>
+        </div>
+      ))}
+    </dl>
+
+    <div class="mt-12 border-t border-hairline pt-8">
+      <p class="max-w-lg text-on-dark-2">
+        Bring your programme guide to the call. We'll scope your own rules running before any
+        commitment.
+      </p>
+      <CTAButton href={bookDemoHref} dataTrack="cta-pilotterms-book" class="mt-6">
+        Book a 20-min demo
+      </CTAButton>
+    </div>
+  </div>
+</section>

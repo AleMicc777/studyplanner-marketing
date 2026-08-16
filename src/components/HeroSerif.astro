@@ -1,0 +1,84 @@
+---
+// HERO SHOOTOUT VARIANT 2: "Faculty Serif"
+// Academic-editorial register: one centered column, Source Serif 4 display,
+// amber demoted to a hairline underline under the key phrase + the CTA fill.
+// Self-contained shootout variant; swap for <Hero /> in index.astro to preview.
+import "@fontsource-variable/source-serif-4";
+import { PLANNER_URL, bookDemoHref } from "../config/site";
+import BrowserFrame from "./BrowserFrame.astro";
+import CTAButton from "./CTAButton.astro";
+---
+
+<section class="bg-paper">
+  <div class="mx-auto max-w-6xl px-6 pb-24 pt-16 md:pt-24">
+    <!-- Editorial column, measure ~60ch -->
+    <div class="mx-auto max-w-[60ch] text-center">
+      <p
+        class="hero-stagger-1 font-mono text-[0.8rem] uppercase tracking-[0.16em] text-muted"
+      >
+        For MSc programme coordinators
+      </p>
+
+      <h1 class="serif-display hero-stagger-2 mt-6 text-ink">
+        Every study plan <span class="key-underline">checked against your rules</span>, before it reaches your inbox.
+      </h1>
+
+      <p
+        class="hero-stagger-3 mx-auto mt-6 max-w-[52ch] text-[length:var(--text-lead)] leading-[1.6] text-muted"
+      >
+        StudyPlanner encodes your programme's degree rules and validates each
+        student's plan while it is being built. Coordinators read plans that
+        already pass, instead of debugging the ones that do not.
+      </p>
+
+      <div
+        class="hero-stagger-4 mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row"
+      >
+        <CTAButton href={bookDemoHref} dataTrack="cta-hero-demo">
+          Book a 20-min demo
+        </CTAButton>
+        <a
+          href={PLANNER_URL}
+          target="_blank"
+          rel="noreferrer"
+          data-track="open-planner"
+          class="inline-flex min-h-[44px] items-center px-2 font-medium text-ink underline decoration-line decoration-1 underline-offset-4 transition-colors duration-200 hover:text-amber-deep hover:decoration-amber-line"
+        >
+          Try the live planner
+        </a>
+      </div>
+    </div>
+
+    <!-- Fold line, then the figure at full container width -->
+    <div class="mt-16 border-t border-line pt-12">
+      <BrowserFrame
+        src="/screenshots/screenshot-1.png"
+        alt="StudyPlanner interface showing a validated MSc study plan"
+        url="planner.studyplanner.eu"
+        tone="light"
+        caption="Fig. 1: a student plan validated against programme rules as it is built."
+        width={1600}
+        height={1000}
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .serif-display {
+    font-family: "Source Serif 4 Variable", Georgia, "Times New Roman", serif;
+    font-size: clamp(2.5rem, 1.85rem + 2.9vw, 4.25rem);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+  }
+  /* The single amber moment in the copy: a hairline rule under the key phrase. */
+  .key-underline {
+    text-decoration: underline;
+    text-decoration-color: var(--color-amber-line);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.14em;
+  }
+</style>
