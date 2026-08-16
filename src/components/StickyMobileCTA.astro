@@ -17,7 +17,7 @@ import CTAButton from "./CTAButton.astro";
   role="region"
   aria-label="Book a demo"
 >
-  <div class="sticky-cta-bar flex items-center justify-between gap-4 bg-graphite px-4">
+  <div class="sticky-cta-bar flex items-center justify-between gap-4 px-4">
     <p class="min-w-0 truncate text-sm font-medium text-on-dark">
       See it live
     </p>
@@ -29,7 +29,7 @@ import CTAButton from "./CTAButton.astro";
         type="button"
         id="sticky-cta-dismiss"
         aria-label="Dismiss"
-        class="flex h-11 w-11 shrink-0 items-center justify-center text-on-dark-2 transition-colors hover:text-accent"
+        class="pressable flex h-11 w-11 shrink-0 items-center justify-center text-on-dark-2 hover:text-accent"
       >
         <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18" />
@@ -45,6 +45,12 @@ import CTAButton from "./CTAButton.astro";
     padding-top: 8px;
     padding-bottom: calc(8px + env(safe-area-inset-bottom));
     border-top: 1px solid var(--color-hairline);
+    /* Translucent graphite material (apple-design): the bar is floating chrome
+       the page scrolls under, so it reads as a dark glass layer rather than an
+       opaque strip. Solid fallbacks below when the user asks for them. */
+    background: oklch(0.2 0.028 215 / 0.86);
+    -webkit-backdrop-filter: blur(20px) saturate(1.6);
+    backdrop-filter: blur(20px) saturate(1.6);
     /* Locked elevation shadow, inverted upward: this bar sits above page
        content rather than below it, so the cast direction flips (negative
        y instead of positive). */
@@ -70,6 +76,22 @@ import CTAButton from "./CTAButton.astro";
     transform: translateY(0);
     opacity: 1;
     pointer-events: auto;
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    .sticky-cta-bar {
+      background: var(--color-graphite);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+  @media (prefers-contrast: more) {
+    .sticky-cta-bar {
+      background: var(--color-graphite);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      border-top-color: var(--color-on-dark);
+    }
   }
 </style>
 

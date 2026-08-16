@@ -62,6 +62,16 @@ Four cards: declared abstractions, never fake screenshots. 10px radius, the one 
 
 Existing infra locked: `[data-reveal]` + `html.js` gate, hero stagger, stroke-draw, ease-out-expo, no bounce, `prefers-reduced-motion` alternative mandatory. Additions: cursor chips reveal-only (8px translate along arrow axis + fade, 480ms, 120ms after parent surface; reduced motion = opacity only) — never drift, never loop. Fragment cards join `[data-reveal]`. Stats numeral: reveal only, NO count-up. No other animation types.
 
+### Interaction feel — apple-design authority (owner-approved 2026-08-16)
+
+The `apple-design` skill (`~/.claude/skills/apple-design/SKILL.md`) governs interaction feel. Applied rules, locked:
+
+- **Press feedback on pointer-down**: every tappable control (CTAs, nav toggle, dismiss) carries `.pressable` (global.css) — instant `scale(0.97)` on `:active` at 80ms, 180ms expo return. Never feedback only on release.
+- **Translucent chrome, exactly two surfaces**: the sticky navbar (`.nav-material`, paper at 78% + blur 16px) and the mobile sticky CTA bar (graphite at 86% + blur 20px). Content scrolls under both. No other translucent surfaces; never stack two light materials.
+- **Scroll-edge effect**: the navbar has no permanent divider; its hairline + cast shadow fade in only once content is under the bar (`.is-scrolled`). No-JS keeps a static hairline.
+- **Fallback triad mandatory on any translucent surface**: `prefers-reduced-transparency` → solid, no blur; `prefers-contrast: more` → solid + defined border; `prefers-reduced-motion` → reveals collapse to a 200ms opacity cross-fade (never "nothing").
+- **Spatial consistency**: enter and exit along the same path (sticky CTA slides up in, slides down out). Easing stays critically-damped (ease-out-expo, no overshoot) — bounce is banned because no interaction here carries user momentum.
+
 ## Imagery
 
 Real product screenshots (`public/screenshots/`) in `BrowserFrame` remain the only *representations of the product UI*. Carve-out (owner-approved 2026-08-16): the three fragment cards and four ink illustrations above are sanctioned as *declared abstractions* under their specs — skeleton bars, real numbers, no chrome. Anything outside those specs falls back under the "no div-fake-UI, no hand-rolled decorative SVG" ban. Alt text carries no institution name.

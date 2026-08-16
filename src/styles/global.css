@@ -138,6 +138,28 @@ li {
 }
 
 /*
+ * Press feedback (apple-design: respond on pointer-down, not on release).
+ * Instant scale-down the moment a control is pressed; short critically-damped
+ * return. Applied to every tappable CTA, the nav toggle, and the dismiss
+ * button. Under prefers-reduced-motion the transition collapses to ~0 and the
+ * press still reads as an instant state change, which is the correct fallback.
+ */
+.pressable {
+  /* Unlayered, so this wins over Tailwind's transition-* utilities on the same
+     element; colors are included here so hover color fades keep working. */
+  transition:
+    transform 180ms var(--ease-out-expo),
+    color 200ms ease,
+    background-color 200ms ease,
+    border-color 200ms ease;
+  will-change: transform;
+}
+.pressable:active {
+  transform: scale(0.97);
+  transition-duration: 80ms;
+}
+
+/*
  * Engineered grid backdrop.
  * `.grid-bg`      — faint ink blueprint on the light hero (paper surface).
  * `.grid-bg-dark` — same texture in a raised hairline for the dark footer
@@ -252,5 +274,14 @@ html:not(.js) .check-draw {
     animation-duration: 0.01ms !important;
     animation-delay: 0ms !important;
     transition-duration: 0.01ms !important;
+  }
+
+  /* apple-design: reduced motion means a gentle cross-fade, not nothing.
+     Reveals lose their vertical travel but keep a short opacity fade (a
+     non-vestibular equivalent). Higher specificity + !important beats the
+     blanket zero above. */
+  html.js [data-reveal] {
+    transform: none !important;
+    transition: opacity 200ms ease !important;
   }
 }

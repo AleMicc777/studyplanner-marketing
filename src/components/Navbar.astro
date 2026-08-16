@@ -8,7 +8,7 @@ const navLinks = [
 ];
 ---
 
-<header class="sticky top-0 z-50 border-b border-line bg-paper">
+<header id="site-nav" class="nav-material sticky top-0 z-50">
   <!-- Pure-CSS mobile toggle: checkbox must be a sibling of everything it controls -->
   <input type="checkbox" id="nav-toggle" class="peer sr-only" />
 
@@ -40,7 +40,7 @@ const navLinks = [
     <a
       href={bookDemoHref}
       data-track="cta-nav-book"
-      class="hidden items-center justify-center rounded-md border border-accent bg-accent px-4 py-2 text-[0.92rem] font-semibold text-graphite transition-colors hover:border-accent-hover hover:bg-accent-hover md:inline-flex"
+      class="pressable hidden items-center justify-center rounded-md border border-accent bg-accent px-4 py-2 text-[0.92rem] font-semibold text-graphite hover:border-accent-hover hover:bg-accent-hover md:inline-flex"
     >
       Book a 20-min demo
     </a>
@@ -48,7 +48,7 @@ const navLinks = [
     <!-- Mobile hamburger label -->
     <label
       for="nav-toggle"
-      class="flex cursor-pointer items-center rounded-md border border-line p-2 text-ink hover:border-accent md:hidden"
+      class="pressable flex cursor-pointer items-center rounded-md border border-line p-2 text-ink hover:border-accent md:hidden"
       aria-label="Toggle navigation menu"
     >
       <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -58,7 +58,9 @@ const navLinks = [
   </div>
 
   <!-- Mobile menu -->
-  <div class="hidden border-t border-line bg-paper px-4 pb-4 pt-2 peer-checked:block md:hidden">
+  <!-- Menu shares the header's one translucent material (no second light
+       surface stacked on it); the header backdrop-filter covers this block. -->
+  <div class="hidden border-t border-line px-4 pb-4 pt-2 peer-checked:block md:hidden">
     {navLinks.map((l) => (
       <a
         href={l.href}
@@ -72,7 +74,7 @@ const navLinks = [
     <a
       href={bookDemoHref}
       data-track="cta-nav-book"
-      class="mt-4 block rounded-md border border-accent bg-accent px-4 py-3 text-center text-sm font-semibold text-graphite hover:border-accent-hover hover:bg-accent-hover"
+      class="pressable mt-4 block rounded-md border border-accent bg-accent px-4 py-3 text-center text-sm font-semibold text-graphite hover:border-accent-hover hover:bg-accent-hover"
     >
       Book a 20-min demo
     </a>
@@ -80,7 +82,7 @@ const navLinks = [
       href={PLANNER_URL}
       target="_blank"
       rel="noreferrer"
-      class="mt-2 block rounded-md border border-line px-4 py-3 text-center text-sm font-medium text-muted hover:border-accent hover:text-accent-deep"
+      class="pressable mt-2 block rounded-md border border-line px-4 py-3 text-center text-sm font-medium text-muted hover:border-accent hover:text-accent-deep"
     >
       Open the StudyPlanner
     </a>
@@ -99,4 +101,73 @@ const navLinks = [
       0 0 0 1px var(--color-accent);
     flex: none;
   }
+
+  /*
+   * Translucent chrome (apple-design: nav is a floating material layer the
+   * content scrolls under, with a scroll-edge effect instead of a permanent
+   * hard divider). At the top of the page the bar sits flush on paper with no
+   * border; once content slides underneath (.is-scrolled, toggled by the
+   * script below) the hairline and a whisper of cast shadow fade in to
+   * separate the material from the content passing under it.
+   */
+  .nav-material {
+    background: oklch(0.975 0.004 200 / 0.78);
+    -webkit-backdrop-filter: blur(16px) saturate(1.6);
+    backdrop-filter: blur(16px) saturate(1.6);
+    border-bottom: 1px solid transparent;
+    transition:
+      border-color 200ms ease,
+      box-shadow 200ms ease;
+  }
+  .nav-material.is-scrolled {
+    border-bottom-color: var(--color-line);
+    box-shadow: 0 1px 12px -6px oklch(0.2 0.028 215 / 0.1);
+  }
+  /* No-JS fallback: keep the permanent hairline so structure never depends on
+     the scroll script. */
+  html:not(.js) .nav-material {
+    border-bottom-color: var(--color-line);
+  }
+
+  /* Accessibility fallbacks for the translucent material (apple-design §14):
+     frostier/solid when transparency is reduced; solid + defined border when
+     more contrast is requested. */
+  @media (prefers-reduced-transparency: reduce) {
+    .nav-material {
+      background: var(--color-paper);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+  @media (prefers-contrast: more) {
+    .nav-material {
+      background: var(--color-paper);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      border-bottom-color: var(--color-ink);
+    }
+  }
 </style>
+
+<script>
+  // Scroll-edge effect: hairline + shadow only once content is under the bar.
+  const nav = document.getElementById("site-nav");
+  if (nav) {
+    let ticking = false;
+    const update = () => {
+      nav.classList.toggle("is-scrolled", window.scrollY > 8);
+      ticking = false;
+    };
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      },
+      { passive: true },
+    );
+    update();
+  }
+</script>
