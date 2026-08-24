@@ -2,20 +2,13 @@
 import Base from "../layouts/Base.astro";
 import Navbar from "../components/Navbar.astro";
 import Hero from "../components/Hero.astro";
-import AudienceRouter from "../components/AudienceRouter.astro";
 import StickyMobileCTA from "../components/StickyMobileCTA.astro";
-import PilotTerms from "../components/PilotTerms.astro";
-import TrustBar from "../components/TrustBar.astro";
 import Problem from "../components/Problem.astro";
 import Stats from "../components/Stats.astro";
 import HowItWorks from "../components/HowItWorks.astro";
-import AdminControl from "../components/AdminControl.astro";
-import CaseStudy from "../components/CaseStudy.astro";
 import FoundingPilot from "../components/FoundingPilot.astro";
-import Screenshots from "../components/Screenshots.astro";
 import ForUniversities from "../components/ForUniversities.astro";
-import AdminDashboard from "../components/AdminDashboard.astro";
-import TrustSecurity from "../components/TrustSecurity.astro";
+import SecurityTeaser from "../components/SecurityTeaser.astro";
 import FAQ from "../components/FAQ.astro";
 import CTAFooter from "../components/CTAFooter.astro";
 import { PLANNER_URL, CONTACT_EMAIL } from "../config/site";
@@ -67,23 +60,18 @@ const jsonLd = [
 <Base jsonLd={jsonLd}>
   <Navbar />
   <main class="flex-1">
+    <!-- Order per the "Page Order" design: proof of the problem, then the
+         mechanism, then the numbers, then the two buyer lanes as teasers that
+         send traffic to /for-universities and /security. The admin console and
+         the full security detail now live on those pages, not here. -->
     <div id="home"><Hero /></div>
-    <AudienceRouter />
-    <TrustBar />
     <div id="problem"><Problem /></div>
-    <Stats />
-    <!-- Admin console promoted above the fold sequence: the buyer's product
-         first (dashboard, then pipeline, then control), student planner proof
-         demoted below. -->
-    <div id="dashboard"><AdminDashboard /></div>
     <HowItWorks />
-    <AdminControl />
-    <CaseStudy />
-    <PilotTerms />
-    <FoundingPilot />
-    <div id="demo"><Screenshots /></div>
+
+    <Stats />
     <div id="universities"><ForUniversities /></div>
-    <TrustSecurity />
+    <FoundingPilot />
+    <div id="security"><SecurityTeaser /></div>
     <div id="faq"><FAQ /></div>
     <div id="contact"><CTAFooter /></div>
     <StickyMobileCTA />

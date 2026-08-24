@@ -1,81 +1,75 @@
 ---
-import { bookDemoHref } from "../config/site";
-import CTAButton from "./CTAButton.astro";
-import ReviewInboxCard from "./ReviewInboxCard.astro";
-import RoleCursor from "./RoleCursor.astro";
 /*
- * Panel names in point 2 are real: AdminCurriculum.jsx ("Curriculum &
- * capacity"), 13 panels at last count — demand forecast, seats demanded,
- * elective column balance, track × elective choices, PPD band adherence,
- * elective uptake, term loading by track, cohort progress, catalogue health,
- * advising load absorbed, module affinity.
+ * Homepage teaser only. The full institutional case — admin dashboard, catalogue
+ * control, cohort analytics — lives on /for-universities; this is the four-point
+ * summary that sends buyer-intent traffic there.
  */
 const points = [
   {
     title: "We handle the rules encoding",
-    body: "Send us your programme guide; we encode the validation logic and keep it current each academic year. No IT project on your side.",
+    body: "Kept current each academic year. No IT project on your side.",
   },
   {
-    title: "A curriculum dashboard, not just a planner",
-    body: "Coordinators get live, anonymised cohort analytics: module demand forecast and seats demanded before registration opens, elective uptake and track-by-track choices, term loading, and cohort progress. Evidence to tune your tracks each year instead of gut feeling.",
+    title: "Module demand forecast",
+    body: "Seats demanded per module and per term, before registration opens.",
   },
   {
-    title: "Advising load, absorbed and counted",
-    body: "The dashboard counts rule checks run, staff hours saved, and plans exported for advising sessions. Invalid configurations are caught in the planner before they become emails.",
+    title: "Advising load, counted",
+    body: "Rule checks run, staff hours saved, plans exported for advising sessions.",
   },
   {
-    title: "Your own tenant, free pilot start",
-    body: "Own catalogue, rules, branding, and subdomain per institution; no shared state. The founding pilot starts with a free encoded prototype of your catalogue before any commitment.",
+    title: "Your own tenant",
+    body: "Own catalogue, rules, branding and subdomain. No shared state.",
   },
 ];
 ---
 
 <section class="border-b border-line bg-paper-shade text-ink">
-  <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)]">
-    <div class="grid gap-12 lg:grid-cols-[1fr_1.55fr] lg:gap-16">
-      <div>
-        <h2 data-reveal class="serif-heading text-[length:var(--text-h2)] text-ink">
-          For universities
-        </h2>
-        <p class="mt-5 text-muted">
-          Students get a validated planner; your office gets the full product: a review
-          queue of pre-checked plans and a curriculum dashboard built to improve your
-          master tracks. Built for the scale of large MSc programmes — hundreds of courses,
-          multiple tracks, per-cohort rules. Priced per institution, per programme.
-        </p>
-        <CTAButton
-          href={bookDemoHref}
-          variant="outline-invert"
-          dataTrack="cta-universities-book"
-          class="mt-8"
-        >
-          Book a 20-min demo
-        </CTAButton>
-
-        <!-- Product-echo card with the one Coordinator chip outside the hero;
-             the chip pins to the card corner only, never to whitespace. -->
-        <div data-reveal class="relative mt-12 w-[280px] max-w-full">
-          <ReviewInboxCard />
-          <RoleCursor
-            role="coordinator"
-            rotate={12}
-            class="absolute -top-4 -right-4 sm:-top-5 sm:-right-6"
-          />
-        </div>
-      </div>
-      <dl data-reveal class="divide-y divide-line border-t border-line">
-        {points.map((p, i) => (
-          <div class="py-6 first:pt-0">
-            <dt class="flex items-start gap-3 text-base font-semibold text-ink">
-              <span class="mt-1 shrink-0 font-mono text-xs tabular-nums text-cobalt-ink" aria-hidden="true">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              {p.title}
-            </dt>
-            <dd class="mt-2 pl-7 text-sm leading-relaxed text-muted">{p.body}</dd>
-          </div>
-        ))}
-      </dl>
+  <div
+    class="mx-auto grid max-w-6xl grid-cols-1 items-start gap-[clamp(2.5rem,1.5rem+3vw,5rem)] px-6 py-[var(--section-y)] lg:grid-cols-2"
+  >
+    <div>
+      <p class="font-mono text-xs tracking-[0.02em] text-cobalt-ink">// for universities</p>
+      <h2
+        data-reveal
+        class="serif-heading mt-5 max-w-[20ch] text-[length:var(--text-h2)] text-ink"
+      >
+        Students get a planner. Your office gets the product.
+      </h2>
+      <p class="mt-5 max-w-[48ch] text-[length:var(--text-lead)] leading-relaxed text-muted">
+        A review queue of pre-checked plans, and a curriculum dashboard that
+        turns what students actually choose into curriculum decisions.
+      </p>
+      <a
+        href="/for-universities"
+        data-track="link-for-universities"
+        class="group mt-7 inline-flex min-h-11 items-center gap-2 text-[0.95rem] font-semibold text-cobalt-ink underline decoration-cobalt-ink/35 underline-offset-[5px] transition-colors hover:text-cobalt-bright"
+      >
+        Read the full case for universities
+        <span aria-hidden="true" class="transition-transform group-hover:translate-x-0.5">→</span>
+      </a>
     </div>
+
+    <dl data-reveal class="border-t border-line">
+      {
+        points.map((p, i) => (
+          <div
+            class:list={[
+              "flex items-start gap-3 py-[18px]",
+              i !== points.length - 1 && "border-b border-line",
+            ]}
+          >
+            <span
+              aria-hidden="true"
+              class="mt-[9px] h-1.5 w-1.5 flex-none rounded-[1px] bg-cobalt-ink"
+            />
+            <div>
+              <dt class="font-semibold text-ink">{p.title}</dt>
+              <dd class="mt-1 text-[0.94rem] leading-relaxed text-muted">{p.body}</dd>
+            </div>
+          </div>
+        ))
+      }
+    </dl>
   </div>
 </section>
