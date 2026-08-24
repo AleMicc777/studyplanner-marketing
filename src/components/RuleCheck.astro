@@ -1,0 +1,397 @@
+---
+/*
+ * Live rule-check widget. Click a course, it advances one quarter, all three
+ * rules re-evaluate. Local state only — no server, no persistence.
+ *
+ * Grounding, deliberately narrow:
+ * - Course names, EC values and band tags are read off the planner screenshot.
+ * - AE4870A / AE4870B are the real cross-year prerequisite pair already named
+ *   in Problem.astro.
+ * - The 15 EC quarter cap is inferred from the screenshot flagging 18 and 17 EC
+ *   quarters as high-workload while leaving 15 and 13 unflagged.
+ * There is deliberately NO total-EC rule: no grounded number exists for it.
+ *
+ * The initial state is rendered server-side (so it is complete without JS) and
+ * the client script PATCHES that DOM rather than re-rendering it, which keeps
+ * exactly one copy of the markup. It opens INVALID with the prerequisite
+ * violated, so there is something to fix.
+ */
+const QUARTERS = [
+  { label: "Q1", months: "Sep-Nov" },
+  { label: "Q2", months: "Nov-Jan" },
+  { label: "Q3", months: "Feb-Apr" },
+  { label: "Q4", months: "Apr-Jun" },
+];
+
+const COURSES = [
+  { id: "c1", name: "Design of Lightweight Structures I", band: "CORE", ec: 3, q: 0 },
+  { id: "c2", name: "Designing Materials with Aerospace Specific Properties", band: "CORE", ec: 3, q: 0 },
+  { id: "c3", name: "Stability and Analysis of Structures I", band: "PROFILE", ec: 3, q: 1 },
+  { id: "c4", name: "Experimental Techniques and NDT", band: "PROFILE", ec: 3, q: 1 },
+  { id: "c5", name: "AE4870B", band: "PROFILE", ec: 5, q: 1 },
+  { id: "c6", name: "Mechanics and Structural Health Monitoring of Composite Structures", band: "PROFILE", ec: 5, q: 2 },
+  { id: "c7", name: "AE4870A", band: "PROFILE", ec: 5, q: 2 },
+  { id: "c8", name: "Fundamentals of Aeroelasticity", band: "PROFILE", ec: 3, q: 2 },
+  { id: "c9", name: "Philosophy of Engineering, Science and Design", band: "PPD", ec: 3, q: 3 },
+  { id: "c10", name: "Talk Like TED", band: "PPD", ec: 3, q: 3 },
+];
+
+const CAP = 15;
+
+const totals = [0, 0, 0, 0];
+COURSES.forEach((c) => (totals[c.q] += c.ec));
+
+const a = COURSES.find((c) => c.name === "AE4870A")!;
+const b = COURSES.find((c) => c.name === "AE4870B")!;
+const ppd = COURSES.filter((c) => c.band === "PPD").reduce((n, c) => n + c.ec, 0);
+
+const rules = [
+  {
+    key: "prereq",
+    name: "prerequisite order",
+    met: a.q < b.q,
+    detail: `AE4870B sits in ${QUARTERS[b.q].label}, before AE4870A in ${QUARTERS[a.q].label}`,
+  },
+  {
+    key: "ppd",
+    name: "PPD band 4-12 EC",
+    met: ppd >= 4 && ppd <= 12,
+    detail: `${ppd} EC of PPD planned`,
+  },
+  {
+    key: "cap",
+    name: `quarter workload cap ${CAP} EC`,
+    met: totals.every((t) => t <= CAP),
+    detail: `no quarter above ${CAP} EC`,
+  },
+];
+
+const failing = rules.filter((r) => !r.met).length;
+---
+
+<section id="try" class="border-b border-line bg-paper-shade text-ink">
+  <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)]">
+    <div class="flex flex-wrap items-end justify-between gap-8">
+      <div>
+        <p class="font-mono text-xs tracking-[0.02em] text-cobalt-ink">// try the rule engine</p>
+        <h2
+          data-reveal
+          class="serif-heading mt-5 max-w-[24ch] text-[length:var(--text-h2)] text-ink"
+        >
+          Break the plan. Watch the rules catch it.
+        </h2>
+        <p class="mt-5 max-w-[54ch] text-[length:var(--text-lead)] leading-relaxed text-muted">
+          Click any course to move it to the next quarter. Three real rules
+          re-check the whole year on every move, the same way they do for a
+          student building a plan.
+        </p>
+      </div>
+      <button
+        type="button"
+        data-rc-reset
+        class="pressable inline-flex min-h-11 items-center justify-center rounded-full border border-line bg-transparent px-[22px] py-[11px] text-[0.9rem] font-semibold text-cobalt-ink hover:border-cobalt-ink"
+      >
+        Reset the plan
+      </button>
+    </div>
+
+    <div
+      class="mt-[clamp(2rem,1.5rem+2vw,3rem)] grid grid-cols-1 items-start gap-[clamp(1.5rem,1rem+2vw,2.5rem)] lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)]"
+    >
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {
+          QUARTERS.map((q, i) => (
+            <div class="overflow-hidden rounded-[10px] border border-line bg-paper-shade">
+              <div class="flex items-baseline justify-between gap-2.5 border-b border-line bg-paper px-3.5 py-2.5">
+                <span class="flex items-baseline gap-2">
+                  <span class="text-[0.95rem] font-bold tracking-[-0.02em] text-ink">{q.label}</span>
+                  <span class="font-mono text-[0.72rem] text-muted">{q.months}</span>
+                </span>
+                <span
+                  data-rc-ec={i}
+                  class:list={[
+                    "whitespace-nowrap font-mono text-[0.78rem] tabular-nums",
+                    totals[i] > CAP ? "text-flag" : "text-valid-deep",
+                  ]}
+                >
+                  {totals[i]} EC
+                </span>
+              </div>
+              <p
+                data-rc-warn={i}
+                hidden={totals[i] <= CAP}
+                class="border-b border-line bg-accent/20 px-3.5 py-[7px] font-mono text-[0.72rem] text-ink"
+              >
+                high workload quarter
+              </p>
+              <div data-rc-list={i} class="flex min-h-[120px] flex-col gap-2 p-3">
+                {COURSES.filter((c) => c.q === i).map((c) => (
+                  <button
+                    type="button"
+                    data-rc-course={c.id}
+                    data-rc-ec-value={c.ec}
+                    class="pressable flex w-full flex-col items-start gap-1.5 rounded-md border border-line border-l-[3px] border-l-cobalt-ink bg-paper px-[11px] py-2.5 text-left hover:border-cobalt-ink"
+                  >
+                    <span class="flex w-full items-baseline gap-2">
+                      <span class="font-mono text-[0.66rem] font-medium tracking-[0.09em] text-cobalt-ink">
+                        {c.band}
+                      </span>
+                      <span class="ml-auto whitespace-nowrap font-mono text-[0.72rem] text-muted">
+                        {c.ec} EC
+                      </span>
+                    </span>
+                    <span class="text-[0.83rem] font-medium leading-[1.35] text-ink">{c.name}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <div
+        class="overflow-hidden rounded-[10px] border border-cobalt-line bg-cobalt lg:sticky lg:top-[88px]"
+      >
+        <p
+          class="border-b border-cobalt-line px-[18px] py-[13px] font-mono text-[0.68rem] font-medium uppercase tracking-[0.12em] text-steel"
+        >
+          Rule check
+        </p>
+        <dl>
+          {
+            rules.map((r) => (
+              <div data-rc-rule={r.key} class="border-b border-cobalt-line px-[18px] py-[15px]">
+                <dt
+                  class:list={[
+                    "flex items-center gap-2.5 font-mono text-[0.8rem]",
+                    r.met ? "text-accent" : "text-flag-bright",
+                  ]}
+                >
+                  <svg
+                    data-rc-icon="met"
+                    hidden={!r.met}
+                    width="13"
+                    height="13"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    class="shrink-0"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8.5 6.5 12 13 4"
+                      stroke="currentColor"
+                      stroke-width="2.2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  <svg
+                    data-rc-icon="unmet"
+                    hidden={r.met}
+                    width="13"
+                    height="13"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    class="shrink-0"
+                    aria-hidden="true"
+                  >
+                    <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+                  </svg>
+                  <span>{r.name}</span>
+                </dt>
+                <dd
+                  data-rc-detail
+                  class="mt-[7px] pl-[22px] font-mono text-[0.74rem] leading-relaxed text-on-dark-3"
+                >
+                  {r.detail}
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+        <p
+          data-rc-verdict
+          class:list={[
+            "flex flex-wrap items-center gap-x-3 gap-y-1 bg-cobalt-panel px-[18px] py-5 font-mono text-base font-medium tracking-[0.08em]",
+            failing === 0 ? "text-valid" : "text-flag-bright",
+          ]}
+        >
+          <svg
+            data-rc-icon="met"
+            hidden={failing !== 0}
+            width="17"
+            height="17"
+            viewBox="0 0 16 16"
+            fill="none"
+            class="shrink-0"
+            aria-hidden="true"
+          >
+            <path
+              d="M3 8.5 6.5 12 13 4"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <svg
+            data-rc-icon="unmet"
+            hidden={failing === 0}
+            width="17"
+            height="17"
+            viewBox="0 0 16 16"
+            fill="none"
+            class="shrink-0"
+            aria-hidden="true"
+          >
+            <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+          </svg>
+          <span data-rc-verdict-label>{failing === 0 ? "VALID" : "INVALID"}</span>
+          <span
+            data-rc-failing
+            hidden={failing === 0}
+            class="whitespace-nowrap text-[0.74rem] tracking-[0.02em] text-on-dark-3"
+          >
+            {failing === 1 ? "1 rule unmet" : `${failing} rules unmet`}
+          </span>
+        </p>
+      </div>
+    </div>
+
+    <p class="mt-[22px] font-mono text-[0.74rem] leading-relaxed text-muted">
+      Simplified to three rules and one year. A real programme runs the full
+      guide: mandatory courses, prerequisites, EC totals and track requirements.
+    </p>
+  </div>
+</section>
+
+<script>
+  // Patches the server-rendered widget in place. Course buttons are physically
+  // moved between quarter lists, so there is only ever one copy of the markup.
+  const QUARTERS = ["Q1", "Q2", "Q3", "Q4"];
+  const CAP = 15;
+
+  const root = document.querySelector<HTMLElement>("#try");
+  if (root) {
+    const lists = QUARTERS.map((_, i) =>
+      root.querySelector<HTMLElement>(`[data-rc-list="${i}"]`),
+    );
+    const ecCells = QUARTERS.map((_, i) => root.querySelector<HTMLElement>(`[data-rc-ec="${i}"]`));
+    const warnCells = QUARTERS.map((_, i) =>
+      root.querySelector<HTMLElement>(`[data-rc-warn="${i}"]`),
+    );
+    const buttons = Array.from(root.querySelectorAll<HTMLElement>("[data-rc-course]"));
+
+    // Home quarter per course, so Reset is a plain re-seat.
+    const home = new Map<HTMLElement, number>();
+    const at = new Map<HTMLElement, number>();
+    buttons.forEach((btn) => {
+      const q = Number(btn.closest("[data-rc-list]")?.getAttribute("data-rc-list") ?? 0);
+      home.set(btn, q);
+      at.set(btn, q);
+      btn.setAttribute(
+        "aria-label",
+        `${btn.textContent?.trim().replace(/\s+/g, " ")} — move to the next quarter`,
+      );
+    });
+
+    const ecOf = (btn: HTMLElement) => Number(btn.getAttribute("data-rc-ec-value") ?? 0);
+    const named = (name: string) =>
+      buttons.find((btn) => btn.textContent?.includes(name)) as HTMLElement;
+    const prereqA = named("AE4870A");
+    const prereqB = named("AE4870B");
+
+    const setIcons = (scope: HTMLElement, met: boolean) => {
+      scope.querySelector<HTMLElement>('[data-rc-icon="met"]')?.toggleAttribute("hidden", !met);
+      scope.querySelector<HTMLElement>('[data-rc-icon="unmet"]')?.toggleAttribute("hidden", met);
+    };
+
+    const swap = (el: HTMLElement | null, on: string, off: string, met: boolean) => {
+      el?.classList.toggle(on, met);
+      el?.classList.toggle(off, !met);
+    };
+
+    function render() {
+      const totals = [0, 0, 0, 0];
+      buttons.forEach((btn) => (totals[at.get(btn)!] += ecOf(btn)));
+
+      totals.forEach((t, i) => {
+        const cell = ecCells[i];
+        if (cell) cell.textContent = `${t} EC`;
+        swap(cell, "text-flag", "text-valid-deep", t > CAP);
+        warnCells[i]?.toggleAttribute("hidden", t <= CAP);
+      });
+
+      const ppd = buttons
+        .filter((btn) => btn.textContent?.includes("PPD"))
+        .reduce((n, btn) => n + ecOf(btn), 0);
+      const aq = at.get(prereqA)!;
+      const bq = at.get(prereqB)!;
+      const breach = totals.findIndex((t) => t > CAP);
+
+      const state = {
+        prereq: {
+          met: aq < bq,
+          detail:
+            aq < bq
+              ? `AE4870A in ${QUARTERS[aq]}, AE4870B in ${QUARTERS[bq]}`
+              : `AE4870B sits in ${QUARTERS[bq]}, before AE4870A in ${QUARTERS[aq]}`,
+        },
+        ppd: { met: ppd >= 4 && ppd <= 12, detail: `${ppd} EC of PPD planned` },
+        cap: {
+          met: breach === -1,
+          detail:
+            breach === -1
+              ? `no quarter above ${CAP} EC`
+              : `${QUARTERS[breach]} carries ${totals[breach]} EC`,
+        },
+      };
+
+      let failing = 0;
+      for (const [key, rule] of Object.entries(state)) {
+        if (!rule.met) failing += 1;
+        const row = root!.querySelector<HTMLElement>(`[data-rc-rule="${key}"]`);
+        if (!row) continue;
+        const dt = row.querySelector<HTMLElement>("dt");
+        if (dt) {
+          setIcons(dt, rule.met);
+          swap(dt, "text-accent", "text-flag-bright", rule.met);
+        }
+        const dd = row.querySelector<HTMLElement>("[data-rc-detail]");
+        if (dd) dd.textContent = rule.detail;
+      }
+
+      const verdict = root!.querySelector<HTMLElement>("[data-rc-verdict]");
+      if (verdict) {
+        setIcons(verdict, failing === 0);
+        swap(verdict, "text-valid", "text-flag-bright", failing === 0);
+        const label = verdict.querySelector<HTMLElement>("[data-rc-verdict-label]");
+        if (label) label.textContent = failing === 0 ? "VALID" : "INVALID";
+        const count = verdict.querySelector<HTMLElement>("[data-rc-failing]");
+        if (count) {
+          count.toggleAttribute("hidden", failing === 0);
+          count.textContent = failing === 1 ? "1 rule unmet" : `${failing} rules unmet`;
+        }
+      }
+    }
+
+    const seat = (btn: HTMLElement, q: number) => {
+      at.set(btn, q);
+      lists[q]?.appendChild(btn);
+    };
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        seat(btn, (at.get(btn)! + 1) % 4);
+        render();
+      });
+    });
+
+    root.querySelector<HTMLElement>("[data-rc-reset]")?.addEventListener("click", () => {
+      buttons.forEach((btn) => seat(btn, home.get(btn)!));
+      render();
+    });
+
+    render();
+  }
+</script>
