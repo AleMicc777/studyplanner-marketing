@@ -1,0 +1,163 @@
+---
+import Base from "../layouts/Base.astro";
+import Navbar from "../components/Navbar.astro";
+import CTAFooter from "../components/CTAFooter.astro";
+import TrustSecurity from "../components/TrustSecurity.astro";
+import CTAButton from "../components/CTAButton.astro";
+import { PLANNER_URL, bookDemoHref, CONTACT_EMAIL } from "../config/site";
+import { securityFaqs } from "../data/faqs";
+
+// The DPO-facing FAQ entries, tagged `topic: "security"` in src/data/faqs.ts.
+// They render in the homepage FAQ too, but their FAQPage JSON-LD ships here so
+// the same question is never marked up twice across two indexable URLs.
+
+const evaluationStats = [
+  { value: "EU", body: "hosting only. Shared plan data never leaves the EU." },
+  { value: "0", body: "accounts required. Students and advisors both work without signing up." },
+  { value: "0", body: "third-party tracking cookies. No cookie banner, self-hosted fonts." },
+];
+
+const dpaMailto = `mailto:${CONTACT_EMAIL}?subject=DPA%20request`;
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: securityFaqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+---
+
+<Base
+  title="Security and data protection / StudyPlanner"
+  description="How StudyPlanner handles student data: EU hosting, no accounts required, data minimisation, no tracking cookies, and a DPA ready for your institution's procurement process."
+  jsonLd={[faqJsonLd]}
+>
+  <Navbar />
+  <main class="flex-1">
+    <!-- Hero -->
+    <section class="grid-bg border-b border-line bg-paper text-ink">
+      <div class="mx-auto max-w-6xl px-6 pt-16 pb-14 sm:pt-24 sm:pb-20">
+        <p class="hero-stagger-1 flex items-center gap-2 font-mono text-[0.78rem] tracking-wide text-cobalt-ink">
+          <span aria-hidden="true" class="h-1.5 w-1.5 shrink-0 rounded-[1px] bg-cobalt-ink"></span>
+          Security and data protection
+        </p>
+        <h1 class="hero-stagger-2 mt-5 max-w-[22ch] serif-display text-[length:var(--text-display)] text-ink">
+          What your data protection officer needs to know
+        </h1>
+        <p class="hero-stagger-3 mt-7 max-w-[58ch] text-[length:var(--text-lead)] leading-relaxed text-muted">
+          Everything below is written for the person who has to sign off: where the data lives,
+          what leaves the browser, how long it is kept, and how to get the DPA.
+        </p>
+        <div class="hero-stagger-4 mt-8 flex flex-wrap items-center gap-5">
+          <CTAButton href={dpaMailto} dataTrack="cta-security-dpa-hero">
+            Request the DPA
+          </CTAButton>
+          <a
+            href={PLANNER_URL}
+            target="_blank"
+            rel="noreferrer"
+            data-track="cta-security-planner"
+            class="inline-flex min-h-11 items-center gap-2 text-[0.95rem] font-semibold text-cobalt-ink underline decoration-cobalt-ink/35 underline-offset-[5px] transition-colors hover:text-cobalt-bright"
+          >
+            Open the planner without an account <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- The six data-protection points (shared component) -->
+    <TrustSecurity />
+
+    <!-- Evaluate without a data-protection review -->
+    <section class="border-b border-line bg-paper-shade text-ink">
+      <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)]">
+        <p class="font-mono text-xs tracking-wide text-cobalt-ink">// what evaluation costs you</p>
+        <h2 data-reveal class="mt-5 max-w-[24ch] serif-heading text-[length:var(--text-h2)] text-ink">
+          You can evaluate us without a data-protection review
+        </h2>
+        <p class="mt-5 max-w-[56ch] text-[length:var(--text-lead)] leading-relaxed text-muted">
+          No student data is required at any point in the evaluation. The planner is open, no
+          account, and nothing you or your students enter reaches our servers unless someone
+          explicitly chooses to share a plan.
+        </p>
+
+        <ul
+          data-reveal
+          class="mt-12 grid border-t border-b border-line sm:grid-cols-3 sm:divide-x sm:divide-line"
+        >
+          {evaluationStats.map((stat) => (
+            <li class="border-b border-line px-0 py-6 last:border-b-0 sm:border-b-0 sm:px-6 sm:first:pl-0 sm:last:pr-0">
+              <p class="stat-numeral text-[length:var(--text-h2)] text-cobalt-ink">{stat.value}</p>
+              <p class="mt-2.5 text-sm leading-relaxed text-muted">{stat.body}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- DPO FAQ -->
+    <section id="dpo-questions" class="border-b border-line bg-paper text-ink">
+      <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)]">
+        <h2 data-reveal class="serif-heading text-[length:var(--text-h2)] text-ink">
+          Questions data-protection officers ask
+        </h2>
+        <dl class="mt-10 divide-y divide-line border-t border-line">
+          {securityFaqs.map((f) => (
+            <div class="grid gap-2 py-6 sm:grid-cols-[1fr_1.35fr] sm:gap-10">
+              <dt class="font-semibold text-ink">{f.q}</dt>
+              <dd class="max-w-[68ch] leading-relaxed text-muted">{f.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <!-- DPA request band -->
+    <section id="dpa" class="bg-cobalt text-on-dark">
+      <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)]">
+        <h2 data-reveal class="max-w-[24ch] serif-heading text-[length:var(--text-h2)] text-on-dark">
+          Send this page to your DPO. Ask us for the DPA.
+        </h2>
+        <div class="mt-10 grid items-end gap-8 lg:grid-cols-2 lg:gap-14">
+          <p class="max-w-[50ch] text-[length:var(--text-lead)] leading-relaxed text-on-dark-2">
+            A Data Processing Agreement is ready for your institution's procurement process. Write
+            to{" "}
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              class="text-on-dark underline decoration-cobalt-line underline-offset-4 transition-colors hover:decoration-accent"
+            >
+              {CONTACT_EMAIL}
+            </a>{" "}
+            and ask for it.
+          </p>
+          <div class="flex flex-wrap items-center gap-x-6 gap-y-4 lg:justify-self-end">
+            <CTAButton href={dpaMailto} dataTrack="cta-security-dpa-band">
+              Request the DPA
+            </CTAButton>
+            <a
+              href={bookDemoHref}
+              data-track="cta-security-demo"
+              class="inline-flex min-h-11 items-center gap-2 text-[0.96rem] font-semibold text-on-dark underline decoration-cobalt-line decoration-1 underline-offset-[6px] transition-colors hover:decoration-accent"
+            >
+              Book a 20-min demo <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </div>
+        <p class="mt-14 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-cobalt-line pt-6 font-mono text-xs text-steel">
+          <span class="text-accent" aria-hidden="true">✓</span>
+          <span>EU-hosted</span>
+          <span aria-hidden="true">/</span>
+          <span>GDPR-ready</span>
+          <span aria-hidden="true">/</span>
+          <span>no student data required to evaluate</span>
+          <span aria-hidden="true">/</span>
+          <span>DPA on request</span>
+        </p>
+      </div>
+    </section>
+  </main>
+  <CTAFooter />
+</Base>

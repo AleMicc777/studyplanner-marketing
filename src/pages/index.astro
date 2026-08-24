@@ -12,7 +12,7 @@ import SecurityTeaser from "../components/SecurityTeaser.astro";
 import FAQ from "../components/FAQ.astro";
 import CTAFooter from "../components/CTAFooter.astro";
 import { PLANNER_URL, CONTACT_EMAIL } from "../config/site";
-import { faqs } from "../data/faqs";
+import { generalFaqs } from "../data/faqs";
 
 const SITE = "https://studyplanner-marketing-steel.vercel.app";
 
@@ -45,7 +45,9 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqs.map((item) => ({
+    // Security questions are excluded here: their FAQPage markup ships on
+    // /security instead, so no question is marked up on two indexable URLs.
+    mainEntity: generalFaqs.map((item) => ({
       "@type": "Question",
       name: item.q,
       acceptedAnswer: {
@@ -67,7 +69,6 @@ const jsonLd = [
     <div id="home"><Hero /></div>
     <div id="problem"><Problem /></div>
     <HowItWorks />
-
     <Stats />
     <div id="universities"><ForUniversities /></div>
     <FoundingPilot />

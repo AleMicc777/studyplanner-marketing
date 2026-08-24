@@ -1,0 +1,281 @@
+---
+import Base from "../../layouts/Base.astro";
+import Navbar from "../../components/Navbar.astro";
+import CTAFooter from "../../components/CTAFooter.astro";
+import CTAButton from "../../components/CTAButton.astro";
+import { PLANNER_URL, bookDemoHref } from "../../config/site";
+
+const title = "Evaluating degree-planning software: 8 questions to ask any vendor / StudyPlanner";
+const description =
+  "A buyer's guide for MSc coordinators, IT and data-protection officers: eight procurement questions on rules maintenance, GDPR, deployment and exit terms — what a defensible answer sounds like, and ours.";
+
+const groups = [
+  {
+    id: "rules",
+    num: "01",
+    heading: "Rules and setup",
+    intro:
+      "The rules are the product. If encoding them lands on your desk, the tool has moved work rather than removed it.",
+    questions: [
+      {
+        n: "01",
+        q: "Who encodes our programme rules, and who maintains them each academic year?",
+        listen:
+          "a named party and a named cadence. “Configurable by your team” means you maintain it, and rules drift every year the catalogue does.",
+        ours:
+          "we do. You send the programme guide; we encode the validation logic and keep it current each academic year. No IT project on your side.",
+      },
+      {
+        n: "02",
+        q: "Can it express our awkward rules, not just EC totals?",
+        listen:
+          "bring your three ugliest cases to the demo. Cross-year prerequisite chains, track-exclusive electives, minimum-per-band requirements. Watch them entered live, not described.",
+        ours:
+          "mandatory courses, prerequisites, EC totals and track requirements are all first-class. Bring your guide to the call and we will run yours.",
+      },
+      {
+        n: "03",
+        q: "Can an invalid plan still reach a coordinator's inbox?",
+        listen:
+          "validation that only warns is validation you will still be doing by hand. Ask whether the check is advisory or a gate on submission.",
+        ours:
+          "it is a gate. A plan cannot be submitted for review until the rule check passes, so nothing unchecked reaches the queue.",
+      },
+    ],
+  },
+  {
+    id: "data",
+    num: "02",
+    heading: "Data and GDPR",
+    intro:
+      "Your data-protection officer will ask these eventually. Asking them first is cheaper than asking them in month four.",
+    questions: [
+      {
+        n: "04",
+        q: "Where does student data physically live, and does any of it leave the EU?",
+        listen:
+          "named regions, and an answer covering sub-processors, backups and support access, not just the primary database.",
+        ours: "all infrastructure runs on EU-based hosting. Shared plan data never leaves the EU.",
+      },
+      {
+        n: "05",
+        q: "How much student data does the tool actually need to function?",
+        listen:
+          "the minimum, not the maximum. A vendor that wants an SIS integration on day one is asking for a data-protection review before you have any evidence it works.",
+        ours:
+          "none to evaluate us. Students build and validate a full plan without an account, and plans are stored in the student's browser by default. Nothing reaches our servers unless a student explicitly shares.",
+      },
+      {
+        n: "06",
+        q: "Is a DPA ready now, and can data be deleted on request?",
+        listen:
+          "“ready to send today” versus “our legal team is drafting one”. The second answer costs you a term.",
+        ours:
+          "a Data Processing Agreement is available on request, and any shared plan or account can be deleted in full within the timelines your institution requires.",
+      },
+    ],
+  },
+  {
+    id: "deployment",
+    num: "03",
+    heading: "Deployment and exit",
+    intro:
+      "Time-to-first-value decides whether a pilot survives contact with a real term. Exit terms decide what year three costs.",
+    questions: [
+      {
+        n: "07",
+        q: "How long from handing over our programme guide to a working planner?",
+        listen:
+          "a number in weeks, and what it depends on. If the honest answer is a term, plan for a term.",
+        ours:
+          "under two weeks, observed. 500+ courses are already encoded in the live catalogue behind our public planner, which you can open without talking to us.",
+      },
+      {
+        n: "08",
+        q: "What does year three cost, and what do we keep if we leave?",
+        listen:
+          "renewal pricing and an export path, in the contract. Encoded rules are institutional knowledge; ask whether you can take them with you.",
+        ours:
+          "priced per institution and per programme, with your own tenant, catalogue, rules, branding and subdomain. The founding pilot starts with a free encoded prototype of your catalogue before any commitment.",
+      },
+    ],
+  },
+];
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: "Eight questions to ask any degree-planning vendor",
+    description,
+    datePublished: "2026-08-01",
+    dateModified: "2026-08-01",
+    author: { "@type": "Person", name: "Alessandro Miccolo" },
+    publisher: {
+      "@type": "Organization",
+      name: "StudyPlanner",
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": "https://studyplanner-marketing-steel.vercel.app/guides/evaluating-degree-planning-software",
+    },
+  },
+];
+---
+
+<Base title={title} description={description} jsonLd={jsonLd}>
+  <Navbar />
+  <main class="flex-1">
+    <!-- Hero -->
+    <section class="grid-bg border-b border-line bg-paper">
+      <div class="mx-auto max-w-6xl px-6 pt-20 pb-16 sm:pt-28 sm:pb-20">
+        <p
+          class="mb-5 inline-flex items-center gap-2 font-mono text-xs tracking-wide text-cobalt-ink"
+          data-reveal
+        >
+          <span aria-hidden="true" class="h-1.5 w-1.5 shrink-0 rounded-[1px] bg-cobalt-ink"></span>
+          Buyer's guide
+        </p>
+        <h1
+          class="serif-display max-w-[26ch] text-[length:var(--text-display)] text-ink"
+          data-reveal
+        >
+          Eight questions to ask any degree-planning vendor
+        </h1>
+        <p
+          class="mt-7 max-w-[60ch] text-[length:var(--text-lead)] leading-relaxed text-muted"
+          data-reveal
+        >
+          For MSc coordinators, IT, and data-protection officers running a procurement process. Take
+          it into any vendor call, including ours. Each question says what a defensible answer sounds
+          like, then gives our own answer plainly.
+        </p>
+        <p
+          class="mt-7 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-xs text-muted"
+          data-reveal
+        >
+          <span>8 questions</span>
+          <span aria-hidden="true">/</span>
+          <span>6 min read</span>
+          <span aria-hidden="true">/</span>
+          <span>updated August 2026</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- Body: sticky table of contents + article -->
+    <div
+      class="mx-auto grid max-w-6xl grid-cols-1 items-start gap-x-12 gap-y-0 px-6 lg:grid-cols-[210px_minmax(0,1fr)] lg:gap-x-20"
+    >
+      <nav aria-label="On this page" class="hidden pt-16 sm:pt-20 lg:sticky lg:top-24 lg:block">
+        <p class="mb-4 font-mono text-[0.72rem] uppercase tracking-[0.06em] text-muted">
+          On this page
+        </p>
+        <ul class="flex flex-col border-t border-line">
+          {groups.map((group) => (
+            <li class="border-b border-line">
+              <a
+                href={`#${group.id}`}
+                class="flex gap-2.5 py-3 text-sm font-medium text-muted transition-colors hover:text-ink"
+              >
+                <span aria-hidden="true" class="font-mono text-xs text-cobalt-ink">{group.num}</span>
+                {group.heading}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <a
+          href={bookDemoHref}
+          data-track="cta-guide-toc-demo"
+          class="mt-7 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-cobalt-ink underline decoration-line underline-offset-4 transition-colors hover:text-cobalt-bright"
+        >
+          Ask us these live <span aria-hidden="true">→</span>
+        </a>
+      </nav>
+
+      <article class="min-w-0 py-16 sm:py-20">
+        <p class="mb-14 max-w-[66ch] text-[1.05rem] leading-relaxed text-muted" data-reveal>
+          Degree-planning tools are sold on dashboards and demos. What decides whether one works in
+          your programme is far less photogenic: who maintains the rules when the catalogue changes,
+          what data leaves your institution, and what happens in year three. These are the questions
+          that separate a working deployment from a stalled one. Ask them of every vendor on your
+          shortlist, in writing.
+        </p>
+
+        {groups.map((group, i) => (
+          <section id={group.id} class:list={["scroll-mt-24", i > 0 && "mt-20 sm:mt-24"]}>
+            <h2
+              class="serif-heading text-[length:var(--text-h2)] text-ink"
+              data-reveal
+            >
+              {group.heading}
+            </h2>
+            <p class="mt-4 max-w-[62ch] leading-relaxed text-muted" data-reveal>{group.intro}</p>
+            <dl class="mt-10 border-t border-line">
+              {group.questions.map((item) => (
+                <div class="border-b border-line py-7" data-reveal>
+                  <dt class="flex gap-3 text-[1.05rem] font-semibold tracking-tight text-ink">
+                    <span
+                      aria-hidden="true"
+                      class="shrink-0 pt-[3px] font-mono text-[0.8rem] tabular-nums text-cobalt-ink"
+                    >
+                      {item.n}
+                    </span>
+                    <span>{item.q}</span>
+                  </dt>
+                  <dd class="mt-3.5 max-w-[66ch] pl-[30px] leading-relaxed text-muted">
+                    <p>
+                      <span class="font-semibold text-ink">What to listen for: </span>{item.listen}
+                    </p>
+                    <p
+                      class="mt-3.5 border-l-2 border-cobalt-ink pl-3.5 font-mono text-[0.85rem] leading-relaxed text-muted"
+                    >
+                      <span class="text-ink">Our answer: </span>{item.ours}
+                    </p>
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        ))}
+
+        <!-- Article-level CTA -->
+        <aside
+          class="mt-20 rounded-lg border border-cobalt-line bg-cobalt-2 p-8 sm:mt-24 sm:p-10"
+          data-reveal
+        >
+          <h2 class="serif-heading max-w-[26ch] text-[length:var(--text-h3)] text-on-dark">
+            Bring this list to the call. Bring your programme guide too.
+          </h2>
+          <p class="mt-4 max-w-[52ch] leading-relaxed text-on-dark-2">
+            Twenty minutes. We answer all eight against your actual programme, and you leave with the
+            answers in writing whether or not you go further.
+          </p>
+          <div class="mt-7 flex flex-wrap items-center gap-4">
+            <CTAButton href={bookDemoHref} dataTrack="cta-guide-demo">
+              Book a 20-min demo
+            </CTAButton>
+            <CTAButton
+              href={PLANNER_URL}
+              variant="outline"
+              target="_blank"
+              rel="noreferrer"
+              dataTrack="cta-guide-planner"
+            >
+              Try the live planner →
+            </CTAButton>
+          </div>
+          <p class="mt-6 flex flex-wrap items-center gap-x-2.5 gap-y-1.5 font-mono text-xs text-steel">
+            <span aria-hidden="true" class="text-valid">✓</span>
+            <span class="whitespace-nowrap">EU-hosted</span>
+            <span aria-hidden="true">/</span>
+            <span class="whitespace-nowrap">GDPR-ready</span>
+            <span aria-hidden="true">/</span>
+            <span class="whitespace-nowrap">no student data required to evaluate</span>
+          </p>
+        </aside>
+      </article>
+    </div>
+  </main>
+  <CTAFooter />
+</Base>

@@ -1,0 +1,162 @@
+---
+/*
+ * For universities — the staff-facing page (design: "For Universities.dc.html").
+ * Section order: hero → what your office gets → admin console (AdminDashboard +
+ * AdminControl) → founding pilot (PilotTerms, dark cobalt) → programme-office FAQ.
+ * The admin-console and pilot sections are the existing components rather than
+ * reimplementations; this page is where they live.
+ */
+import Base from "../layouts/Base.astro";
+import Navbar from "../components/Navbar.astro";
+import CTAFooter from "../components/CTAFooter.astro";
+import CTAButton from "../components/CTAButton.astro";
+import AdminDashboard from "../components/AdminDashboard.astro";
+import AdminControl from "../components/AdminControl.astro";
+import PilotTerms from "../components/PilotTerms.astro";
+import { PLANNER_URL, bookDemoHref } from "../config/site";
+
+const points = [
+  {
+    n: "01",
+    title: "We handle the rules encoding",
+    body: "Send us your programme guide; we encode the validation logic and keep it current each academic year. No IT project on your side.",
+  },
+  {
+    n: "02",
+    title: "A curriculum dashboard, not just a planner",
+    body: "Coordinators get live, anonymised cohort analytics: module demand forecast and seats demanded before registration opens, elective uptake and track-by-track choices, term loading, and cohort progress. Evidence to tune your tracks each year instead of gut feeling.",
+  },
+  {
+    n: "03",
+    title: "Advising load, absorbed and counted",
+    body: "The dashboard counts rule checks run, staff hours saved, and plans exported for advising sessions. Invalid configurations are caught in the planner before they become emails.",
+  },
+  {
+    n: "04",
+    title: "Your own tenant, free pilot start",
+    body: "Own catalogue, rules, branding, and subdomain per institution; no shared state. The founding pilot starts with a free encoded prototype of your catalogue before any commitment.",
+  },
+];
+
+const faqs = [
+  {
+    q: "How long does it take to set up for my programme?",
+    a: "About two weeks. You send us your programme guide; we encode the validation rules and you review them before going live. No IT involvement needed on your side.",
+  },
+  {
+    q: "What does it cost?",
+    a: "Pricing is per-institution. Pilots start with a free encoded prototype of your own catalogue. We'll give you a number in the first call, with no commitment needed to hear it.",
+  },
+  {
+    q: "What if our programme rules change each year?",
+    a: "We update the validation logic each academic year as part of the subscription. Send us the new programme guide and we'll handle the rest.",
+  },
+  {
+    q: "Does it connect to our student information system?",
+    a: "Not yet. StudyPlanner works standalone today, so students use it alongside whatever SIS you have. Integration with SIS and course catalogues is on the roadmap.",
+  },
+];
+---
+
+<Base
+  title="For universities / StudyPlanner"
+  description="Students get a planner. Your office gets a review queue of pre-checked plans and a curriculum dashboard built to improve your master tracks."
+>
+  <Navbar />
+  <main class="flex-1">
+    <!-- Hero -->
+    <section class="grid-bg border-b border-line bg-paper text-ink">
+      <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)]">
+        <p
+          data-reveal
+          class="inline-flex items-center gap-2 font-mono text-xs tracking-[0.02em] text-cobalt-ink"
+        >
+          <span aria-hidden="true" class="h-1.5 w-1.5 shrink-0 rounded-[1px] bg-cobalt-ink"></span>
+          For universities
+        </p>
+        <h1
+          data-reveal
+          class="mt-5 max-w-[24ch] serif-display text-[length:var(--text-display)] text-ink"
+        >
+          Students get a planner. Your office gets the product.
+        </h1>
+        <p class="mt-7 max-w-[58ch] text-[length:var(--text-lead)] leading-relaxed text-muted">
+          A review queue of pre-checked plans, and a curriculum dashboard built to
+          improve your master tracks. Priced per institution, per programme.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center gap-4">
+          <CTAButton href={bookDemoHref} dataTrack="cta-universities-hero-demo">
+            Book a 20-min demo
+          </CTAButton>
+          <CTAButton
+            href={PLANNER_URL}
+            variant="outline-invert"
+            target="_blank"
+            rel="noreferrer"
+            dataTrack="cta-universities-hero-planner"
+          >
+            Try the live planner →
+          </CTAButton>
+          <a
+            href="#pilot"
+            class="inline-flex min-h-11 items-center gap-2 text-[0.95rem] font-semibold text-cobalt-ink underline decoration-line-soft underline-offset-[5px] transition-colors hover:text-cobalt-bright"
+          >
+            See the founding pilot terms <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- What your office gets -->
+    <section class="border-b border-line bg-paper-shade text-ink">
+      <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)]">
+        <h2 data-reveal class="max-w-[22ch] serif-heading text-[length:var(--text-h2)] text-ink">
+          What your office gets
+        </h2>
+        <dl data-reveal class="mt-10 border-t border-line">
+          {points.map((p) => (
+            <div class="grid gap-4 border-b border-line py-7 md:grid-cols-[minmax(0,1fr)_minmax(0,1.45fr)] md:gap-12">
+              <dt class="flex gap-3.5 text-[length:var(--text-h3)] font-semibold tracking-[-0.025em] text-ink">
+                <span
+                  aria-hidden="true"
+                  class="shrink-0 pt-1.5 font-mono text-xs tabular-nums text-cobalt-ink"
+                >{p.n}</span>
+                <span>{p.title}</span>
+              </dt>
+              <dd class="max-w-[66ch] leading-relaxed text-ink-2">{p.body}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <!-- The admin console: curriculum dashboard + total control -->
+    <div id="admin-console">
+      <AdminDashboard />
+      <AdminControl />
+    </div>
+
+    <!-- Founding pilot -->
+    <div id="pilot">
+      <PilotTerms />
+    </div>
+
+    <!-- Programme-office FAQ -->
+    <section class="bg-paper text-ink">
+      <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)]">
+        <h2 data-reveal class="serif-heading text-[length:var(--text-h2)] text-ink">
+          Questions we get from programme offices
+        </h2>
+        <dl data-reveal class="mt-10 border-t border-line">
+          {faqs.map((f) => (
+            <div class="grid gap-3 border-b border-line py-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] md:gap-12">
+              <dt class="text-[1.05rem] font-semibold tracking-[-0.02em] text-ink">{f.q}</dt>
+              <dd class="max-w-[68ch] leading-relaxed text-muted">{f.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+  </main>
+  <CTAFooter />
+</Base>
