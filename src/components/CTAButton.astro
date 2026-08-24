@@ -17,16 +17,16 @@ const base =
 // `solid` and `solid-dark` are the same accent primary; the two names document
 // intent at the call site (which background the button sits on).
 const accentPrimary =
-  "bg-accent text-graphite-2 border-accent hover:bg-accent-hover hover:border-accent-hover";
+  "bg-accent text-cobalt-2 border-accent hover:bg-accent-hover hover:border-accent-hover";
 
 const variants = {
   solid: accentPrimary,
   "solid-dark": accentPrimary,
   // Ghost on dark (graphite) surfaces.
-  outline: "bg-transparent text-on-dark border-hairline hover:border-accent hover:text-accent",
+  outline: "bg-transparent text-on-dark border-cobalt-line hover:border-accent hover:text-accent",
   // Ghost on light (paper) surfaces.
   "outline-invert":
-    "bg-transparent text-ink border-line hover:border-accent hover:text-accent-deep",
+    "bg-transparent text-ink border-line hover:border-cobalt-ink hover:text-cobalt-ink",
 };
 ---
 

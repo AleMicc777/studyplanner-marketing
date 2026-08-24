@@ -99,7 +99,7 @@ import InkPlanSheet from "./ink/InkPlanSheet.astro";
           </div>
 
           <!-- the one accent margin note -->
-          <p class="mt-6 border-t border-line pt-3 text-right text-[0.78rem] italic text-accent-deep">
+          <p class="mt-6 border-t border-line pt-3 text-right text-[0.78rem] italic text-cobalt-ink">
             checked before it was ever sent
           </p>
         </div>
@@ -111,22 +111,22 @@ import InkPlanSheet from "./ink/InkPlanSheet.astro";
 <style>
   /* flag-deep / valid-deep live in @theme; fallbacks kept for safety. */
   .mark-flag {
-    color: var(--color-flag-deep, oklch(0.45 0.14 27));
+    color: var(--color-flag-deep, oklch(0.42 0.15 28));
   }
   .mark-valid {
-    color: var(--color-valid-deep, oklch(0.42 0.1 147));
+    color: var(--color-valid-deep, oklch(0.42 0.11 150));
   }
   .rule-flag {
-    border-color: var(--color-flag-deep, oklch(0.45 0.14 27));
+    border-color: var(--color-flag-deep, oklch(0.42 0.15 28));
   }
   .rule-valid {
-    border-color: var(--color-valid-deep, oklch(0.42 0.1 147));
+    border-color: var(--color-valid-deep, oklch(0.42 0.11 150));
   }
   /* Corrector's thin rule under the offending course pair; text stays ink. */
   .course-flag {
     text-decoration: underline;
     text-decoration-thickness: 1px;
-    text-decoration-color: var(--color-flag-deep, oklch(0.45 0.14 27));
+    text-decoration-color: var(--color-flag-deep, oklch(0.42 0.15 28));
     text-underline-offset: 0.3em;
   }
 </style>

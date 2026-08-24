@@ -44,19 +44,19 @@ import CTAButton from "./CTAButton.astro";
     min-height: 48px;
     padding-top: 8px;
     padding-bottom: calc(8px + env(safe-area-inset-bottom));
-    border-top: 1px solid var(--color-hairline);
+    border-top: 1px solid var(--color-cobalt-line);
     /* Translucent graphite material (apple-design): the bar is floating chrome
        the page scrolls under, so it reads as a dark glass layer rather than an
        opaque strip. Solid fallbacks below when the user asks for them. */
-    background: oklch(0.2 0.028 215 / 0.86);
+    background: oklch(0.28 0.13 264 / 0.86);
     -webkit-backdrop-filter: blur(20px) saturate(1.6);
     backdrop-filter: blur(20px) saturate(1.6);
     /* Locked elevation shadow, inverted upward: this bar sits above page
        content rather than below it, so the cast direction flips (negative
        y instead of positive). */
     box-shadow:
-      0 -1px 2px oklch(0.2 0.028 215 / 0.06),
-      0 -8px 24px -8px oklch(0.2 0.028 215 / 0.12);
+      0 -1px 2px oklch(0.28 0.13 264 / 0.06),
+      0 -8px 24px -8px oklch(0.28 0.13 264 / 0.12);
   }
 
   /* Off-screen + transparent until scrolled past the hero, then slides up.
@@ -80,14 +80,14 @@ import CTAButton from "./CTAButton.astro";
 
   @media (prefers-reduced-transparency: reduce) {
     .sticky-cta-bar {
-      background: var(--color-graphite);
+      background: var(--color-cobalt);
       -webkit-backdrop-filter: none;
       backdrop-filter: none;
     }
   }
   @media (prefers-contrast: more) {
     .sticky-cta-bar {
-      background: var(--color-graphite);
+      background: var(--color-cobalt);
       -webkit-backdrop-filter: none;
       backdrop-filter: none;
       border-top-color: var(--color-on-dark);

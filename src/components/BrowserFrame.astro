@@ -30,13 +30,13 @@ const {
 
 const isDark = tone === "dark";
 const shell = isDark
-  ? "border-hairline bg-panel shadow-(--shadow-float)"
+  ? "border-cobalt-line bg-cobalt-panel shadow-(--shadow-float)"
   : "border-line bg-paper-shade shadow-(--shadow-float)";
-const bar = isDark ? "bg-graphite-2 border-hairline" : "bg-paper border-line";
+const bar = isDark ? "bg-cobalt-2 border-cobalt-line" : "bg-paper border-line";
 const urlBox = isDark
-  ? "bg-graphite border-hairline text-steel"
+  ? "bg-cobalt border-cobalt-line text-steel"
   : "bg-paper-shade border-line text-muted";
-const dot = isDark ? "bg-hairline" : "bg-line";
+const dot = isDark ? "bg-cobalt-line" : "bg-line";
 const capTone = isDark ? "text-steel" : "text-muted";
 ---
 
@@ -62,7 +62,7 @@ const capTone = isDark ? "text-steel" : "text-muted";
         >{url}</span>
       )}
       {live && (
-        <span class="rounded bg-accent px-1.5 py-0.5 font-mono text-[0.66rem] font-medium tracking-[0.08em] text-graphite">
+        <span class="rounded bg-accent px-1.5 py-0.5 font-mono text-[0.66rem] font-medium tracking-[0.08em] text-cobalt">
           LIVE
         </span>
       )}

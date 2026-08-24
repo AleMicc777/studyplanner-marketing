@@ -40,7 +40,7 @@ const navLinks = [
     <a
       href={bookDemoHref}
       data-track="cta-nav-book"
-      class="pressable hidden items-center justify-center rounded-md border border-accent bg-accent px-4 py-2 text-[0.92rem] font-semibold text-graphite hover:border-accent-hover hover:bg-accent-hover md:inline-flex"
+      class="pressable hidden items-center justify-center rounded-md border border-accent bg-accent px-4 py-2 text-[0.92rem] font-semibold text-cobalt hover:border-accent-hover hover:bg-accent-hover md:inline-flex"
     >
       Book a 20-min demo
     </a>
@@ -48,7 +48,7 @@ const navLinks = [
     <!-- Mobile hamburger label -->
     <label
       for="nav-toggle"
-      class="pressable flex cursor-pointer items-center rounded-md border border-line p-2 text-ink hover:border-accent md:hidden"
+      class="pressable flex cursor-pointer items-center rounded-md border border-line p-2 text-ink hover:border-cobalt-ink md:hidden"
       aria-label="Toggle navigation menu"
     >
       <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -74,7 +74,7 @@ const navLinks = [
     <a
       href={bookDemoHref}
       data-track="cta-nav-book"
-      class="pressable mt-4 block rounded-md border border-accent bg-accent px-4 py-3 text-center text-sm font-semibold text-graphite hover:border-accent-hover hover:bg-accent-hover"
+      class="pressable mt-4 block rounded-md border border-accent bg-accent px-4 py-3 text-center text-sm font-semibold text-cobalt hover:border-accent-hover hover:bg-accent-hover"
     >
       Book a 20-min demo
     </a>
@@ -82,7 +82,7 @@ const navLinks = [
       href={PLANNER_URL}
       target="_blank"
       rel="noreferrer"
-      class="pressable mt-2 block rounded-md border border-line px-4 py-3 text-center text-sm font-medium text-muted hover:border-accent hover:text-accent-deep"
+      class="pressable mt-2 block rounded-md border border-line px-4 py-3 text-center text-sm font-medium text-muted hover:border-cobalt-ink hover:text-cobalt-ink"
     >
       Open the StudyPlanner
     </a>
@@ -111,7 +111,7 @@ const navLinks = [
    * separate the material from the content passing under it.
    */
   .nav-material {
-    background: oklch(0.975 0.004 200 / 0.78);
+    background: oklch(0.972 0.008 85 / 0.78);
     -webkit-backdrop-filter: blur(16px) saturate(1.6);
     backdrop-filter: blur(16px) saturate(1.6);
     border-bottom: 1px solid transparent;
@@ -121,7 +121,7 @@ const navLinks = [
   }
   .nav-material.is-scrolled {
     border-bottom-color: var(--color-line);
-    box-shadow: 0 1px 12px -6px oklch(0.2 0.028 215 / 0.1);
+    box-shadow: 0 1px 12px -6px oklch(0.28 0.13 264 / 0.1);
   }
   /* No-JS fallback: keep the permanent hairline so structure never depends on
      the scroll script. */

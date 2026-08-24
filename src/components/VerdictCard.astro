@@ -7,7 +7,7 @@ const { class: className = "", ...rest } = Astro.props;
 
 <div
   class:list={[
-    "w-full max-w-[300px] rounded-[10px] border border-hairline bg-graphite p-4",
+    "w-full max-w-[300px] rounded-[10px] border border-cobalt-line bg-cobalt p-4",
     "font-mono text-[0.8rem] leading-normal shadow-(--shadow-float)",
     className,
   ]}
@@ -16,17 +16,17 @@ const { class: className = "", ...rest } = Astro.props;
   {...rest}
 >
   <div aria-hidden="true">
-    <p class="flex items-baseline gap-2 rounded-md border border-hairline bg-panel px-3 py-2 text-steel">
+    <p class="flex items-baseline gap-2 rounded-md border border-cobalt-line bg-cobalt-panel px-3 py-2 text-steel">
       <span>electives</span>
       <span class="ml-auto text-on-dark-2">60 / 60 EC</span>
       <span class="text-valid">met</span>
     </p>
-    <p class="mt-2 flex items-baseline gap-2 rounded-md border border-hairline bg-panel px-3 py-2 text-steel">
+    <p class="mt-2 flex items-baseline gap-2 rounded-md border border-cobalt-line bg-cobalt-panel px-3 py-2 text-steel">
       <span>total</span>
       <span class="ml-auto text-on-dark-2">120 / 120 EC</span>
     </p>
 
-    <div class="verdict-stack mt-3 border-t border-hairline pt-3">
+    <div class="verdict-stack mt-3 border-t border-cobalt-line pt-3">
       <p class="verdict-invalid flex items-center gap-2 text-flag-bright">
         <span class="inline-block w-3.5 shrink-0 text-center">✗</span>
         <span class="font-medium tracking-[0.06em] line-through decoration-1">INVALID</span>

@@ -1,56 +1,69 @@
 @import "tailwindcss";
 
 /*
- * StudyPlanner design system — "Petrol Ledger" (owner-approved 2026-08-16,
- * evolved from "Engineered Paper + Amber Signal": accent hue moved from amber
- * 71 to petrol teal 200; neutrals re-tinted onto the same blue-green axis).
+ * StudyPlanner design system — "Civic Cobalt".
  *
- * ONE committed identity. A deep petrol graphite carries the structural
- * surface; a single teal accent signal carries validation, key data, and the
- * primary CTA. No second competing colour. Green/red are reserved strictly for
+ * Light-dominant on warm bone paper. Deep cobalt is the single identity
+ * colour: it carries the dark fields (hero band, footer, product-echo cards)
+ * and, as `cobalt-ink`, all emphasis text on paper. One ochre accent
+ * (`accent`) exists for actions only. Green/red are reserved strictly for
  * plan-validation meaning (valid / flag), never decoration.
  *
- * Light-dominant: paper carries the page; graphite is demoted to the single
- * dark footer anchor (+ optional product-echo cards).
+ * THE ONE HARD RULE: ochre is a fill and a dark-surface colour. Never ochre
+ * text on paper — oklch(0.72 0.13 70) on bone is 2.33:1 and fails AA. On
+ * paper, emphasis text is always --color-cobalt-ink (8.1:1). Ochre as a
+ * button background with an --color-ink label is 6.8:1 and fine.
  *
  * Token usage:
- * - graphite / graphite-2 : the dark footer anchor (+ product-echo cards)
- * - panel                  : raised dark surfaces (frames) on graphite
- * - hairline               : 1px structural rules on dark
- * - paper / paper-shade    : light section surfaces (cool near-white, never warm)
- * - ink / muted            : text on light surfaces
- * - on-dark / on-dark-2    : text on graphite; steel = faint mono metadata
- * - accent (+ hover/line/deep): THE signal. CTAs, key metrics, validation accents.
+ * - cobalt / cobalt-2      : dark fields (hero band, footer, product-echo cards)
+ * - cobalt-panel           : raised surfaces on cobalt
+ * - cobalt-line            : 1px rules on cobalt
+ * - cobalt-ink             : cobalt as TEXT on paper — the emphasis colour
+ * - cobalt-bright          : hover only
+ * - paper / paper-shade    : light section surfaces (warm bone, never cool grey)
+ * - line / line-soft       : 1px rules on paper
+ * - ink / ink-2 / muted    : text on light surfaces
+ * - on-dark / -2 / -3      : text on cobalt; steel = faint mono metadata
+ * - accent (+ hover)       : ochre. Fills and dark surfaces only, never text on paper.
  * - valid / flag           : success / error meaning only.
  * Type: Geist (sans) body; Geist Mono for metrics, code, validation.
  */
 @theme {
-  --color-graphite: oklch(0.2 0.028 215);
-  --color-graphite-2: oklch(0.17 0.026 215);
-  --color-panel: oklch(0.25 0.03 213);
-  --color-hairline: oklch(0.33 0.032 212);
+  /* cobalt — the identity. Dark fields, signal, emphasis on paper. */
+  --color-cobalt: oklch(0.28 0.13 264);
+  --color-cobalt-2: oklch(0.24 0.115 264);
+  --color-cobalt-panel: oklch(0.34 0.14 263);
+  --color-cobalt-line: oklch(0.38 0.15 263);
+  --color-cobalt-ink: oklch(0.42 0.18 262);
+  --color-cobalt-bright: oklch(0.55 0.2 258);
 
-  --color-paper: oklch(0.975 0.004 200);
-  --color-paper-shade: oklch(0.945 0.006 200);
-  --color-line: oklch(0.9 0.007 200);
+  /* paper — warm bone, never cool grey */
+  --color-paper: oklch(0.972 0.008 85);
+  --color-paper-shade: oklch(0.94 0.012 85);
+  --color-line: oklch(0.88 0.014 82);
+  --color-line-soft: oklch(0.92 0.012 82);
 
-  --color-ink: oklch(0.215 0.02 220);
-  --color-muted: oklch(0.46 0.02 210);
+  /* text on paper */
+  --color-ink: oklch(0.22 0.015 80);
+  --color-ink-2: oklch(0.34 0.015 80);
+  --color-muted: oklch(0.48 0.015 80);
 
-  --color-on-dark: oklch(0.975 0.004 200);
-  --color-on-dark-2: oklch(0.8 0.018 205);
-  --color-steel: oklch(0.63 0.04 205);
+  /* text on cobalt */
+  --color-on-dark: oklch(0.972 0.008 85);
+  --color-on-dark-2: oklch(0.86 0.04 262);
+  --color-on-dark-3: oklch(0.82 0.045 262);
+  --color-steel: oklch(0.78 0.05 262);
 
-  --color-accent: oklch(0.785 0.105 200);
-  --color-accent-hover: oklch(0.73 0.107 199);
-  --color-accent-line: oklch(0.66 0.1 200);
-  --color-accent-deep: oklch(0.45 0.072 205);
+  /* ochre — actions only */
+  --color-accent: oklch(0.72 0.13 70);
+  --color-accent-hover: oklch(0.79 0.13 72);
 
+  /* validation meaning only */
   --color-valid: oklch(0.7 0.14 148);
-  --color-valid-deep: oklch(0.42 0.1 147);
-  --color-flag: oklch(0.6 0.165 27);
-  --color-flag-bright: oklch(0.7 0.155 25);
-  --color-flag-deep: oklch(0.45 0.14 27);
+  --color-valid-deep: oklch(0.42 0.11 150);
+  --color-flag: oklch(0.52 0.17 28);
+  --color-flag-bright: oklch(0.78 0.14 25);
+  --color-flag-deep: oklch(0.42 0.15 28);
 
   --font-sans: "Geist Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "Geist Mono Variable", ui-monospace, "SF Mono", Menlo, monospace;
@@ -72,7 +85,7 @@
   --section-y: clamp(4rem, 3rem + 5vw, 7.5rem);
   --prose-max: 46ch;
 
-  --shadow-float: 0 12px 32px -12px oklch(0.2 0.028 215 / 0.18);
+  --shadow-float: 0 12px 32px -12px oklch(0.28 0.13 264 / 0.18);
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --dur-reveal: 600ms;
@@ -130,9 +143,10 @@ li {
   text-wrap: pretty;
 }
 
-/* Accent focus ring, applied globally to keyboard focus. */
+/* Focus ring: cobalt-ink, not ochre — ochre on paper is 2.33:1 and fails the
+   3:1 non-text minimum. Cobalt-ink reads on both paper and cobalt fields. */
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-cobalt-ink);
   outline-offset: 3px;
   border-radius: 3px;
 }
@@ -186,13 +200,13 @@ li {
 }
 .grid-bg::before {
   background-image:
-    linear-gradient(to right, oklch(0.215 0.02 220 / 0.07) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(0.215 0.02 220 / 0.07) 1px, transparent 1px);
+    linear-gradient(to right, oklch(0.22 0.015 80 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.22 0.015 80 / 0.07) 1px, transparent 1px);
 }
 .grid-bg-dark::before {
   background-image:
-    linear-gradient(to right, oklch(0.33 0.032 212 / 0.55) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(0.33 0.032 212 / 0.55) 1px, transparent 1px);
+    linear-gradient(to right, oklch(0.38 0.15 263 / 0.55) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.38 0.15 263 / 0.55) 1px, transparent 1px);
 }
 .grid-bg > *,
 .grid-bg-dark > * {
