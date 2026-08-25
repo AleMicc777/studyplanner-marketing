@@ -18,7 +18,12 @@ export const faqs: Faq[] = [
   },
   {
     q: "Is student data safe and GDPR-compliant?",
-    a: "Yes. Plans are stored locally in the student's browser by default, so no data reaches our servers unless the student explicitly shares their plan. All shared data is stored on EU infrastructure and never used for training or sold to third parties. A Data Processing Agreement (DPA) is available on request.",
+    a: "Study plans are stored on EU infrastructure — Neon Postgres in Frankfurt — and sync as the student works, so a coordinator always sees the current plan. The record holds the student's name and email from their account, and nothing else about them. Data is never used for model training and never sold. A Data Processing Agreement is available on request.",
+    topic: "security",
+  },
+  {
+    q: "What personal data do you actually hold?",
+    a: "The name and email on the account, and the study plan. Nothing else about the student. We do not receive or store student numbers, grades, or any record from your SIS.",
     topic: "security",
   },
   {
@@ -31,8 +36,8 @@ export const faqs: Faq[] = [
     a: "We update the validation logic each academic year as part of the subscription. Send us the new programme guide and we'll handle the rest.",
   },
   {
-    q: "Can students use it without creating an account?",
-    a: "Yes. Plans are saved in the browser by default. Students can optionally create an account to sync across devices and share with their advisor.",
+    q: "Do students need an account?",
+    a: "Yes. An account is required to use the planner, so plans sync across devices and can be submitted to a coordinator for review. Accounts are handled by Clerk in its EU data region.",
     topic: "security",
   },
 ];

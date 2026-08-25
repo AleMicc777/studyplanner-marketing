@@ -12,9 +12,9 @@ import { securityFaqs } from "../data/faqs";
 // the same question is never marked up twice across two indexable URLs.
 
 const evaluationStats = [
-  { value: "EU", body: "hosting only. Shared plan data never leaves the EU." },
-  { value: "0", body: "accounts required. Students and advisors both work without signing up." },
-  { value: "0", body: "third-party tracking cookies. No cookie banner, self-hosted fonts." },
+  { value: "8", body: "sub-processors named on this page." },
+  { value: "2", body: "fields of personal data stored: name and email." },
+  { value: "0", body: "third-party advertising or data sales." },
 ];
 
 const dpaMailto = `mailto:${CONTACT_EMAIL}?subject=DPA%20request`;
@@ -32,7 +32,7 @@ const faqJsonLd = {
 
 <Base
   title="Security and data protection / StudyPlanner"
-  description="How StudyPlanner handles student data: EU hosting, no accounts required, data minimisation, no tracking cookies, and a DPA ready for your institution's procurement process."
+  description="How StudyPlanner handles student data: EU hosting in Frankfurt, every sub-processor named, minimal personal data stored, and a DPA drafted per institution on request."
   jsonLd={[faqJsonLd]}
 >
   <Navbar />
@@ -62,7 +62,7 @@ const faqJsonLd = {
             data-track="cta-security-planner"
             class="inline-flex min-h-11 items-center gap-2 text-[0.95rem] font-semibold text-cobalt-ink underline decoration-cobalt-ink/35 underline-offset-[5px] transition-colors hover:text-cobalt-bright"
           >
-            Open the planner without an account <span aria-hidden="true">&rarr;</span>
+            Open the planner <span aria-hidden="true">&rarr;</span>
           </a>
         </div>
       </div>
@@ -74,14 +74,14 @@ const faqJsonLd = {
     <!-- Evaluate without a data-protection review -->
     <section class="border-b border-line bg-paper-shade text-ink">
       <div class="mx-auto max-w-6xl px-6 py-[var(--section-y)]">
-        <p class="font-mono text-xs tracking-wide text-cobalt-ink">// what evaluation costs you</p>
+        <p class="font-mono text-xs tracking-wide text-cobalt-ink">// what we process</p>
         <h2 data-reveal class="mt-5 max-w-[24ch] serif-heading text-[length:var(--text-h2)] text-ink">
-          You can evaluate us without a data-protection review
+          Every sub-processor, named
         </h2>
         <p class="mt-5 max-w-[56ch] text-[length:var(--text-lead)] leading-relaxed text-muted">
-          No student data is required at any point in the evaluation. The planner is open, no
-          account, and nothing you or your students enter reaches our servers unless someone
-          explicitly chooses to share a plan.
+          Using the planner requires a student account, and plans sync to our database as they are
+          edited. Above is every service that touches that data, what it does, and where it runs —
+          including the four we cannot yet pin to an EU region.
         </p>
 
         <ul
@@ -150,9 +150,9 @@ const faqJsonLd = {
           <span class="text-accent" aria-hidden="true">✓</span>
           <span>EU-hosted</span>
           <span aria-hidden="true">/</span>
-          <span>GDPR-ready</span>
+          <span>Frankfurt</span>
           <span aria-hidden="true">/</span>
-          <span>no student data required to evaluate</span>
+          <span>every sub-processor named</span>
           <span aria-hidden="true">/</span>
           <span>DPA on request</span>
         </p>

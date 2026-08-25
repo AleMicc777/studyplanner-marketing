@@ -4,23 +4,23 @@
  * (.stat-numeral, the only serif use here), with the remaining three stats
  * as a modest hairline-separated mono row underneath.
  *
- * Numbers are defensible, not fabricated: the 500+ course count is the pilot
- * catalogue (owner-stated 2026-08-16); "0 unchecked plans" is
- * the submission gate (plans cannot be submitted for review until the rule
- * check passes); "12+" is the panel count on the Curriculum & capacity admin
- * dashboard (AdminCurriculum.jsx, 13 panels at last count); "< 2 wks" is the
- * observed setup time. No institution is named until written permission is on
- * file (PRODUCT.md).
+ * Numbers are defensible, not fabricated: the 259 course count is
+ * src/data/courses.js (one Aerospace MSc catalogue, five tracks); "0 unchecked
+ * plans" reflects the UI gate only — getSubmissionGate (validation.js:1232)
+ * blocks the Confirm button, but handleCreate does not re-check server-side
+ * yet; "16" is the panel count on the Curriculum & capacity admin dashboard
+ * (AdminCurriculum.jsx); "< 2 wks" is the observed setup time. No institution
+ * is named until written permission is on file (PRODUCT.md).
  * Reveal only, no count-up.
  */
 const hero = {
-  value: "500+",
-  label: "Courses available",
-  note: "encoded in the pilot catalogue",
+  value: "259",
+  label: "Courses encoded",
+  note: "one Aerospace MSc catalogue, five tracks",
 };
 const supporting = [
-  { value: "0", label: "Unchecked plans reach review", note: "every submission passes the rule check first" },
-  { value: "12+", label: "Curriculum analytics panels", note: "demand, elective uptake, track load, cohort progress" },
+  { value: "0", label: "Plans submitted without passing the rule check", note: "the submit action stays locked until every rule clears" },
+  { value: "16", label: "Curriculum analytics panels", note: "demand, elective uptake, track load, cohort progress" },
   { value: "< 2 wks", label: "From guide to live", note: "programme guide to working planner" },
 ];
 ---

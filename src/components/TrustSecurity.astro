@@ -4,28 +4,28 @@ import InkLedgerBook from "./ink/InkLedgerBook.astro";
 
 const points = [
   {
-    title: "EU hosting",
-    body: "All infrastructure runs on EU-based hosting. Shared plan data never leaves the EU.",
+    title: "Where plan data lives",
+    body: "Study plans and account records are stored in Neon Postgres in eu-central-1, Frankfurt. Plans sync as the student edits them, so a coordinator always reads the current version rather than an emailed copy.",
   },
   {
-    title: "No student accounts required",
-    body: "Students can build and validate a full plan without creating an account. Advisors can view a shared plan without either party signing up.",
+    title: "An account is required",
+    body: "Students sign in before using the planner; there is no anonymous mode. Authentication runs through Clerk in its EU data region. Coordinators and administrators sign in the same way.",
   },
   {
-    title: "Data minimisation",
-    body: "Plans are stored locally in the student's browser by default. Nothing reaches our servers unless a student explicitly chooses to share.",
+    title: "What we store about a person",
+    body: "Two fields: the name and email address on the account. No student number, no address, no date of birth, no grades. The rest of the record is the study plan itself.",
   },
   {
-    title: "No third-party tracking cookies",
-    body: "Fonts are self-hosted and analytics are cookieless, so the site loads without a cookie banner and without sending visitor data to Google or Meta.",
+    title: "Sub-processors, in full",
+    body: "Vercel (hosting), Neon (database, Frankfurt), Clerk (authentication, EU data region), PostHog (product analytics, EU cloud), Sentry (error reporting), Upstash (rate limiting), Resend (transactional email), Google Gemini (AI assistance). Sentry, Upstash, Resend and Gemini are not currently pinned to an EU region — we will confirm the position for each in writing during review.",
   },
   {
-    title: "DPA available on request",
-    body: "A Data Processing Agreement is ready for your institution's procurement process. Ask in the first call.",
+    title: "Never used for training or sold",
+    body: "Plan and account data is not used to train models, not sold, and not shared with advertisers. Gemini is called for assistance features only and is not sent personal identifiers.",
   },
   {
-    title: "Data deletion on request",
-    body: "Any shared plan or account can be deleted on request, in full, within the timelines your institution requires.",
+    title: "DPA and deletion",
+    body: "We draft a Data Processing Agreement per institution rather than publishing a standing one; ask and we will send yours. Any account and its plans can be deleted in full on request.",
   },
 ];
 ---
